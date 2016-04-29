@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whitegray"
+    >
+
+
+
+    <TextView
+        android:id="@+id/ju_person_title"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="用户主页"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:paddingTop="5dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:background="@mipmap/ju_title"
+        />
+    <ImageView
+        android:id="@+id/ju_person_back"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:src="@mipmap/back"
+        android:layout_alignBottom="@id/ju_person_title"
+        android:layout_alignTop="@id/ju_person_title"
+        android:paddingLeft="5dp"
+        />
+
+   <ListView
+       android:id="@+id/ju_person_list"
+       android:layout_below="@id/ju_person_title"
+       android:layout_height="wrap_content"
+       android:layout_width="match_parent"
+       />
+
+</RelativeLayout>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    >
+
+
+    <TextView
+        android:id="@+id/ju_storname"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="吾饮良品（大东门店）"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#3c3c3c"
+        />
+
+    <TextView
+        android:id="@+id/ju_userscore"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="4.5分"
+        android:layout_below="@id/ju_storname"
+        />
+
+    <ImageView
+        android:id="@+id/ju_storephoto"
+        android:padding="5dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:src="@mipmap/ic_launcher"
+        android:layout_below="@id/ju_userscore"
+        />
+
+
+
+    <TextView
+        android:id="@+id/ju_storedistance"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="569m"
+        android:textSize="15sp"
+        android:layout_alignTop="@id/ju_userscore"
+        android:layout_alignParentRight="true"
+        />
+
+    <TextView
+        android:id="@+id/ju_storecontent"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="大东门店双人套餐"
+        android:paddingLeft="5dp"
+        android:textSize="15sp"
+        android:layout_toRightOf="@id/ju_storephoto"
+        android:layout_alignTop="@id/ju_storephoto"
+        android:layout_below="@id/ju_userscore"
+        android:paddingBottom="5dp"
+        />
+    <TextView
+        android:id="@+id/ju_salebefore"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:paddingLeft="5dp"
+        android:text="$13.9"
+        android:textSize="15sp"
+        android:textColor="#00E3E3"
+        android:layout_toRightOf="@id/ju_storephoto"
+        android:layout_below="@id/ju_storecontent"
+        />
+
+    <TextView
+        android:id="@+id/ju_salebelater"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="17"
+        android:textSize="13sp"
+        android:textColor="@color/gray"
+        android:paddingLeft="5dp"
+        android:layout_toRightOf="@id/ju_salebefore"
+        android:layout_below="@id/ju_storecontent"
+        android:layout_alignBottom="@id/ju_salebefore"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/ju_salenum"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="已售20"
+        android:textSize="13sp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/gray"
+        />
+
+</RelativeLayout>

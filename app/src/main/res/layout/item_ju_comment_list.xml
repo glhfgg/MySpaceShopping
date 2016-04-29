@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ju_comment_item_photo"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@mipmap/ic_launcher"
+        />
+
+     <TextView
+         android:id="@+id/ju_comment_item_name"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="TestMessage"
+         android:textSize="18sp"
+         android:textStyle="bold"
+         android:paddingRight="5dp"
+         android:layout_toRightOf="@id/ju_comment_item_photo"
+         />
+
+    <TextView
+        android:id="@+id/ju_comment_item_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4-12 06:46"
+        android:layout_alignParentRight="true"
+
+
+        android:gravity="center"
+        />
+
+     <TextView
+         android:id="@+id/ju_comment_item_content"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="TestContentTestContentTestContentTestContentTestContentTestContentTestContent"
+         android:paddingTop="5dp"
+         android:layout_toRightOf="@id/ju_comment_item_photo"
+         android:layout_below="@id/ju_comment_item_time"
+         android:layout_alignBottom="@id/ju_comment_item_photo"
+         android:gravity="center"
+         android:paddingLeft="15dp"
+         />
+
+
+
+
+</RelativeLayout>

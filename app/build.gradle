@@ -33,4 +33,8 @@ dependencies {
     compile 'com.github.halzhang:mvp-support-v7:1.0.0'
     compile 'com.android.support:recyclerview-v7:23.3.0'
     compile 'com.timehop.stickyheadersrecyclerview:library:0.4.3'
+    compile 'cn.bmob.android:bmob-im:1.1.9'
+    compile 'cn.bmob.android:bmob-sdk:3.4.3'
+
+
 }

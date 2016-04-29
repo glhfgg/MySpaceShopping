@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+<include layout="@layout/item_ju_main_title"
+    />
+
+    <RadioGroup
+        android:id="@+id/ju_main_radio"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        >
+
+        <RadioButton
+            android:id="@+id/ju_main_periphery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@drawable/ju_main_pagetitle"
+            android:background="@drawable/ju_main_selecter"
+            android:button="@null"
+            android:text="周边动态"
+            android:padding="15dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:checked="true"
+            />
+
+        <RadioButton
+            android:id="@+id/ju_main_friends"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@drawable/ju_main_pagetitle"
+            android:background="@drawable/ju_main_selecter"
+            android:button="@null"
+            android:text="好友动态"
+            android:padding="15dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            />
+
+        <RadioButton
+            android:id="@+id/ju_main_near"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@drawable/ju_main_pagetitle"
+            android:background="@drawable/ju_main_selecter"
+            android:button="@null"
+            android:text="附近的人"
+            android:padding="15dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            />
+
+    </RadioGroup>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/ju_viewpager"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        >
+
+    </android.support.v4.view.ViewPager>
+
+</LinearLayout>

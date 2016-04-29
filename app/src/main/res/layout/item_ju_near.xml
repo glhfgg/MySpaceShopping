@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="5dp"
+    >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ju_nearphoto"
+        android:layout_height="60dp"
+        android:layout_width="60dp"
+        android:src="@mipmap/ic_launcher"
+        />
+
+
+<TextView
+    android:id="@+id/ju_nearname"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="NearName"
+    android:layout_toRightOf="@id/ju_nearphoto"
+    android:textSize="20sp"
+    android:textStyle="bold"
+    android:padding="5dp"
+    />
+
+    <TextView
+        android:id="@+id/ju_nearcontent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="交友宣言，个人简介"
+        android:layout_toRightOf="@id/ju_nearphoto"
+        android:layout_below="@id/ju_nearname"
+        android:textSize="15sp"
+        android:textAlignment="1"
+        />
+
+    <TextView
+        android:id="@+id/ju_neardistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="500m"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:textSize="15sp"
+        android:paddingLeft="5dp"
+        android:textAlignment="1"
+        />
+
+    <TextView
+        android:id="@+id/ju_neartime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1小时前"
+        android:layout_toLeftOf="@id/ju_neardistance"
+        android:layout_alignParentBottom="true"
+        android:textSize="15sp"
+        android:textAlignment="1"
+        />
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/ju_focus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:focusable="false"
+        android:button="@null"
+        android:background="@drawable/ju_near"
+        android:layout_alignBottom="@id/ju_nearphoto"
+        android:layout_alignTop="@id/ju_nearphoto"
+        android:layout_margin="15dp"
+        />
+
+
+</RelativeLayout>

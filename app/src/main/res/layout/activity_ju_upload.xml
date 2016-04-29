@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+
+    <TextView
+        android:id="@+id/ju_titles"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@mipmap/ju_title"
+        />
+
+    <ImageView
+        android:id="@+id/ju_upload_back"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:src="@mipmap/back"
+        android:padding="10dp"
+        android:layout_alignTop="@id/ju_titles"
+        android:layout_alignBottom="@id/ju_titles"
+        />
+
+     <TextView
+        android:id="@+id/ju_upload_enter"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="上传"
+         android:textStyle="bold"
+        android:layout_margin="5dp"
+        android:background="@drawable/ju_main_selecter"
+        android:textSize="17sp"
+        android:textColor="#17b9e6"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:gravity="center"
+        android:layout_alignTop="@id/ju_titles"
+        android:layout_alignBottom="@id/ju_titles"
+        />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ju_upload_img"
+        android:layout_height="200dp"
+        android:layout_width="200dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        />
+       <TextView
+           android:layout_above="@id/ju_upload_img"
+           android:layout_height="wrap_content"
+           android:layout_width="wrap_content"
+           android:text="点击图片就可以编辑头像哦~"
+           android:textSize="20dp"
+           android:padding="30dp"
+           android:layout_centerHorizontal="true"
+           android:textColor="@color/gray"
+           />
+
+
+</RelativeLayout>

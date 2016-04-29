@@ -315,7 +315,7 @@ public class HomeFragment extends Fragment {
         shopMap.put("deals_per_shop", "10");
 
 
-        OkHttpUtils.getInstance().doGet("http://apis.baidu.com/baidunuomi/openapi/searchdeals", shopMap).excute(new OKCallBack() {
+        OkHttpUtils.getInstance().doGet("http://apis.baidu.com/baidunuomi/openapi/searchdeals", shopMap,"eca37bd5318ddde48b144c6a37bd82e5").excute(new OKCallBack() {
             @Override
             public void onFailure(String message) {
 
@@ -336,7 +336,7 @@ public class HomeFragment extends Fragment {
 
         Map<String, String> cityMap = new HashMap<>();
         cityMap.put("city_id", "400010000");
-        OkHttpUtils.getInstance().doGet("http://apis.baidu.com/baidunuomi/openapi/districts", cityMap).excute(new OKCallBack() {
+        OkHttpUtils.getInstance().doGet("http://apis.baidu.com/baidunuomi/openapi/districts", cityMap,"eca37bd5318ddde48b144c6a37bd82e5").excute(new OKCallBack() {
             @Override
             public void onFailure(String message) {
 

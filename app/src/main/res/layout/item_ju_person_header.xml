@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@mipmap/per"
+    android:padding="10dp"
+    >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ju_person_bigphoto"
+        android:layout_height="80dp"
+        android:layout_width="80dp"
+        android:layout_margin="5dp"
+        android:layout_below="@id/ju_person_title"
+        android:src="@mipmap/ic_launcher"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView
+        android:id="@+id/ju_person_name"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="UserName"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/ju_person_bigphoto"
+        />
+
+    <ImageView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:src="@mipmap/userinfo_membership_expired"
+        android:layout_toRightOf="@id/ju_person_name"
+        android:layout_alignTop="@id/ju_person_name"
+        android:layout_alignBottom="@id/ju_person_name"
+        android:textColor="@color/white"
+        android:padding="5dp"
+        />
+
+    <TextView
+        android:id="@+id/ju_person_creattime"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="创建时间2016 4-12"
+        android:layout_below="@id/ju_person_name"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView
+        android:id="@+id/ju_person_location"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:padding="10dp"
+        android:text="武汉"
+        android:textColor="@color/white"
+        />
+
+    <TextView
+        android:id="@+id/ju_person_content"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:padding="10dp"
+        android:text="简介内容简介内容简介内容简介内容简介内容简介内容简介内容简介内容简介内容简介内容简介内容"
+        android:layout_below="@id/ju_person_creattime"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        />
+
+    <LinearLayout
+        android:layout_below="@id/ju_person_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="3"
+        >
+
+        <TextView
+            android:id="@+id/ju_person_fansnum"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="粉丝 110"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="1dp"
+            android:background="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/ju_person_weibonum"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="微博 110"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="1dp"
+            android:background="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/ju_person_concernnum"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="关注 110"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/white"
+            />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

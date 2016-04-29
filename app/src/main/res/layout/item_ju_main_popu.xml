@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    >
+
+    <TextView
+        android:id="@+id/ju_more_myshare"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="我的分享"
+        android:padding="15dp"
+        />
+
+    <TextView
+        android:id="@+id/ju_more_myfocus"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="我的关注"
+        android:padding="15dp"
+        />
+
+    <TextView
+        android:id="@+id/ju_more_myfans"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="我的粉丝"
+        android:padding="15dp"
+        />
+
+    <TextView
+        android:id="@+id/ju_more_changedata"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="资料修改"
+        android:padding="15dp"
+        />
+
+
+</LinearLayout>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whitegray"
+    >
+
+
+
+    <TextView
+        android:id="@+id/ju_news_title"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="新消息"
+        android:background="@color/white"
+        android:textColor="#333232"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <ImageView
+        android:id="@+id/ju_news_back"
+        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:src="@mipmap/tuihou"
+        android:layout_alignBottom="@id/ju_news_title"
+        android:layout_alignTop="@id/ju_news_title"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        />
+
+    <TextView
+        android:id="@+id/ju_news_atttmy"
+        android:layout_below="@id/ju_news_title"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:drawableLeft="@mipmap/att"
+        android:layout_marginTop="15dp"
+        android:padding="5dp"
+        android:text="关注我的"
+        android:textSize="20sp"
+        android:gravity="center_vertical"
+        android:drawablePadding="10dp"
+        android:background="@color/white"
+        />
+    <TextView
+        android:id="@+id/att_xiaohongdian"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:background="@mipmap/xiaohongdian"
+        android:layout_alignTop="@id/ju_news_atttmy"
+        android:layout_alignBottom="@id/ju_news_atttmy"
+        android:layout_alignParentRight="true"
+        android:layout_margin="22dp"
+        android:text="1"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/ju_news_pinlun"
+        android:layout_below="@id/ju_news_atttmy"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:drawableLeft="@mipmap/pinglun"
+        android:layout_marginTop="1dp"
+        android:padding="5dp"
+        android:text="评论"
+        android:textSize="20sp"
+        android:gravity="center_vertical"
+        android:drawablePadding="10dp"
+        android:background="@color/white"
+        />
+    <TextView
+        android:id="@+id/pinlun_xiaohongdian"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:background="@mipmap/xiaohongdian"
+        android:layout_alignTop="@id/ju_news_pinlun"
+        android:layout_alignBottom="@id/ju_news_pinlun"
+        android:layout_alignParentRight="true"
+        android:layout_margin="22dp"
+        android:text="1"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/ju_news_dianzan"
+        android:layout_below="@id/ju_news_pinlun"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:drawableLeft="@mipmap/zan"
+        android:layout_marginTop="1dp"
+        android:padding="5dp"
+        android:text="赞过我的"
+        android:textSize="20sp"
+        android:gravity="center_vertical"
+        android:drawablePadding="10dp"
+        android:background="@color/white"
+        />
+    <TextView
+        android:id="@+id/zan_xiaohongdian"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:background="@mipmap/xiaohongdian"
+        android:layout_alignTop="@id/ju_news_dianzan"
+        android:layout_alignBottom="@id/ju_news_dianzan"
+        android:layout_alignParentRight="true"
+        android:layout_margin="22dp"
+        android:text="1"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:visibility="gone"
+        />
+
+
+
+
+</RelativeLayout>

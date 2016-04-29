@@ -251,7 +251,7 @@ public class HomeMovieActivity extends Activity {
         shopMap.put("page_size", "10");
 
 
-        OkHttpUtils.getInstance().doGet("http://apis.baidu.com/baidunuomi/openapi/searchdeals", shopMap).excute(new OkHttpUtils.OKCallBack() {
+        OkHttpUtils.getInstance().doGet("http://apis.baidu.com/baidunuomi/openapi/searchdeals", shopMap,"eca37bd5318ddde48b144c6a37bd82e5").excute(new OkHttpUtils.OKCallBack() {
             @Override
             public void onFailure(String message) {
 
