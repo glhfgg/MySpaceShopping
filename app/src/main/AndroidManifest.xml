@@ -60,10 +60,17 @@
         </activity>
 
         <activity android:name=".activity.LoginActivity" android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+
         <activity android:name=".activity.JuPersonActivity" android:launchMode="singleTask"/>
         <activity android:name=".activity.JuCommentActivity" android:launchMode="singleTask"/>
         <activity android:name=".activity.JuNewsActivity" android:launchMode="singleTask"/>
+
         <activity android:name=".activity.SingupActivity" android:launchMode="singleTask"/>
         <activity android:name=".activity.JuPersonModifyActivity" android:launchMode="singleTask"/>
         <activity android:name=".activity.JuUploadImgActivity" android:launchMode="singleTask"/>
