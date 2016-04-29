@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/home_mian_container">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/fragment_container"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+
+
+    <RadioGroup
+        android:id="@+id/rg_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f1ebeb"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+
+        <RadioButton
+            android:id="@+id/rbtn_main_zhuye"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/main_zhuye_selector"
+            android:button="@null"
+            android:checked="true" />
+
+        <RadioButton
+            android:id="@+id/rbtn_main_zhoubian"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/main_zhoubian_selector"
+            android:button="@null" />
+
+        <RadioButton
+            android:id="@+id/rbtn_main_ju"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/main_ju"
+            android:button="@null"
+            android:checked="false" />
+
+        <RadioButton
+            android:id="@+id/rbtn_main_wode"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/main_wode_selector"
+            android:button="@null" />
+
+        <RadioButton
+            android:id="@+id/rbtn_main_genduo"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/main_gengduo_selector"
+            android:button="@null" />
+
+    </RadioGroup>
+
+</LinearLayout>

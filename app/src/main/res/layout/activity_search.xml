@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="@mipmap/header_bg">
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:src="@mipmap/tuihou"
+            android:id="@+id/btn_search_back"/>
+        <AutoCompleteTextView
+            android:layout_margin="5dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:drawableLeft="@mipmap/btn_home_search"
+            android:layout_weight="1"
+            android:id="@+id/edit_search"
+            android:background="@mipmap/search_1"
+            android:hint="搜索" />
+        <TextView
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="20sp"
+            android:text="搜索"
+            android:id="@+id/btn_search_find"/>
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="热门搜索"
+        android:layout_margin="5dp"/>
+    <GridView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/grid_Search"
+        android:numColumns="3"
+        android:horizontalSpacing="1dp"
+        android:verticalSpacing="1dp">
+
+    </GridView>
+
+</LinearLayout>

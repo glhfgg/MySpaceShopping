@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="200dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:id="@+id/classFunctionOne">
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/btn_classification_food"
+            android:src="@drawable/home_food_selector"
+            android:clickable="true"/>
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_classification_movie"
+            android:layout_weight="1"
+            android:src="@drawable/home_movie_selector"/>
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/btn_classification_hotle"
+            android:src="@drawable/home_hotle_selector"/>
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/btn_classification_entertainment"
+            android:src="@drawable/home_entertainment_selector"/>
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/btn_classification_takeaway"
+            android:src="@drawable/home_takeaway_selector"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:id="@+id/classFunctionTow"
+        android:layout_below="@id/classFunctionOne"
+        android:layout_marginTop="-20dp">
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/btn_classification_buffet"
+            android:src="@drawable/home_buffet_selector"/>
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/btn_classification_ktv"
+            android:src="@drawable/home_ktv_selector"/>
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/btn_classification_ticket"
+            android:src="@drawable/home_ticket_selector"/>
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/btn_classification_beauty"
+            android:src="@drawable/home_beauty_selector"/>
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/btn_classification_dessert"
+            android:src="@drawable/home_dessert_selector"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

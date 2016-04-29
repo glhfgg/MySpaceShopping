@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/img_movie_release"
+        android:src="@mipmap/movie_btn_tubiao"/>
+    <it.sephiroth.android.library.widget.HListView
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:id="@+id/list_movie_release"
+        app:hlv_dividerWidth="4dp">
+
+    </it.sephiroth.android.library.widget.HListView>
+
+
+
+
+</LinearLayout>
