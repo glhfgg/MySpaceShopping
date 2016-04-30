@@ -13,26 +13,42 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!--允许读取手机状态 用于创建BmobInstallation-->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!--百度地图 添加所需权限 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
 
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/shop"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".activity.MainActivity"
-            android:launchMode="singleTask">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <!--百度地图 添加开发密钥 -->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="mFtTyrALsxs9p904ndgESKAL7lNKEUFh" />
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote"></service>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity
+            android:name=".activity.MainActivity"
+            android:launchMode="singleTask">
 
         </activity>
-
-
 
 
         <activity
@@ -59,23 +75,52 @@
 
         </activity>
 
-        <activity android:name=".activity.LoginActivity" android:launchMode="singleTask">
+        <activity
+            android:name=".activity.LoginActivity"
+            android:launchMode="singleTask">
+
+        </activity>
+
+        <activity
+            android:name=".activity.JuPersonActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.JuCommentActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.JuNewsActivity"
+            android:launchMode="singleTask" />
+
+        <activity
+            android:name=".activity.SingupActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.JuPersonModifyActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.JuUploadImgActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.JuCreatePostActivity"
+            android:launchMode="singleTask" />
+
+        <activity
+            android:name="com.jhy.myspaceshopping.myspaceshopping.activity.BusinessActivity"
+            android:launchMode="singleTask" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.jhy.myspaceshopping.myspaceshopping.activity.MapBaiduActivity"
+            android:launchMode="singleTask" >
 
-        <activity android:name=".activity.JuPersonActivity" android:launchMode="singleTask"/>
-        <activity android:name=".activity.JuCommentActivity" android:launchMode="singleTask"/>
-        <activity android:name=".activity.JuNewsActivity" android:launchMode="singleTask"/>
-
-        <activity android:name=".activity.SingupActivity" android:launchMode="singleTask"/>
-        <activity android:name=".activity.JuPersonModifyActivity" android:launchMode="singleTask"/>
-        <activity android:name=".activity.JuUploadImgActivity" android:launchMode="singleTask"/>
-        <activity android:name=".activity.JuCreatePostActivity" android:launchMode="singleTask"/>
-
+        </activity>
+        <activity
+            android:name="com.jhy.myspaceshopping.myspaceshopping.activity.SearchActivity"
+            android:launchMode="singleTask" ></activity>.
     </application>
 
 </manifest>

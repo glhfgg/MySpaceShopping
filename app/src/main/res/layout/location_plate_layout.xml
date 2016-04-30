@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/text_presentlocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="武汉金汉渝科技有限公司18号"
+        android:padding="8dp"
+        android:drawableRight="@mipmap/shua"
+        />
+</LinearLayout>

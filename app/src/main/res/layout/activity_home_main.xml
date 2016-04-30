@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:gravity="center_vertical"
-            android:text="输入商家、分类或商圈"
+            android:text="@string/hint_search"
             android:layout_weight="6"
             android:drawableLeft="@mipmap/btn_home_search"
             android:background="@mipmap/search_1"/>

@@ -8,4 +8,24 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="rbbusiness_style">
+        <item name="android:textColor">@color/color_selector</item>
+        <item name="android:gravity">center</item>
+        <item name="android:button">@null</item>
+    </style>
+
+    <style name="rbup_style">
+        <item name="android:textColor">@color/color_selector</item>
+        <item name="android:gravity">center</item>
+        <item name="android:button">@null</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:drawableRight">@drawable/rbup_selector</item>
+    </style>
+
+    <style name="rbdown_style">
+        <item name="android:textColor">@color/color_selector</item>
+        <item name="android:gravity">center</item>
+        <item name="android:button">@null</item>
+        <item name="android:layout_weight">1</item>
+    </style>
 </resources>

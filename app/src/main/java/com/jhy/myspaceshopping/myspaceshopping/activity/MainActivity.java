@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+
 import com.jhy.myspaceshopping.myspaceshopping.R;
 import com.jhy.myspaceshopping.myspaceshopping.fragment.BannerFragment;
 
@@ -18,8 +19,9 @@ import com.jhy.myspaceshopping.myspaceshopping.fragment.BannerFragment;
  */
 public class MainActivity extends FragmentActivity {
     RadioGroup rgMain;
-    Fragment homeFragment;
+    Fragment homeFragment;//首页-fragment
     Fragment bannerFragment;
+    Fragment businessFragment;//周边-fragment
     String city;
 
     @Override
@@ -76,6 +78,7 @@ public class MainActivity extends FragmentActivity {
                 case R.id.rbtn_main_wode:
                     break;
                 case R.id.rbtn_main_genduo:
+
                     break;
             }
             ft.commit();
