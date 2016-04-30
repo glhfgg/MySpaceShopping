@@ -27,7 +27,7 @@ public class MapBaiduActivity extends Activity {
    TextView  textMapXY;//地图定位后的地点
 
     public LocationClient mLocationClient = null;
-    public BDLocationListener myListener = new MyLocationListener();
+    public MyLocationListener myListener = new MyLocationListener();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +39,12 @@ public class MapBaiduActivity extends Activity {
         //控件初始化
         mapvSlideMap = (MapView) findViewById(R.id.mapv_slidemap);//获取地图控件引用
        textMapXY = (TextView) findViewById(R.id.text_mapxy);//最终定位的地址结果
-       /* mLocationClient = new LocationClient(getApplicationContext());     //声明LocationClient类
+        //Context需要时全进程有效的context,推荐用getApplicationConext获取全进程有效的context
+        mLocationClient = new LocationClient(getApplicationContext());     //声明LocationClient类
         mLocationClient.registerLocationListener(myListener );    //注册监听函数
-        mLocationClient.start();*/
-
-       // textMapXY.setText(myListener.sb);
+        mLocationClient.start();
+        initLocation();
+       textMapXY.setText(myListener.bdLocation.getCity());
 
     }
     //LocationClientOption类，该类用来设置定位SDK的定位方式

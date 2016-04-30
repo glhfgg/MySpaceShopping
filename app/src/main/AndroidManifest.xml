@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jhy.myspaceshopping.myspaceshopping">
-    <!--允许联网 -->
+    <!--允许联网 --><!-- 访问网络，网络定位需要上网-->
     <uses-permission android:name="android.permission.INTERNET" />
     <!--获取GSM（2g）、WCDMA（联通3g）等网络状态的信息  -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -14,19 +14,29 @@
     <!--允许读取手机状态 用于创建BmobInstallation-->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!--百度地图 添加所需权限 -->
+    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位-->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
+    <!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 这个权限用于进行网络定位-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 用于读取手机当前的状态-->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- SD卡读取权限，用户写入离线定位数据-->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-
+    <!-- 这个权限用于访问GPS定位-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <!-- SD卡读取权限，用户写入离线定位数据-->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"></uses-permission>
 
     <application
         android:allowBackup="true"
@@ -39,11 +49,13 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="mFtTyrALsxs9p904ndgESKAL7lNKEUFh" />
+        <!--百度定位中的服务-->
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote"></service>
 
+        .
         <activity
             android:name=".activity.MainActivity"
             android:launchMode="singleTask">
@@ -106,21 +118,21 @@
 
         <activity
             android:name="com.jhy.myspaceshopping.myspaceshopping.activity.BusinessActivity"
-            android:launchMode="singleTask" >
+            android:launchMode="singleTask">
+
+        </activity>
+        <activity
+            android:name="com.jhy.myspaceshopping.myspaceshopping.activity.MapBaiduActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.jhy.myspaceshopping.myspaceshopping.activity.MapBaiduActivity"
-            android:launchMode="singleTask" >
+            android:name=".activity.MoreActivity">
 
-        </activity>
-        <activity
-            android:name="com.jhy.myspaceshopping.myspaceshopping.activity.SearchActivity"
-            android:launchMode="singleTask" ></activity>.
+        </activity>.
     </application>
 
 </manifest>

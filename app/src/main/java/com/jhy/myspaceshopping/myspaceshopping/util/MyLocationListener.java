@@ -1,6 +1,7 @@
 package com.jhy.myspaceshopping.myspaceshopping.util;
 
 import android.util.Log;
+import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -13,13 +14,17 @@ import java.util.List;
 
 /**
  * Created by TOSHIBA on 2016/4/26.
- */
+ *
+ * 实现BDLocationListener接口
+ * 接收异步返回的定位结果
+ * 监听函数，又新位置的时候，格式化成字符串，输出到屏幕中
+*/
 public class MyLocationListener implements BDLocationListener {
 
-    private MyLocationData mLocData;
+    public BDLocation bdLocation;
     @Override
     public void onReceiveLocation(BDLocation bdLocation) {
-        //Receive Location
+
         StringBuffer sb = new StringBuffer(256);
         sb.append("time : ");
         sb.append(bdLocation.getTime());
@@ -80,6 +85,8 @@ public class MyLocationListener implements BDLocationListener {
         Log.i("BaiduLocationApiDem", sb.toString());
 
     }
+
+
 }
 
 
