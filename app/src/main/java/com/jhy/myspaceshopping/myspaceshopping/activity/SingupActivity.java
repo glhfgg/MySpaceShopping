@@ -18,6 +18,7 @@ import cn.bmob.v3.listener.SaveListener;
  * Created by Administrator on 2016/4/21.
  */
 
+
 public class SingupActivity extends Activity{
 
     EditText name;

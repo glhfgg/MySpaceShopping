@@ -49,7 +49,6 @@ public class JuNearbyFragment extends Fragment {
     List<JuUniversalData> listdata;
     PullToRefreshListView list;
     String img;
-    List<String> User;
      int num = 5;
 
     @Override
@@ -118,8 +117,7 @@ public class JuNearbyFragment extends Fragment {
                     //获得用户自我介绍
                String  storecontent =  object.get(i).getContent();
                     //获得createdAt数据创建时间（注意是：createdAt，不是createAt）
-               String score = object.get(i).getCreatedAt();
-                    User  = new ArrayList<String>();
+
                     //获取用户头像
                     if(object.get(i).getIcon() != null){
                          img ="http://file.bmob.cn/"+ object.get(i).getIcon().getUrl();
@@ -132,8 +130,6 @@ public class JuNearbyFragment extends Fragment {
                     Log.i("result","++++____"+img);
                     listdata.add(data);
                     data = null;
-
-
 
                 }
 
@@ -149,7 +145,6 @@ public class JuNearbyFragment extends Fragment {
                 Toast.makeText(JuNearbyFragment.this.getActivity(),"查询失败："+msg, Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
 
@@ -159,8 +154,6 @@ public class JuNearbyFragment extends Fragment {
 //            Intent intent = new Intent(getActivity(), JuPersonActivity.class);
 //            startActivity(intent);
 
-
         }
     };
-
 }

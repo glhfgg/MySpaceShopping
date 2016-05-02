@@ -21,6 +21,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jhy.myspaceshopping.myspaceshopping.activity.JuCreatePostActivity;
+import com.jhy.myspaceshopping.myspaceshopping.activity.JuMyFansActivity;
+import com.jhy.myspaceshopping.myspaceshopping.activity.JuMyLikesActivity;
+import com.jhy.myspaceshopping.myspaceshopping.activity.JuMyShareActivity;
 import com.jhy.myspaceshopping.myspaceshopping.activity.JuPersonModifyActivity;
 import com.jhy.myspaceshopping.myspaceshopping.adapter.JuViewPagerAdapter;
 import com.jhy.myspaceshopping.myspaceshopping.R;
@@ -55,7 +58,11 @@ public class JuMainFragment extends Fragment {
     LayoutInflater inflater1;
 
     //Pop
-    TextView modify;
+    TextView modify;  //资料修改
+    TextView share;   //我的分享
+    TextView fans;    //我的粉丝
+    TextView likes;   //我的关注
+
     String s ;   // Bmob 上传图片的URL
     String t;
     MyUser  user;
@@ -65,13 +72,12 @@ public class JuMainFragment extends Fragment {
     private static final int NEAR_PAGE =2;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         inflater1 = inflater;
         View v = inflater.inflate(R.layout.fragment_ju_main, container, false);
-
         v1 = v;
+
         //初始化ViewPager控件 并且设置点击事件
         img = (ImageView) v.findViewById(R.id.ju_main_userphoto);
         news = (ImageView) v.findViewById(R.id.ju_main_news);
@@ -82,7 +88,9 @@ public class JuMainFragment extends Fragment {
 
         user = BmobUser.getCurrentUser(this.getActivity(), MyUser.class);
 
-        name.setText(user.getPersonname());
+        if(user == null){
+        }else{  name.setText(user.getPersonname());}
+
         searchImg();
         setPopuWindow();
         setViewPager();//设置 ViewPager的Fragmnet嵌套到 MainFragmnet中
@@ -147,7 +155,14 @@ public class JuMainFragment extends Fragment {
         LayoutInflater inflater =LayoutInflater.from(this.getActivity());
         View popu = inflater.inflate(R.layout.item_ju_main_popu,null);
         modify = (TextView) popu.findViewById(R.id.ju_more_changedata);
+        share = (TextView) popu.findViewById(R.id.ju_more_myshare);   //我的分享
+        fans = (TextView) popu.findViewById(R.id.ju_more_myfans);    //我的粉丝
+        likes = (TextView) popu.findViewById(R.id.ju_more_myfocus);   //我的关注
+
         modify.setOnClickListener(modifyClick);
+        share.setOnClickListener(modifyClick);
+        fans.setOnClickListener(modifyClick);
+        likes.setOnClickListener(modifyClick);
 
         pop = new PopupWindow(popu,LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
         pop.setTouchable(true);
@@ -220,8 +235,30 @@ public class JuMainFragment extends Fragment {
     OnClickListener modifyClick = new OnClickListener(){
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(getActivity(), JuPersonModifyActivity.class);
-            startActivity(intent);
+            switch (v.getId()){
+                case R.id.ju_more_changedata:
+                    Intent intent = new Intent(getActivity(), JuPersonModifyActivity.class);
+                    startActivity(intent);
+                    break;
+
+                case R.id.ju_more_myfans:
+                     intent = new Intent(getActivity(), JuMyFansActivity.class);
+                    startActivity(intent);
+                    break;
+
+                case R.id.ju_more_myfocus:
+                     intent = new Intent(getActivity(), JuMyLikesActivity.class);
+                    startActivity(intent);
+                    break;
+
+                case R.id.ju_more_myshare:
+                     intent = new Intent(getActivity(), JuMyShareActivity.class);
+                    startActivity(intent);
+                    break;
+
+            }
+
+
         }
     };
 

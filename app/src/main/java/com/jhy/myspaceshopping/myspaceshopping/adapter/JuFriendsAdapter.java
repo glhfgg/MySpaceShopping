@@ -78,6 +78,7 @@ public class JuFriendsAdapter extends BaseAdapter {
             holder.storecontent = (TextView) convertView.findViewById(R.id.ju_usercontents);
             holder.salebefore = (TextView) convertView.findViewById(R.id.ju_forwarding);
             holder.salenum = (TextView) convertView.findViewById(R.id.ju_clickpraise);
+
             textss =   holder.salenum;
             holder.contentphoto = (ImageView) convertView.findViewById(R.id.ju_contentphoto);
             convertView.setTag(holder);
