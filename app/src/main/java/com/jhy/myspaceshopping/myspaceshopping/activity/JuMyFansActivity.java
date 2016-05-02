@@ -34,7 +34,7 @@ public class JuMyFansActivity extends Activity{
     int m=0;
     int s= 0;
     String img;
-    int i;
+    int j;
 
     List<MyUser> object2;
     List<JuUniversalData> listdata;
@@ -63,11 +63,11 @@ public class JuMyFansActivity extends Activity{
                 // TODO Auto-generated method stub
                 Log.i("life", "查询个数："+object.size());
                 object2 = object;
-                for( i=0;i<object.size();i++){
+                for( j=0;j<object.size();j++){
 
                     BmobQuery<MyUser> query = new BmobQuery<MyUser>();
                     MyUser post = new MyUser();
-                    post.setObjectId( object.get(i).getObjectId());
+                    post.setObjectId( object.get(j).getObjectId());
                     query.addWhereRelatedTo("likes", new BmobPointer(post));
                     query.findObjects(JuMyFansActivity.this, new FindListener<MyUser>() {
 
@@ -80,14 +80,14 @@ public class JuMyFansActivity extends Activity{
                                 if(objects.get(i).getUsername().toString().equals(user.getUsername().toString())){
                                     s++;
                                     m=1;
-                                    String name =  object2.get(i).getPersonname();
-                                    String  storecontent =  object2.get(i).getContent();
-                                    if(object2.get(i).getIcon() != null){
-                                        img ="http://file.bmob.cn/"+ object2.get(i).getIcon().getUrl();
+                                    String name =  object2.get(j).getPersonname();
+                                    String  storecontent =  object2.get(j).getContent();
+                                    if(object2.get(j).getIcon() != null){
+                                        img ="http://file.bmob.cn/"+ object2.get(j).getIcon().getUrl();
                                     }else{
                                         img = "http://file.bmob.cn/M03/46/56/oYYBAFcfIiGAIh3gAAAEw_gSloU510.png";
                                     }
-                                    String us =  object2.get(i).getObjectId();
+                                    String us =  object2.get(j).getObjectId();
 
                                     JuUniversalData data = new JuUniversalData(name,us,null,"500m",img,storecontent,null,null,null);
                                     listdata.add(data);
