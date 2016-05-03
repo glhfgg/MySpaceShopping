@@ -1,4 +1,4 @@
-package com.jhy.myspaceshopping.myspaceshopping.activity;
+package com.jhy.myspaceshopping.myspaceshopping.fragment;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -26,6 +26,9 @@ import java.util.Map;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.jhy.myspaceshopping.myspaceshopping.R;
+import com.jhy.myspaceshopping.myspaceshopping.activity.HomeSearchActivity;
+import com.jhy.myspaceshopping.myspaceshopping.activity.ListTestActivity;
+import com.jhy.myspaceshopping.myspaceshopping.activity.WebViewActivity;
 import com.jhy.myspaceshopping.myspaceshopping.adapter.CityAreaAdapter;
 import com.jhy.myspaceshopping.myspaceshopping.adapter.NearbyShopsAdapter;
 import com.jhy.myspaceshopping.myspaceshopping.objectmode.CityArea;
@@ -349,7 +352,7 @@ public class HomeFragment extends Fragment {
         });
     }
     public interface setCityInterface{
-        public void setCity();
+        void setCity();
     }
 
 }
