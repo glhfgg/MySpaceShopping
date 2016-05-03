@@ -52,6 +52,7 @@ public class LoginActivity extends Activity{
                 Intent intent = new Intent(context, MainActivity.class);
                 startActivity(intent);
             }
+
             @Override
             public void onFailure(int code, String msg) {
                 Toast.makeText(LoginActivity.this, "登录失败:"+msg, Toast.LENGTH_SHORT).show();

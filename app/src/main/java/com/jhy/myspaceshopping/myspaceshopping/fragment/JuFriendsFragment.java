@@ -53,8 +53,6 @@ public class JuFriendsFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_ju_list,container,false);
 
-
-
         list = (PullToRefreshListView) v.findViewById(R.id.listJu);
         list.setMode(PullToRefreshBase.Mode.BOTH);
         list.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {

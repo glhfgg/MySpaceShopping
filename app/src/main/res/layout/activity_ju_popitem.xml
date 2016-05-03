@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whitegray"
+    >
+
+    <TextView
+        android:id="@+id/ju_share_title"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="我的分享"
+        android:background="@color/white"
+        android:textColor="#333232"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <ImageView
+        android:id="@+id/ju_share_back"
+        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:src="@mipmap/tuihou"
+        android:layout_alignBottom="@id/ju_share_title"
+        android:layout_alignTop="@id/ju_share_title"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        />
+
+    <ListView
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/ju_share_title"
+        android:id="@+id/ju_share_list"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:dividerHeight="1dp"
+        />
+
+
+</RelativeLayout>

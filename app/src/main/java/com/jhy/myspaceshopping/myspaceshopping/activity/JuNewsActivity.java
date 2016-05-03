@@ -1,13 +1,12 @@
 package com.jhy.myspaceshopping.myspaceshopping.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 import com.jhy.myspaceshopping.myspaceshopping.R;
 import com.jhy.myspaceshopping.myspaceshopping.object.MyUser;
@@ -40,6 +39,7 @@ public class JuNewsActivity extends Activity{
     TextView zanRed;
     final  List<Integer> num = new ArrayList<Integer>();
     int s= 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,21 +88,16 @@ public class JuNewsActivity extends Activity{
                        @Override
                        public void onSuccess(List<MyUser> object) {
                            // TODO Auto-generated method stub
-                           Log.i("life", "查询个数2："+object.size());
+
                            for(int i =0;i<object.size();i++){
-                               Log.i("life", "查询个数ttttttttt："+object.get(i).getUsername().toString());
-                               Log.i("life", "查询个数zzzzzzzzz："+user.getUsername().toString());
-                               Log.i("life", "查询个数yyyyyyyyyyyy："+object.get(i).getUsername().toString().equals(user.getUsername().toString()));
 
                                if(object.get(i).getUsername().toString().equals(user.getUsername().toString())){
                                    s++;
-
                                }
                            }
                            Log.i("life", "查询个数sssss："+s);
                            if(s==0){
                            }else{
-
                                attRed.setText(""+s);
                                attRed.setVisibility(View.VISIBLE);
                            }
@@ -125,29 +120,6 @@ public class JuNewsActivity extends Activity{
 
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
 
@@ -156,14 +128,20 @@ public class JuNewsActivity extends Activity{
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.ju_news_atttmy:
-
+                    Intent intent = new Intent(JuNewsActivity.this,JuMyFansActivity.class);
+                    startActivity(intent);
                     break;
+
                 case R.id.ju_news_pinlun:
-
+                    intent = new Intent(JuNewsActivity.this, JuMyShareActivity.class);
+                    startActivity(intent);
                     break;
+
                 case R.id.ju_news_dianzan:
-
+                    intent = new Intent(JuNewsActivity.this, JuMyShareActivity.class);
+                    startActivity(intent);
                     break;
+
                 case R.id.ju_news_back:
                     finish();
                     break;
