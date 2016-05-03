@@ -65,6 +65,7 @@
          android:layout_below="@+id/ju_contentphoto"
          />
     <LinearLayout
+        android:id="@+id/ju_friends_linear"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:layout_below="@+id/ju_friends_liagn"

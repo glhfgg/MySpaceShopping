@@ -12,6 +12,7 @@ import android.widget.RadioGroup;
 
 import com.jhy.myspaceshopping.myspaceshopping.R;
 import com.jhy.myspaceshopping.myspaceshopping.fragment.BannerFragment;
+import com.jhy.myspaceshopping.myspaceshopping.fragment.HomeFragment;
 import com.jhy.myspaceshopping.myspaceshopping.fragment.JuMainFragment;
 import com.jhy.myspaceshopping.myspaceshopping.object.MyUser;
 
