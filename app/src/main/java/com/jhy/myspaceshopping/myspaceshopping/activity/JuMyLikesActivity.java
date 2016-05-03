@@ -2,10 +2,12 @@ package com.jhy.myspaceshopping.myspaceshopping.activity;
 
 import android.app.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -50,6 +52,7 @@ public class JuMyLikesActivity  extends Activity{
         title.setText("我的关注");
         back.setOnClickListener(click);
         searchUser();
+        list.setOnItemClickListener(ListClick);
     }
 
 
@@ -73,8 +76,8 @@ public class JuMyLikesActivity  extends Activity{
                     String name =  object.get(i).getPersonname();
                     //获得用户自我介绍
                     String  storecontent =  object.get(i).getContent();
-                    //获得createdAt数据创建时间（注意是：createdAt，不是createAt）
-                    String score = object.get(i).getCreatedAt();
+                    String userName = object.get(i).getUsername();
+
                     //获取用户头像
                     if(object.get(i).getIcon() != null){
                         img ="http://file.bmob.cn/"+ object.get(i).getIcon().getUrl();
@@ -83,7 +86,7 @@ public class JuMyLikesActivity  extends Activity{
                     }
 
                     String us =  object.get(i).getObjectId();
-                    JuUniversalData data = new JuUniversalData(name,us,null,"500m",img,storecontent,null,null,null);
+                    JuUniversalData data = new JuUniversalData(name,us,null,"500m",img,storecontent,userName,null,null);
                     Log.i("result","++++____"+img);
                     listdata.add(data);
                     data = null;
@@ -109,6 +112,17 @@ public class JuMyLikesActivity  extends Activity{
         }
     };
 
+    AdapterView.OnItemClickListener ListClick = new AdapterView.OnItemClickListener(){
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+
+             Intent intent = new Intent(JuMyLikesActivity.this, JuPersonUserActivity.class);
+            intent.putExtra("PersonUser",listdata.get(position).getScore());
+            intent.putExtra("PersonUserName",listdata.get(position).getSalebefore());
+            intent.putExtra("PersonUserPhoto",listdata.get(position).getPhoto());
+            startActivity(intent);
+        }
+    };
 
 }

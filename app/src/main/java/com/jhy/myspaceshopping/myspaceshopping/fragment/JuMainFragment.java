@@ -255,19 +255,14 @@ public class JuMainFragment extends Fragment {
                      intent = new Intent(getActivity(), JuMyShareActivity.class);
                     startActivity(intent);
                     break;
-
             }
-
-
         }
     };
 
     //搜素查询当前用户登陆头像
    private void searchImg(){
        BmobQuery<MyUser> query = new BmobQuery<MyUser>();
-
        query.addWhereEqualTo("username", user.getUsername());
-
        query.findObjects(this.getActivity(), new FindListener<MyUser>() {
            @Override
            public void onSuccess(List<MyUser> list) {
