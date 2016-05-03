@@ -23,11 +23,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
+                android:drawableBottom="@drawable/buytitle_selector"
                 android:padding="5dp"
                 android:text="@string/label_businessall"
                 android:textColor="@color/color_selector"
-                android:textSize="15sp"
-                android:drawableBottom="@drawable/buytitle_selector"/>
+                android:textSize="15sp" />
 
             <RadioButton
                 android:id="@+id/rbtn_businesscheap"
@@ -36,38 +36,40 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/rbtn_businessall"
+                android:drawableBottom="@drawable/buytitle_selector"
                 android:padding="5dp"
                 android:text="@string/label_cheap"
                 android:textColor="@color/color_selector"
-                android:textSize="15sp"
-                android:drawableBottom="@drawable/buytitle_selector"/>
+                android:textSize="15sp" />
         </RadioGroup>
 
-        <Button
-            android:id="@+id/btn_map"
-            android:layout_width="wrap_content"
+        <RadioButton
+            android:id="@+id/rbtn_map"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/btn_search"
+            android:layout_alignTop="@+id/rbtn_search"
+            android:layout_toLeftOf="@+id/rbtn_search"
+            android:layout_toStartOf="@+id/rbtn_search"
             android:background="@mipmap/dingwei"
-            android:onClick="onClickMap" />
+            android:button="@null"
+            />
 
-        <Button
-            android:id="@+id/btn_search"
-            android:layout_width="wrap_content"
+        <RadioButton
+            android:id="@+id/rbtn_search"
+            android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
             android:background="@mipmap/sou"
-            android:onClick="onClickSearch"
+            android:button="@null"
             android:paddingRight="5dp" />
     </RelativeLayout>
-.
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/upbutton_container"></LinearLayout>
+    .
+
+    <include
+        android:id="@+id/include_upbuttonset"
+        layout="@layout/upbuttonset_layout"></include>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vpager_storeall"

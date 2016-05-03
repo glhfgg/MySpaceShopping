@@ -69,8 +69,9 @@ public class UpButtonSetFragment extends Fragment {
         btnCity.setOnClickListener(btnListener);
         btnOrder.setOnClickListener(btnListener);
 
-        animIn = AnimationUtils.loadAnimation(context, R.anim.fade_in_anim);
-        animOut = AnimationUtils.loadAnimation(context, R.anim.fade_out_anim);
+        animIn = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in_anim);
+        animOut = AnimationUtils.loadAnimation(getActivity(), R.anim.fade_out_anim);
+
         return v;
     }
 
@@ -157,8 +158,9 @@ public class UpButtonSetFragment extends Fragment {
     }
     //PopupWindow
     private void initPopup() {
-        popupWindow = new PopupWindow(context);
-        View view = LayoutInflater.from(context).inflate(R.layout.popuplevel_layout, null);
+        popupWindow = new PopupWindow(getActivity());
+        //存放popupWindow中的空间的view
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.popuplevel_layout, null);
         leftLV = (ListView) view.findViewById(R.id.pop_listview_left);
         rightLV = (ListView) view.findViewById(R.id.pop_listview_right);
         popupWindow.setContentView(view);

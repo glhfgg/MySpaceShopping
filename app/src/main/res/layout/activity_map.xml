@@ -3,54 +3,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
-    <Button
-        android:id="@+id/btn_mapback"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:layout_margin="5dp"
-        android:background="@mipmap/back"
-        android:onClick="onClickBack"/>
-    <EditText
-        android:id="@+id/edt_mapwrite"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:hint="@string/hint_search"
-        android:drawableLeft="@mipmap/rs"
-        android:textSize="15dp"
-        android:padding="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_weight="1"
-        android:background="@color/bg_home"/>
-    <RadioButton
-        android:id="@+id/btn_maptypes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:layout_margin="5dp"
-        android:text="@string/tab_type"
-        android:background="@color/bg_head"
-        android:button="@null"/>
-        </LinearLayout>
+        android:orientation="horizontal"
+        android:background="@mipmap/header_bg">
+
+        <ImageView
+            android:id="@+id/btn_search_back"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:onClick="onClickBack"
+            android:src="@mipmap/tuihou" />
+
+        <EditText
+            android:id="@+id/edt_mapwrite"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:drawableLeft="@mipmap/btn_home_search"
+            android:hint="@string/hint_search"
+            android:padding="5dp"
+            android:textSize="15dp"
+            android:background="@mipmap/search_1"/>
+
+        <RadioButton
+            android:id="@+id/btn_maptypes"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:background="@color/bg_head"
+            android:button="@null"
+            android:padding="5dp"
+            android:textSize="15sp"
+            android:text="@string/tab_type" />
+    </LinearLayout>
+
     <com.baidu.mapapi.map.MapView
         android:id="@+id/mapv_slidemap"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true"
-        android:layout_weight="1"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clickable="true" />
+
     <TextView
         android:id="@+id/text_mapxy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:paddingBottom="15dp"
         android:paddingTop="15dp"
         android:text="地图定位"
-        android:textSize="20sp"
-        android:gravity="center"/>
+        android:textSize="20sp" />
 </LinearLayout>

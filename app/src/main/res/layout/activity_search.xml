@@ -20,13 +20,14 @@
             android:layout_weight="1"
             android:id="@+id/edit_search"
             android:background="@mipmap/search_1"
+            android:textSize="15sp"
             android:hint="@string/btn_search" />
         <TextView
             android:layout_margin="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:text="@string/btn_search"
             android:id="@+id/btn_search_find"/>
 

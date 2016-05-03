@@ -9,6 +9,5 @@
         android:divider="@color/div_gray"
         android:dividerHeight="1dp"
         android:listSelector="@color/popup_right_bg_selected"
-        android:scrollingCache="false"
         />
 </LinearLayout>

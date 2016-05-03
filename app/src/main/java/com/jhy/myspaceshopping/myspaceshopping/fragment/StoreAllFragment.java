@@ -76,4 +76,5 @@ public class StoreAllFragment extends Fragment {
     }
     //从网络上获得动态数据
 
+
 }

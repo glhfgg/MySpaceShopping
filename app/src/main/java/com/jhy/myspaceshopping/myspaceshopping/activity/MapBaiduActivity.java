@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
+import com.baidu.location.BDNotifyListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
@@ -32,20 +35,17 @@ public class MapBaiduActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //在使用SDK各组件之前初始化context信息，传入ApplicationContext
-        //注意该方法要再setContentView方法之前实现
-        SDKInitializer.initialize(getApplicationContext());
         setContentView(R.layout.activity_map);
         //控件初始化
         mapvSlideMap = (MapView) findViewById(R.id.mapv_slidemap);//获取地图控件引用
        textMapXY = (TextView) findViewById(R.id.text_mapxy);//最终定位的地址结果
         //Context需要时全进程有效的context,推荐用getApplicationConext获取全进程有效的context
         mLocationClient = new LocationClient(getApplicationContext());     //声明LocationClient类
-        mLocationClient.registerLocationListener(myListener );    //注册监听函数
-        mLocationClient.start();
+        mLocationClient.registerLocationListener(myListener);    //注册监听函数
         initLocation();
-       textMapXY.setText(myListener.bdLocation.getCity());
-
+        mLocationClient.start();
+        Log.i("result","--------------------start");
+        textMapXY.setText(myListener.bdLocation.getAddrStr());
     }
     //LocationClientOption类，该类用来设置定位SDK的定位方式
     private void initLocation(){
@@ -86,11 +86,9 @@ public class MapBaiduActivity extends Activity {
         //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
         mapvSlideMap.onDestroy();
     }
-
     //返回控件点击事件
   public  void onClickBack(View view) {
         Intent intent = new Intent(MapBaiduActivity.this, BusinessActivity.class);
         startActivity(intent);
-        finish();
     }
 }
