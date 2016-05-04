@@ -36,7 +36,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
-            android:background="@color/bg_head"
             android:button="@null"
             android:padding="5dp"
             android:textSize="15sp"
@@ -49,7 +48,6 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:clickable="true" />
-
     <TextView
         android:id="@+id/text_mapxy"
         android:layout_width="match_parent"
@@ -58,5 +56,6 @@
         android:paddingBottom="15dp"
         android:paddingTop="15dp"
         android:text="地图定位"
-        android:textSize="20sp" />
+        android:textSize="15sp" />
+
 </LinearLayout>

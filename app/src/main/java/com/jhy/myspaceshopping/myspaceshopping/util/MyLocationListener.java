@@ -20,11 +20,12 @@ import java.util.List;
  * 监听函数，又新位置的时候，格式化成字符串，输出到屏幕中
 */
 public class MyLocationListener implements BDLocationListener {
-
-    public BDLocation bdLocation;
+   public BDLocation bdLocation=new BDLocation();
     @Override
     public void onReceiveLocation(BDLocation bdLocation) {
-
+        if(bdLocation==null){
+            return;
+        }
         StringBuffer sb = new StringBuffer(256);
         sb.append("time : ");
         sb.append(bdLocation.getTime());
@@ -83,9 +84,7 @@ public class MyLocationListener implements BDLocationListener {
             }
         }
         Log.i("BaiduLocationApiDem", sb.toString());
-
     }
-
 
 }
 

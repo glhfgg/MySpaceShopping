@@ -45,7 +45,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".activity.MapApplication">
+        android:name="com.jhy.myspaceshopping.myspaceshopping.activity.MapApplication">
         <!-- 将我们以前一直用的默认Application设置成自定义的MapApplication -->
         <!--百度地图 添加开发密钥 -->
         <meta-data
