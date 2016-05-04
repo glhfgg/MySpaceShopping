@@ -36,4 +36,5 @@ dependencies {
     compile 'cn.bmob.android:bmob-im:1.1.9'
     compile 'cn.bmob.android:bmob-sdk:3.4.3'
     compile 'com.android.support:support-v4:23.3.0'
+    compile 'de.hdodenhof:circleimageview:2.0.0'
 }

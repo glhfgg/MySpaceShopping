@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="search_shop">
+        <item>肯德基</item>
+        <item>王品台塑牛排</item>
+        <item>绿茵阁西餐厅</item>
+        <item>洪湖小碗菜</item>
+        <item>十秒到过桥米线</item>
+        <item>炒吧炒吧</item>
+        <item>米乐烤鱼</item>
+        <item>无敌鸡排茶饮</item>
+        <item>正新鸡排</item>
+        <item>细毛大酒店</item>
+        <item>中百仓储</item>
+        <item>金谷一韩式自助烧烤</item>
+        <item>金滏山自助烤肉</item>
+        <item>紫燕百味鸡</item>
+        <item>一品韩山韩式自助烤肉</item>
+        <item>快乐柠檬</item>
+        <item>麦当劳</item>
+        <item>玩味音乐海鲜自助火锅</item>
+        <item>醉太羊</item>
+        <item>泡沫剧</item>
+        <item>锅吉畅吃乐</item>
+        <item>亮亮烧烤</item>
+        <item>牛太郎</item>
+        <item>大米先生</item>
+        <item>韩信宫</item>
+        <item>慕肯披萨</item>
+        <item>五谷渔粉</item>
+        <item>3D打印</item>
+        <item>666</item>
+        <item>33肯德基</item>
+    </string-array>
+</resources>

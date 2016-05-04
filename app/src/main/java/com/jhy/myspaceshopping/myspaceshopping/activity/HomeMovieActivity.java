@@ -57,7 +57,7 @@ public class HomeMovieActivity extends Activity {
     DistancePopListAdapter distanceListAdapter;
     MovieReleaseShopAdapter movieReleasesAdapter;
     PopupWindow distancePopupWindow1;
-
+    ImageView btnMovieSearch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,9 +88,17 @@ public class HomeMovieActivity extends Activity {
         listView.setMode(PullToRefreshBase.Mode.BOTH);
         listView.setOnRefreshListener(pullListener);
         listView.setOnItemClickListener(movieShopListListener);
+        btnMovieSearch = (ImageView) findViewById(R.id.btn_movie_search);
+        btnMovieSearch.setOnClickListener(movieSearchListener);
 
     }
-
+    View.OnClickListener movieSearchListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(context,HomeSearchActivity.class);
+            startActivity(intent);
+        }
+    };
     /**
      * 电影list列表的监听
      */
@@ -144,6 +152,9 @@ public class HomeMovieActivity extends Activity {
         }
     }
 
+    /**
+     * 其余没有功能的RadioButton的监听
+     */
     View.OnClickListener l = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

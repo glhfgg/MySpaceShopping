@@ -12,6 +12,7 @@ import android.widget.RadioGroup;
 
 import com.jhy.myspaceshopping.myspaceshopping.R;
 import com.jhy.myspaceshopping.myspaceshopping.fragment.BannerFragment;
+import com.jhy.myspaceshopping.myspaceshopping.fragment.HomeFragment;
 import com.jhy.myspaceshopping.myspaceshopping.fragment.JuMainFragment;
 import com.jhy.myspaceshopping.myspaceshopping.object.MyUser;
 
@@ -91,7 +92,7 @@ public class MainActivity extends FragmentActivity {
             hideFragment(ft);
             switch (checkedId) {
                 case R.id.rbtn_main_zhuye:
-                    Log.i("gl","!!@#!!!!!!!!!"+"主页");
+                   // Log.i("gl","!!@#!!!!!!!!!"+"主页");
                     if (homeFragment == null) {
                         homeFragment = new HomeFragment();
                     }
@@ -99,7 +100,7 @@ public class MainActivity extends FragmentActivity {
                     break;
 
                 case R.id.rbtn_main_zhoubian:
-                    Log.i("gl","!@!@!@!@!!!!"+"周边");
+                   // Log.i("gl","!@!@!@!@!!!!"+"周边");
                     if (bannerFragment == null) {
                         bannerFragment = new BannerFragment();
                     }
@@ -107,7 +108,7 @@ public class MainActivity extends FragmentActivity {
                     break;
 
                 case R.id.rbtn_main_ju:
-                    Log.i("gl","!@!@!@!@!!!!"+"聚");
+                   // Log.i("gl","!@!@!@!@!!!!"+"聚");
 
 //                    Log.i("result","~~~~~~~~~~~~~~~"+user.getUsername().equals(null));
                     if(user==null){
@@ -120,7 +121,7 @@ public class MainActivity extends FragmentActivity {
 
                             ft4.show(jufragment);
                             ft4.commit();
-                            Log.i("result", "~~~~~~~~~~~~~~~jufragment");
+                           // Log.i("result", "~~~~~~~~~~~~~~~jufragment");
                         }
                     }
 
