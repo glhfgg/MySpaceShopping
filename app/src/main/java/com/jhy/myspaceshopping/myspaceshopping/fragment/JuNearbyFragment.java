@@ -1,6 +1,7 @@
 package com.jhy.myspaceshopping.myspaceshopping.fragment;
 
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.jhy.myspaceshopping.myspaceshopping.activity.JuPersonUserActivity;
 import com.jhy.myspaceshopping.myspaceshopping.adapter.JuNearAdapter;
 import com.jhy.myspaceshopping.myspaceshopping.object.JuUniversalData;
 import com.jhy.myspaceshopping.myspaceshopping.R;
@@ -116,7 +118,8 @@ public class JuNearbyFragment extends Fragment {
                String name =  object.get(i).getPersonname();
                     //获得用户自我介绍
                String  storecontent =  object.get(i).getContent();
-                    //获得createdAt数据创建时间（注意是：createdAt，不是createAt）
+
+               String userName = object.get(i).getUsername();
 
                     //获取用户头像
                     if(object.get(i).getIcon() != null){
@@ -126,7 +129,7 @@ public class JuNearbyFragment extends Fragment {
                     }
 
                     String us =  object.get(i).getObjectId();
-                    JuUniversalData data = new JuUniversalData(name,us,null,"500m",img,storecontent,null,null,null);
+                    JuUniversalData data = new JuUniversalData(name,us,null,"500m",img,storecontent,userName,null,null);
                     Log.i("result","++++____"+img);
                     listdata.add(data);
                     data = null;
@@ -151,8 +154,11 @@ public class JuNearbyFragment extends Fragment {
     OnItemClickListener itemClick = new OnItemClickListener(){
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//            Intent intent = new Intent(getActivity(), JuPersonActivity.class);
-//            startActivity(intent);
+            Intent intent = new Intent(getActivity(), JuPersonUserActivity.class);
+            intent.putExtra("PersonUser",listdata.get(position-1).getScore());
+            intent.putExtra("PersonUserName",listdata.get(position-1).getSalebefore());
+            intent.putExtra("PersonUserPhoto",listdata.get(position-1).getPhoto());
+            startActivity(intent);
 
         }
     };

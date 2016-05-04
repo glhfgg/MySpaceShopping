@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,8 @@ import com.jhy.myspaceshopping.myspaceshopping.object.JuUniversalData;
 import com.jhy.myspaceshopping.myspaceshopping.object.MyUser;
 import com.jhy.myspaceshopping.myspaceshopping.object.Post;
 import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,10 +57,8 @@ public class JuCommentActivity extends Activity {
     TextView forwarding;     //转发
     TextView comment;        //评论
     TextView paris;         //赞
-
-    TextView forwarding2;     //转发
-    TextView comment2;        //评论
-    TextView paris2;         //赞
+    EditText huifu;
+    TextView enter;
 
 
     TextView username;
@@ -76,9 +77,7 @@ public class JuCommentActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ju_comment);
-        linear = (LinearLayout) findViewById(R.id.ju_comment_linear);
         setList();
-        setMyDialog();
         setParisNum();
 
     }
@@ -86,16 +85,11 @@ public class JuCommentActivity extends Activity {
     private void setIntentData(){
 
         Intent  intent = getIntent();
-
         if( intent.getExtras().getString("JuUseImg") != null){
-
             Picasso.with(this).load( intent.getExtras().getString("JuUseImg").toString()).into(userphoto);
-
         }else{
-
             Picasso.with(this).load("http://www.qqzhi.com/uploadpic/2014-10-08/051328157.jpg").into(userphoto);
         }
-
         if(intent.getExtras().getString("JuConImg") != null){
             Picasso.with(this).load( intent.getExtras().getString("JuConImg").toString()).into(contentphoto);
         }
@@ -108,18 +102,19 @@ public class JuCommentActivity extends Activity {
 
     private  void setList(){
         list = (ListView) findViewById(R.id.ju_comment_list);
+        forwarding = (TextView)findViewById(R.id.ju_forwarding2);
+        comment = (TextView)findViewById(R.id.ju_comments2);
+        paris = (TextView)findViewById(R.id.ju_clickpraise2);
+        huifu = (EditText) findViewById(R.id.ju_comment_huifu);
+        enter = (TextView) findViewById(R.id.ju_comment_enter);
+
+
         LayoutInflater inflater = LayoutInflater.from(this);
         v = inflater.inflate(R.layout.item_ju_friends,null);
-
         content = (TextView) v.findViewById(R.id.ju_usercontents);
         userphoto = (ImageView) v.findViewById(R.id.ju_userphoto);
-
-        forwarding = (TextView) v.findViewById(R.id.ju_forwarding);
-        comment = (TextView) v.findViewById(R.id.ju_comments);
-        paris = (TextView) v.findViewById(R.id.ju_clickpraise);
-
-
-
+        linear = (LinearLayout) v.findViewById(R.id.ju_friends_linear);
+        linear.setVisibility(View.GONE);
         username = (TextView) v.findViewById(R.id.ju_username);
         createtime = (TextView) v.findViewById(R.id.ju_usertime);
         contentphoto = (ImageView) v.findViewById(R.id.ju_contentphoto);
@@ -128,7 +123,6 @@ public class JuCommentActivity extends Activity {
         setData();
 
         list.addHeaderView(v);
-        list.setOnScrollListener(Scrol);
         forwarding.setOnClickListener(Click);
         comment.setOnClickListener(Click);
         paris.setOnClickListener(Click);
@@ -187,33 +181,6 @@ public class JuCommentActivity extends Activity {
        });
    }
 
-    private  void setMyDialog(){
-        LayoutInflater inflater = LayoutInflater.from(this);
-        final View viewdialog = inflater.inflate(R.layout.dialog_ju_modify,null);
-        dialog = new AlertDialog.Builder(this);
-
-        dialog.setTitle("请输入评论");
-        dialog.setView(viewdialog);
-        text = (EditText) viewdialog.findViewById(R.id.ju_dialog_message);
-        dialog.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                texts = text.getText().toString();
-                saveComment();;
-                ((ViewGroup) viewdialog.getParent()).removeView(viewdialog);
-            }
-        });
-        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                ((ViewGroup) viewdialog.getParent()).removeView(viewdialog);
-            }
-        });
-
-
-    }
 
     private void saveComment(){
         MyUser user = BmobUser.getCurrentUser(this, MyUser.class);
@@ -229,6 +196,12 @@ public class JuCommentActivity extends Activity {
             public void onSuccess() {
                 // TODO Auto-generated method stub
                 Log.i("life","评论发表成功");
+                setData();
+                huifu.setVisibility(View.GONE);
+                huifu.setText("");
+                enter.setVisibility(View.GONE);
+                Toast.makeText(JuCommentActivity.this, "回复Ok~", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
@@ -258,8 +231,8 @@ public class JuCommentActivity extends Activity {
                 Log.i("life", "查询个数："+object.size());
                 num = "点赞"+object.size();
                 paris.setText(num);
-                if(paris2 != null){
-                    paris2.setText(num);
+                if(paris != null){
+                    paris.setText(num);
                 }
                
             }
@@ -297,12 +270,20 @@ public class JuCommentActivity extends Activity {
         });
     }
 
+    View.OnClickListener EnterClick = new View.OnClickListener(){
+        @Override
+        public void onClick(View v) {
+            texts = huifu.getText().toString();
+            saveComment();
+        }
+    };
+
 
     View.OnClickListener Click = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
              switch (v.getId()){
-                 case R.id.ju_forwarding:
+                 case R.id.ju_forwarding2:
                      Intent  intent = getIntent();
                              MyUser user = BmobUser.getCurrentUser(JuCommentActivity.this,MyUser.class);
                              Post post = new Post();
@@ -321,98 +302,44 @@ public class JuCommentActivity extends Activity {
                                      // TODO Auto-generated method stub
                                  }
                              });
+                     break;
+                 case R.id.ju_comments2:
 
+                     if(enter.getVisibility()==View.VISIBLE){
+                         enter.setVisibility(View.GONE);
+                         huifu.setVisibility(View.GONE);
+                     }else{
+                         huifu.setVisibility(View.VISIBLE);
+                         enter.setVisibility(View.VISIBLE);
+                         enter.setOnClickListener(EnterClick);
+                     }
                      break;
-                 case R.id.ju_comments:
-                     dialog.create().show();
-                     break;
-                 case R.id.ju_clickpraise:
+                 case R.id.ju_clickpraise2:
                      setParis();
                      setParisNum();
                      break;
              }
-
         }
     };
 
-    View.OnClickListener Click2 = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.ju_forwarding2:
-                    Intent  intent = getIntent();
-                    MyUser user = BmobUser.getCurrentUser(JuCommentActivity.this,MyUser.class);
-                    Post post = new Post();
-
-                    post.setContent("转发：  "+intent.getExtras().getString("JuConTex").toString());
-
-                    post.setAuthor(user);
-                    post.save(JuCommentActivity.this, new SaveListener() {
-                        @Override
-                        public void onSuccess() {
-                            // TODO Auto-generated method stub
-                            Toast.makeText(JuCommentActivity.this, "转发成功", Toast.LENGTH_SHORT).show();
-                        }
-                        @Override
-                        public void onFailure(int code, String msg) {
-                            // TODO Auto-generated method stub
-                        }
-                    });
-
-                    break;
-                case R.id.ju_comments2:
-                    dialog.create().show();
-                    break;
-                case R.id.ju_clickpraise2:
-                    setParis();
-                    setParisNum();
-                    break;
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK) { //监控/拦截/屏蔽返回键
+            if(enter.getVisibility()==View.VISIBLE){
+                enter.setVisibility(View.GONE);
+                huifu.setVisibility(View.GONE);
+            }else{
+                finish();
             }
 
-        }
-    };
-
-    AbsListView.OnScrollListener Scrol = new AbsListView.OnScrollListener(){
-        @Override
-        public void onScrollStateChanged(AbsListView view, int scrollState) {
-            switch (scrollState) {
-                // 当不滚动时
-                case AbsListView.OnScrollListener.SCROLL_STATE_IDLE:
-                    // 判断滚动到底部
-                    if (list.getLastVisiblePosition() == (list.getCount() - 1)) {
-                        Log.i("result","-------------------底部"+list.getCount());
-                    }
-                    // 判断滚动到顶部
-                    if(list.getFirstVisiblePosition() > 0){
-                        Log.i("result","-------------------顶部");
-                        linear.setVisibility(View.VISIBLE);
-                        forwarding2 = (TextView)findViewById(R.id.ju_forwarding2);
-                        comment2 = (TextView)findViewById(R.id.ju_comments2);
-                        paris2 = (TextView)findViewById(R.id.ju_clickpraise2);
-                        forwarding2.setOnClickListener(Click2);
-                        comment2.setOnClickListener(Click2);
-                        paris2.setOnClickListener(Click2);
-                        paris2.setText(num);
-
-
-
-
-                    }else{
-                        linear.setVisibility(View.GONE);
-                    }
-                    break;
-            }
+            return true;
+        } else if(keyCode == KeyEvent.KEYCODE_MENU) {
+            //监控/拦截菜单键
+        } else if(keyCode == KeyEvent.KEYCODE_HOME) {
+            //由于Home键为系统键，此处不能捕获，需要重写onAttachedToWindow()
         }
 
+        return super.onKeyDown(keyCode, event);
 
-
-
-
-        @Override
-        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-
-        }
-    };
-
-
+    }
 }

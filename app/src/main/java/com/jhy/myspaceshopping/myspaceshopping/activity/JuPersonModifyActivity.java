@@ -134,18 +134,21 @@ public class JuPersonModifyActivity extends Activity {
                     case 0:
                         newUser.setPersonname(texts);
                         pername.setText(texts);
+                        text.setText("");
                         break;
                     case 1:
                         break;
                     case 2:
                         newUser.setContent(texts);
                         content.setText(texts);
+                        text.setText("");
                         break;
                     case 3:
                         break;
                     case 4:
                         newUser.setQQ(texts);
                         qq.setText(texts);
+                        text.setText("");
                         break;
 
                 }

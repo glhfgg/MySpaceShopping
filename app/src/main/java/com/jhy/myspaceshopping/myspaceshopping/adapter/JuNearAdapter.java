@@ -11,14 +11,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jhy.myspaceshopping.myspaceshopping.R;
+import com.jhy.myspaceshopping.myspaceshopping.object.Friends;
 import com.jhy.myspaceshopping.myspaceshopping.object.JuUniversalData;
 import com.jhy.myspaceshopping.myspaceshopping.object.MyUser;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobRelation;
+import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 
 /**
@@ -78,11 +81,12 @@ public class JuNearAdapter extends BaseAdapter {
 
         holder = (ViewHolderNear) convertView.getTag();
         final JuUniversalData data = list.get(position);
+
         holder.name.setText(data.getName());
-        holder.score.setText("");
         holder.distance.setText(data.getDistance());
         Picasso.with(context).load(data.getPhoto()).into( holder.storephoto);
         holder.storecontent.setText(data.getContent());
+
         final   MyUser user = BmobUser.getCurrentUser(context, MyUser.class);
         final MyUser likes = new MyUser();
         holder.likes.setOnClickListener(new View.OnClickListener() {
@@ -101,8 +105,6 @@ public class JuNearAdapter extends BaseAdapter {
                     public void onSuccess() {
                         // TODO Auto-generated method stub
                         Log.i("life","多对多关联添加成功");
-
-
                     }
                     @Override
                     public void onFailure(int arg0, String arg1) {
@@ -112,19 +114,11 @@ public class JuNearAdapter extends BaseAdapter {
                 });
 
             }
-
-            });
-
-
-
-
+        });
 
         return convertView;
     }
-
-
 }
-
 class ViewHolderNear{
 
     TextView name;
