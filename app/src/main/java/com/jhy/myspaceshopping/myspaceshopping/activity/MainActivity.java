@@ -70,9 +70,6 @@ public class MainActivity extends FragmentActivity {
                ft4.show(jufragment);
                ft4.commit();
            }
-
-
-
     }
 
     @Override
