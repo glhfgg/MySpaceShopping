@@ -73,11 +73,6 @@ public class MainActivity extends FragmentActivity {
 
 
 
-
-
-
-
-
     }
 
     @Override
