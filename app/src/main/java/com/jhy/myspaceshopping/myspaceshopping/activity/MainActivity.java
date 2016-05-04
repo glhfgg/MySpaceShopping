@@ -67,6 +67,7 @@ public class MainActivity extends FragmentActivity {
            if( user != null){
                jufragment = new JuMainFragment();
                ft4.add(R.id.fragment_container,jufragment);
+               ft4.show(jufragment);
                ft4.commit();
            }
 
@@ -113,7 +114,6 @@ public class MainActivity extends FragmentActivity {
 //                    Log.i("result","~~~~~~~~~~~~~~~"+user.getUsername().equals(null));
                     if(user==null){
                         Intent intent = new Intent(MainActivity.this ,LoginActivity.class);
-                        Log.i("result","~~~~~~~~~~~~~~~");
                         startActivity(intent);
                     }else {
                         if (jufragment == null) {
@@ -121,7 +121,6 @@ public class MainActivity extends FragmentActivity {
 
                             ft4.show(jufragment);
                             ft4.commit();
-                            Log.i("result", "~~~~~~~~~~~~~~~jufragment");
                         }
                     }
 
