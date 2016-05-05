@@ -69,10 +69,9 @@ public class MainActivity extends FragmentActivity {
                ft4.add(R.id.fragment_container,jufragment);
                ft4.show(jufragment);
                ft4.commit();
+
            }
     }
-
-
 
 
 

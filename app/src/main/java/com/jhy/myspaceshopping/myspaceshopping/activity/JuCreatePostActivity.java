@@ -2,7 +2,6 @@ package com.jhy.myspaceshopping.myspaceshopping.activity;
 
 import android.app.Activity;
 import android.content.ContentResolver;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -11,10 +10,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.text.style.ClickableSpan;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,7 +23,11 @@ import com.jhy.myspaceshopping.myspaceshopping.object.MyUser;
 import com.jhy.myspaceshopping.myspaceshopping.object.Post;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Locale;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
@@ -42,6 +44,7 @@ public class JuCreatePostActivity extends Activity{
     ImageView back;
     TextView enter;
     ImageView add;
+    ImageView camera;
     ImageView img;
     EditText content;
     String path;
@@ -58,6 +61,7 @@ public class JuCreatePostActivity extends Activity{
     }
 
     private void init(){
+        camera = (ImageView) findViewById(R.id.ju_create_camera);
         back = (ImageView) findViewById(R.id.ju_create_back);
         enter = (TextView) findViewById(R.id.ju_create_enter);
         add = (ImageView) findViewById(R.id.ju_create_addimg);
@@ -71,7 +75,7 @@ public class JuCreatePostActivity extends Activity{
         back.setOnClickListener(Click);
         enter.setOnClickListener(Click);
         add.setOnClickListener(AddClick);
-
+        camera.setOnClickListener(AddClick);
     }
 
 
@@ -157,7 +161,6 @@ public class JuCreatePostActivity extends Activity{
         ContentResolver resolver = getContentResolver();
         //此处的用于判断接收的Activity是不是你想要的那个
         if (requestCode == POST_REQUEST_CODE) {
-
             try {
                 Uri originalUri = data.getData();        //获得图片的uri
                 bm = MediaStore.Images.Media.getBitmap(resolver, originalUri);        //显得到bitmap图片
@@ -176,9 +179,44 @@ public class JuCreatePostActivity extends Activity{
                 Log.e("result",e.toString());
             }
         }
-    }
-    private void addImg(){
 
+
+      //相机
+        String name = new DateFormat().format("yyyyMMdd_hhmmss", Calendar.getInstance(Locale.CHINA)) + ".jpg";
+        Toast.makeText(this, name, Toast.LENGTH_LONG).show();
+        Bundle bundle = data.getExtras();
+        Bitmap bitmap = (Bitmap) bundle.get("data");// 获取相机返回的数据，并转换为Bitmap图片格式
+
+        FileOutputStream b = null;
+        //???????????????????????????????为什么不能直接保存在系统相册位置呢？？？？？？？？？？？？
+        File file = new File("/sdcard/myImage/");
+        path = "/sdcard/myImage/"+name;
+        file.mkdirs();// 创建文件夹
+        String fileName = "/sdcard/myImage/"+name;
+   Log.i("lift","------"+"/sdcard/myImage/"+name);
+        try {
+            b = new FileOutputStream(fileName);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);// 把数据写入文件
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                b.flush();
+                b.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        img.setImageBitmap(bitmap);// 将图片显示在ImageView里
+    }
+
+
+
+
+
+
+
+    private void addImg(){
         if (Environment.getExternalStorageState().equals( Environment.MEDIA_MOUNTED)) {
             Intent getImageIntent = new Intent(Intent.ACTION_GET_CONTENT);
             getImageIntent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -207,7 +245,18 @@ public class JuCreatePostActivity extends Activity{
     View.OnClickListener AddClick = new View.OnClickListener(){
         @Override
         public void onClick(View v) {
-            addImg();
+            switch (v.getId()){
+                case R.id.ju_create_addimg:
+                    addImg();
+                    break;
+                case R.id.ju_create_camera:
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent, 1);
+                    break;
+            }
+
+
+
         }
     };
 

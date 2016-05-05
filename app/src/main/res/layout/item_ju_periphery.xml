@@ -81,6 +81,7 @@
         android:layout_below="@id/ju_storecontent"
         android:layout_alignBottom="@id/ju_salebefore"
         android:gravity="center"
+
         />
 
     <TextView

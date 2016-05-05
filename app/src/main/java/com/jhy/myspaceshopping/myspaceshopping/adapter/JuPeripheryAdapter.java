@@ -1,6 +1,7 @@
 package com.jhy.myspaceshopping.myspaceshopping.adapter;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,6 +71,8 @@ public class JuPeripheryAdapter extends BaseAdapter{
         Picasso.with(context).load(data.getPhoto()).into( holder.storephoto);
         holder.storecontent.setText(data.getContent());
         holder.salebefore.setText(data.getSalebefore());
+        //删除线
+        holder.salelater.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         holder.salelater.setText(data.getSalelater());
         holder.salenum.setText(data.getSalenum());
 
