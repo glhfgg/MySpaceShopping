@@ -30,6 +30,7 @@ import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,6 +74,11 @@ public class JuCommentActivity extends Activity {
     String img;
     String  i ;
     String num;  //评论数
+
+    //获取系统时间
+    SimpleDateFormat sDateFormat    =   new SimpleDateFormat("yyyy-MM-dd    hh:mm:ss");
+    String    date    =    sDateFormat.format(new    java.util.Date());
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,7 +101,93 @@ public class JuCommentActivity extends Activity {
         }
 
         username.setText(intent.getExtras().getString("JuUseNam").toString());
-        createtime.setText(intent.getExtras().getString("JuCrtTim").toString());
+
+
+        String []str =intent.getExtras().getString("JuCrtTim").toString().split(" ");
+//        Log.i("life","my time------"+data.getScore());
+        String s1=str[0];
+        String s2=str[1];
+
+        String [] year = s1.split("-");
+        String year1 = year[0];
+        String year2 = year[1];
+        String year3 = year[2];
+
+        String [] hours = s2.split(":");
+        String hours1 = hours[0];
+        String hours2 = hours[1];
+        String hours3 = hours[2];
+
+        int years = Integer.parseInt(year1);
+        int month = Integer.parseInt(year2);
+        int day = Integer.parseInt(year3);
+        int hour = Integer.parseInt(hours1);
+        int min = Integer.parseInt(hours2);
+        int sec = Integer.parseInt(hours3);
+
+        String [] sstr = date.split("    ");
+        Log.i("life","system time------"+date);
+        String ss1=sstr[0];
+        String ss2=sstr[1];
+        //
+        String [] syears = ss1.split("-");
+        String syear1 = syears[0];
+        String syear2 = syears[1];
+        String syear3 = syears[2];
+        //
+        String [] shours = ss2.split(":");
+        String shours1 = shours[0];
+        String shours2 = shours[1];
+        String shours3 = shours[2];
+
+        int syear = Integer.parseInt(syear1);
+        int smonth = Integer.parseInt(syear2);
+        int sday = Integer.parseInt(syear3);
+        int shour = Integer.parseInt(shours1);
+        int smin = Integer.parseInt(shours2);
+        int ssec = Integer.parseInt(shours3);  if(years == syear){
+            if(month == smonth){
+                if(day == sday ){
+                    if(hour == shour+12){
+                        if(smin == min){
+                            createtime.setText( "1分钟内");
+
+                        }else{
+                            int mins = smin - min;
+                            if(mins <0){
+                                createtime.setText( "1分钟内");
+                            }else{
+                                createtime.setText( mins+"分钟前");
+                            }
+                        }
+
+                    }else if((hour - shour+12)==1){
+                        int mins =  (60-min)+smin;
+                        createtime.setText( mins+"分钟前");
+
+                    }else{
+
+                        int hous =12+shour-hour;
+                        createtime.setText(hous+"小时前");
+                    }
+                }else{
+                    int days = sday - day;
+                    if(days == 1){
+                        createtime.setText("昨天"+hour+" "+":"+min);
+                    }else if(days ==2 ){
+                        createtime.setText("前天"+hour+" "+":"+min);
+                    }else{
+                        createtime.setText(days+"天前"+" "+hour+":"+min);
+                    }
+
+                }
+            }else{
+                createtime.setText(month+"月"+day+"日"+" "+hour+":"+min);
+            }
+        }else{
+            createtime.setText(intent.getExtras().getString("JuCrtTim").toString());
+        }
+
         content.setText(intent.getExtras().getString("JuConTex").toString());
         i = intent.getExtras().getString("JuId").toString();
     }

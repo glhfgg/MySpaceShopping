@@ -114,20 +114,25 @@ public class JuCommentAdapter extends BaseAdapter{
         if(years == syear){
             if(month == smonth){
                 if(day == sday ){
-                    if(hour == shour){
-                        int mins = smin - min;
-                        if(mins <=0 ){
-                            int secs = ssec - sec;
-                            holder.time.setText( secs+"秒前");
+                    if(hour == shour+12){
+                        if(smin == min){
+                            holder.time.setText( "1分钟内");
+
                         }else{
-                            holder.time.setText( mins+"分钟前");
+                            int mins = smin - min;
+                            if(mins <0){
+                                holder.time.setText( "1分钟内");
+                            }else{
+                                holder.time.setText( mins+"分钟前");
+                            }
                         }
-                    }else if((hour - shour<1)){
-                        int mins =  (60-min)+(60-smin);
+                    }else if((hour - shour+12)==1){
+                        int mins =  (60-min)+smin;
                         holder.time.setText( mins+"分钟前");
 
                     }else{
-                        int hous = (12-shour)+(12-hour);
+
+                        int hous =12+shour-hour;
                         holder.time.setText(hous+"小时前");
                     }
                 }else{
@@ -147,6 +152,7 @@ public class JuCommentAdapter extends BaseAdapter{
         }else{
             holder.time.setText(data.getScore());
         }
+
 
         holder.content.setText(data.getContent());
         Picasso.with(context).load(data.getPhoto()).into( holder.photo);

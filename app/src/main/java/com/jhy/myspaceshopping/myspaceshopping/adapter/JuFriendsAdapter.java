@@ -94,7 +94,7 @@ public class JuFriendsAdapter extends BaseAdapter {
 
 
         String []str = data.getScore().split(" ");
-//        Log.i("life","my time------"+data.getScore());
+        Log.i("life","my time------"+data.getScore());
         String s1=str[0];
         String s2=str[1];
 
@@ -116,7 +116,7 @@ public class JuFriendsAdapter extends BaseAdapter {
         int sec = Integer.parseInt(hours3);
 
         String [] sstr = date.split("    ");
-//        Log.i("life","system time------"+date);
+        Log.i("life","system time------"+date);
         String ss1=sstr[0];
         String ss2=sstr[1];
         Log.i("","");
@@ -136,44 +136,49 @@ public class JuFriendsAdapter extends BaseAdapter {
         int sday = Integer.parseInt(syear3);
         int shour = Integer.parseInt(shours1);
         int smin = Integer.parseInt(shours2);
-        int ssec = Integer.parseInt(shours3);
+        int ssec = Integer.parseInt(shours3);  if(years == syear){
+            if(month == smonth){
+                if(day == sday ){
+                    if(hour == shour+12){
+                        if(smin == min){
+                            holder.score.setText( "1分钟内");
 
-        if(years == syear){
-          if(month == smonth){
-              if(day == sday ){
-                   if(hour == shour){
-                           int mins = smin - min;
-                       if(mins <=0 ){
-                           int secs = ssec - sec;
-                           holder.score.setText( secs+"秒前");
-                       }else{
-                           holder.score.setText( mins+"分钟前");
-                       }
-                   }else if((hour - shour<1)){
-                       int mins =  (60-min)+(60-smin);
-                       holder.score.setText( mins+"分钟前");
+                        }else{
+                            int mins = smin - min;
+                            if(mins <0){
+                                holder.score.setText( "1分钟内");
+                            }else{
+                                holder.score.setText( mins+"分钟前");
+                            }
+                        }
+                    }else if((hour - shour+12)==1){
+                        int mins =  (60-min)+smin;
+                        holder.score.setText( mins+"分钟前");
 
-                   }else{
-                       int hous = (12-shour)+(12-hour);
-                       holder.score.setText(hous+"小时前");
-                   }
-              }else{
-                  int days = sday - day;
-                  if(days == 1){
-                      holder.score.setText("昨天"+hour+" "+":"+min);
-                  }else if(days ==2 ){
-                      holder.score.setText("前天"+hour+" "+":"+min);
-                  }else{
-                      holder.score.setText(days+"天前"+" "+hour+":"+min);
-                  }
+                    }else{
 
-              }
-          }else{
-              holder.score.setText(month+"月"+day+"日"+" "+hour+":"+min);
-          }
+                        int hous =12+shour-hour;
+                        holder.score.setText(hous+"小时前");
+                    }
+                }else{
+                    int days = sday - day;
+                    if(days == 1){
+                        holder.score.setText("昨天"+hour+" "+":"+min);
+                    }else if(days ==2 ){
+                        holder.score.setText("前天"+hour+" "+":"+min);
+                    }else{
+                        holder.score.setText(days+"天前"+" "+hour+":"+min);
+                    }
+
+                }
+            }else{
+                holder.score.setText(month+"月"+day+"日"+" "+hour+":"+min);
+            }
         }else{
             holder.score.setText(data.getScore());
         }
+
+
 
 
 
