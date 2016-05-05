@@ -100,7 +100,7 @@ public class JuFriendsFragment extends Fragment {
         listdata = new ArrayList<>();
         BmobQuery<Post> query = new BmobQuery<Post>();
         ID = new ArrayList<>();
-        query.order("-updatedAt");
+        query.order("-createdAt");
         query.setLimit(num);
         query.include("author");// 希望在查询帖子信息的同时也把发布人的信息查询出来
         query.findObjects(this.getActivity(), new FindListener<Post>() {

@@ -83,20 +83,14 @@ public class JuCreatePostActivity extends Activity{
 
 
     private void setData(){
-
         MyUser user = BmobUser.getCurrentUser(this,MyUser.class);
-
         post.setContent(content.getText().toString());
-
         //添加一对一关联
         post.setAuthor(user);
-
         post.save(this, new SaveListener() {
             @Override
             public void onSuccess() {
                 // TODO Auto-generated method stub
-
-
             }
             @Override
             public void onFailure(int code, String msg) {
@@ -114,34 +108,26 @@ public class JuCreatePostActivity extends Activity{
                 @Override
                 public void onSuccess() {
                     //设置内容
-
                     post.setImage(bmobFile);
                     post.update(JuCreatePostActivity.this, post.getObjectId(), new UpdateListener() {
-
                         @Override
                         public void onSuccess() {
                             // TODO Auto-generated method stub
-
                             Log.i("bmob","更新成功：");
                         }
-
                         @Override
                         public void onFailure(int code, String msg) {
                             // TODO Auto-generated method stub
                             Log.i("bmob","更新失败："+msg);
                         }
                     });
-
-
                     Toast.makeText(JuCreatePostActivity.this, "上传文件成功", Toast.LENGTH_SHORT).show();
                     finish();
                 }
-
                 @Override
                 public void onProgress(Integer value) {
                     // 返回的上传进度（百分比）
                 }
-
                 @Override
                 public void onFailure(int code, String msg) {
                     Toast.makeText(JuCreatePostActivity.this, "上传文件失败"+msg, Toast.LENGTH_SHORT).show();
@@ -174,7 +160,6 @@ public class JuCreatePostActivity extends Activity{
                 cursor.moveToFirst();
                 //最后根据索引值获取图片路径
                 path = cursor.getString(column_index);
-                Log.i("result","IMG---------"+path);
             }catch (IOException e) {
                 Log.e("result",e.toString());
             }
@@ -186,14 +171,11 @@ public class JuCreatePostActivity extends Activity{
         Toast.makeText(this, name, Toast.LENGTH_LONG).show();
         Bundle bundle = data.getExtras();
         Bitmap bitmap = (Bitmap) bundle.get("data");// 获取相机返回的数据，并转换为Bitmap图片格式
-
         FileOutputStream b = null;
-        //???????????????????????????????为什么不能直接保存在系统相册位置呢？？？？？？？？？？？？
         File file = new File("/sdcard/myImage/");
         path = "/sdcard/myImage/"+name;
         file.mkdirs();// 创建文件夹
         String fileName = "/sdcard/myImage/"+name;
-   Log.i("lift","------"+"/sdcard/myImage/"+name);
         try {
             b = new FileOutputStream(fileName);
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);// 把数据写入文件
