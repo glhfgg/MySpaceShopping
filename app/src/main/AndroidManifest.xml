@@ -69,7 +69,9 @@
         <activity android:name=".activity.JuMyShareActivity" android:launchMode="singleTask"/>
         <activity android:name=".activity.JuMyLikesActivity" android:launchMode="singleTask"/>
         <activity android:name=".activity.JuMyFansActivity" android:launchMode="singleTask"/>
+        <activity android:name=".activity.HomeSearchDegitalActivity" android:launchMode="singleTask"/>
         <activity android:name=".activity.JuPersonUserActivity" android:launchMode="singleTask"/>
+
     </application>
 
 </manifest>

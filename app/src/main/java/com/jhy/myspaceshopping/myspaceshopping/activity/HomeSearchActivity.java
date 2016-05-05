@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -52,16 +53,44 @@ public class HomeSearchActivity extends Activity {
         gridSearch = (GridView) findViewById(R.id.grid_Search);
         gridSearch.setOnItemClickListener(gridListener);
         btnSearchBack.setOnClickListener(btnSearchBackListener);
+        btnSearchFind.setOnClickListener(btnSearchFindListeneer);
+        setAutoData();
     }
+
+    private void setAutoData() {
+        String[] shops = getResources().getStringArray(R.array.search_shop);
+        ArrayAdapter adapter = new ArrayAdapter
+                (this, android.R.layout.simple_list_item_1, shops);
+        editSearch.setAdapter(adapter);
+
+    }
+
+    View.OnClickListener btnSearchFindListeneer = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String shopName = editSearch.getText().toString();
+            Intent intent = new Intent(context,HomeSearchDegitalActivity.class);
+            intent.putExtra("shopName",shopName);
+            startActivity(intent);
+
+        }
+    };
+
+    /**
+     * 热门搜索的Item项的监听
+     */
     AdapterView.OnItemClickListener gridListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             String shopUrl = shopUrlList.get(position);
             Intent intent = new Intent(context, WebViewActivity.class);
-            intent.putExtra("shopUrl",shopUrl);
+            intent.putExtra("shopUrl", shopUrl);
             startActivity(intent);
         }
     };
+    /**
+     * 退后按钮的监听
+     */
     View.OnClickListener btnSearchBackListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -81,7 +110,7 @@ public class HomeSearchActivity extends Activity {
         shopMap.put("page_size", "50");
         shopMap.put("deals_per_shop", "50");
 
-        OkHttpUtils.getInstance().doGet("http://apis.baidu.com/baidunuomi/openapi/searchdeals", shopMap,"eca37bd5318ddde48b144c6a37bd82e5").excute(new OkHttpUtils.OKCallBack() {
+        OkHttpUtils.getInstance().doGet("http://apis.baidu.com/baidunuomi/openapi/searchdeals", shopMap, "eca37bd5318ddde48b144c6a37bd82e5").excute(new OkHttpUtils.OKCallBack() {
             @Override
             public void onFailure(String message) {
 
@@ -100,18 +129,17 @@ public class HomeSearchActivity extends Activity {
         });
 
 
-
     }
 
     private void setListData() {
         list = new ArrayList<>();
         shopUrlList = new ArrayList<>();
-        for (int i=0;i<50;i++){
-            if(shop.getData().getDeals().get(i).getTitle().length()<6){
+        for (int i = 0; i < 50; i++) {
+            if (shop.getData().getDeals().get(i).getTitle().length() < 6) {
                 list.add(shop.getData().getDeals().get(i).getTitle());
                 shopUrlList.add(shop.getData().getDeals().get(i).getDeal_murl());
             }
-            if(list.size()>=9){
+            if (list.size() >= 9) {
                 break;
             }
         }

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.jhy.myspaceshopping.myspaceshopping.R;
 import com.jhy.myspaceshopping.myspaceshopping.activity.HomeSearchActivity;
+import com.jhy.myspaceshopping.myspaceshopping.activity.JuNewsActivity;
 import com.jhy.myspaceshopping.myspaceshopping.activity.ListTestActivity;
 import com.jhy.myspaceshopping.myspaceshopping.activity.WebViewActivity;
 import com.jhy.myspaceshopping.myspaceshopping.adapter.CityAreaAdapter;
@@ -62,6 +64,7 @@ public class HomeFragment extends Fragment {
     String cityName;
     PopupWindow popupWindow1;
     View homeFragmentView;
+    ImageView btnNewsMessage;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -99,7 +102,7 @@ public class HomeFragment extends Fragment {
         super.onResume();
         context = getActivity();
         cityName = getActivity().getIntent().getStringExtra("city");
-        Log.i("gl", "!!!!!!!!!!!!!" + "我进Resum了" + cityName);
+        //Log.i("gl", "!!!!!!!!!!!!!" + "我进Resum了" + cityName);
         if (cityName != null) {
             imageCity.setText(cityName);
 
@@ -130,7 +133,8 @@ public class HomeFragment extends Fragment {
         shopListView.setOnRefreshListener(shoListListener);
         dealsList = new ArrayList<>();//产生一个装商店数据的集合
         shopListView.setOnItemClickListener(shopListViewItemListener);
-
+        btnNewsMessage = (ImageView) homeFragmentView.findViewById(R.id.btn_new_message);
+        btnNewsMessage.setOnClickListener(messageListener);
 
     }
 
@@ -183,6 +187,9 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    /**
+     * 选择城市的监听
+     */
     View.OnClickListener l = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -197,7 +204,16 @@ public class HomeFragment extends Fragment {
             startActivity(intent);//跳转到搜索页面
         }
     };
-
+    /**
+     * title栏上新消息的监听
+     */
+    View.OnClickListener messageListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(context, JuNewsActivity.class);
+            startActivity(intent);
+        }
+    };
 
     /**
      * 显示该城市区的popuwindow
@@ -350,9 +366,6 @@ public class HomeFragment extends Fragment {
                 cityResult = message;
             }
         });
-    }
-    public interface setCityInterface{
-        void setCity();
     }
 
 }
