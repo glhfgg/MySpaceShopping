@@ -154,7 +154,7 @@ public class JuFriendsAdapter extends BaseAdapter {
                        holder.score.setText( mins+"分钟前");
 
                    }else{
-                       int hous = shour - hour;
+                       int hous = (12-shour)+(12-hour);
                        holder.score.setText(hous+"小时前");
                    }
               }else{

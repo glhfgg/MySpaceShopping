@@ -127,7 +127,7 @@ public class JuCommentAdapter extends BaseAdapter{
                         holder.time.setText( mins+"分钟前");
 
                     }else{
-                        int hous = shour - hour;
+                        int hous = (12-shour)+(12-hour);
                         holder.time.setText(hous+"小时前");
                     }
                 }else{
