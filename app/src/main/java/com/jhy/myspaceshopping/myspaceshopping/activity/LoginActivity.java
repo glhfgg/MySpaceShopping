@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -24,16 +25,16 @@ public class LoginActivity extends Activity{
     EditText name;
     EditText pass;
     Button login;
-    Button singup;
+    TextView singup;
     Context context = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_login);
-        name = (EditText) findViewById(R.id.test_username);
-        pass = (EditText) findViewById(R.id.test_userpass);
-        login = (Button) findViewById(R.id.test_login);
-        singup = (Button) findViewById(R.id.test_singup);
+        setContentView(R.layout.activity_login);
+        name = (EditText) findViewById(R.id.edit_user_name);
+        pass = (EditText) findViewById(R.id.edit_user_passward);
+        login = (Button) findViewById(R.id.btn_login);
+        singup = (TextView) findViewById(R.id.btn_register);
         login.setOnClickListener(click);
         singup.setOnClickListener(click);
         Bmob.initialize(this, "83d3230ec6120329ff990b35775b96f3");
@@ -65,11 +66,11 @@ public class LoginActivity extends Activity{
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                case R.id.test_singup:
+                case R.id.btn_register:
                     Intent intent = new Intent(context,SingupActivity.class);
                     startActivity(intent);
                     break;
-                case R.id.test_login:
+                case R.id.btn_login:
                     toLogin();
                     break;
             }

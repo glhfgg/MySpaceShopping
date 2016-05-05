@@ -30,11 +30,11 @@ public class SingupActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_singup);
-        name = (EditText) findViewById(R.id.singup_name);
-        pass = (EditText) findViewById(R.id.singup_pass);
-        email = (EditText) findViewById(R.id.singup_email);
-        enter = (Button) findViewById(R.id.singup_enter);
+        setContentView(R.layout.activity_register);
+        name = (EditText) findViewById(R.id.register_edit_user_name);
+        pass = (EditText) findViewById(R.id.register_edit_user_password);
+        email = (EditText) findViewById(R.id.register_edit_user_mail);
+        enter = (Button) findViewById(R.id.btn_login);
         enter.setOnClickListener(click);
     }
 
