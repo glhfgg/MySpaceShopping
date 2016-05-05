@@ -37,4 +37,6 @@ dependencies {
     compile 'cn.bmob.android:bmob-sdk:3.4.3'
     compile 'com.android.support:support-v4:23.3.0'
     compile 'de.hdodenhof:circleimageview:2.0.0'
+    compile 'com.google.zxing:zxing-parent:3.2.1'
+    compile project(path: ':libzxing')
 }

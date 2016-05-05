@@ -1,10 +1,10 @@
 package com.jhy.myspaceshopping.myspaceshopping.fragment;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +18,7 @@ import com.jhy.myspaceshopping.myspaceshopping.activity.HomeMovieActivity;
 /**
  * Created by Administrator on 2016/4/19.
  */
-public class ClassificationFragment extends Fragment {
+public class ClassificationFragment extends Fragment{
     ImageView movieImage;
     ImageView foodImage;
     ImageView hotleImage;

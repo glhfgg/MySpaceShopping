@@ -1,10 +1,10 @@
 package com.jhy.myspaceshopping.myspaceshopping.fragment;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -37,6 +38,7 @@ import com.jhy.myspaceshopping.myspaceshopping.objectmode.CityArea;
 import com.jhy.myspaceshopping.myspaceshopping.objectmode.NearbyShops;
 import com.jhy.myspaceshopping.myspaceshopping.util.OkHttpUtils;
 import com.jhy.myspaceshopping.myspaceshopping.util.OkHttpUtils.OKCallBack;
+import com.xys.libzxing.zxing.activity.CaptureActivity;
 
 public class HomeFragment extends Fragment {
 
@@ -65,12 +67,13 @@ public class HomeFragment extends Fragment {
     PopupWindow popupWindow1;
     View homeFragmentView;
     ImageView btnNewsMessage;
+    ImageView btnSweep;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        homeFragmentView = inflater.inflate(R.layout.activity_home_main,container,false);
+        homeFragmentView = inflater.inflate(R.layout.activity_home_main, container, false);
         view = homeFragmentView.findViewById(R.id.btn_city_choose);
-
+        Log.i("gl","!!!!!!!!!!@@@@@@@@@"+"我又进来了");
         this.inflater = inflater;
         init();
         getCityDataRun();//开启异步线程获取城市数据
@@ -78,7 +81,12 @@ public class HomeFragment extends Fragment {
         return homeFragmentView;
     }
 
-   /* @Override
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+    }
+    /* @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_main);
@@ -105,7 +113,6 @@ public class HomeFragment extends Fragment {
         //Log.i("gl", "!!!!!!!!!!!!!" + "我进Resum了" + cityName);
         if (cityName != null) {
             imageCity.setText(cityName);
-
         }
     }
 
@@ -113,6 +120,7 @@ public class HomeFragment extends Fragment {
     public void onStart() {
         super.onStart();
     }
+
 
     /**
      * 初始化控件
@@ -127,7 +135,6 @@ public class HomeFragment extends Fragment {
         shopListView.setMode(PullToRefreshBase.Mode.BOTH);
         header = inflater.inflate(R.layout.listview_home_header, null);
         shopListView.getRefreshableView().addHeaderView(header);
-        //shopListView.addHeaderView(header);
         editTextSearch = (TextView) homeFragmentView.findViewById(R.id.edt_search);
         editTextSearch.setOnClickListener(search);
         shopListView.setOnRefreshListener(shoListListener);
@@ -135,8 +142,21 @@ public class HomeFragment extends Fragment {
         shopListView.setOnItemClickListener(shopListViewItemListener);
         btnNewsMessage = (ImageView) homeFragmentView.findViewById(R.id.btn_new_message);
         btnNewsMessage.setOnClickListener(messageListener);
+        btnSweep = (ImageView) homeFragmentView.findViewById(R.id.btn_sweep);
+        btnSweep.setOnClickListener(sweepListener);
 
     }
+
+    /**
+     * 扫描二维码的跳转监听
+     */
+    View.OnClickListener sweepListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(context, CaptureActivity.class);
+            startActivity(intent);
+        }
+    };
 
     /**
      * 为商铺listView设置点击事件
@@ -144,9 +164,9 @@ public class HomeFragment extends Fragment {
     ListView.OnItemClickListener shopListViewItemListener = new ListView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            String shopUrl = dealsList.get(position-2).getDeal_murl();
+            String shopUrl = dealsList.get(position - 2).getDeal_murl();
             Intent intent = new Intent(context, WebViewActivity.class);
-            intent.putExtra("shopUrl",shopUrl);
+            intent.putExtra("shopUrl", shopUrl);
             startActivity(intent);
         }
     };
@@ -334,7 +354,7 @@ public class HomeFragment extends Fragment {
         shopMap.put("deals_per_shop", "10");
 
 
-        OkHttpUtils.getInstance().doGet("http://apis.baidu.com/baidunuomi/openapi/searchdeals", shopMap,"eca37bd5318ddde48b144c6a37bd82e5").excute(new OKCallBack() {
+        OkHttpUtils.getInstance().doGet("http://apis.baidu.com/baidunuomi/openapi/searchdeals", shopMap, "eca37bd5318ddde48b144c6a37bd82e5").excute(new OKCallBack() {
             @Override
             public void onFailure(String message) {
 
@@ -355,7 +375,7 @@ public class HomeFragment extends Fragment {
 
         Map<String, String> cityMap = new HashMap<>();
         cityMap.put("city_id", "400010000");
-        OkHttpUtils.getInstance().doGet("http://apis.baidu.com/baidunuomi/openapi/districts", cityMap,"eca37bd5318ddde48b144c6a37bd82e5").excute(new OKCallBack() {
+        OkHttpUtils.getInstance().doGet("http://apis.baidu.com/baidunuomi/openapi/districts", cityMap, "eca37bd5318ddde48b144c6a37bd82e5").excute(new OKCallBack() {
             @Override
             public void onFailure(String message) {
 

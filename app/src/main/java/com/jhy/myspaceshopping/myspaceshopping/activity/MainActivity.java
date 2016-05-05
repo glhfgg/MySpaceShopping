@@ -1,11 +1,10 @@
 package com.jhy.myspaceshopping.myspaceshopping.activity;
-
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 
 import android.widget.RadioGroup;
@@ -40,24 +39,24 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (user != null) {
+        /*if (user != null) {
             jufragment = new JuMainFragment();
             android.support.v4.app.FragmentManager fm4 = getSupportFragmentManager();
             android.support.v4.app.FragmentTransaction ft4 = fm4.beginTransaction();
             ft4.add(R.id.fragment_container, jufragment);
             ft4.commit();
-        }
+        }*/
     }
 
     private void init() {
         user = BmobUser.getCurrentUser(MainActivity.this,MyUser.class);
-        android.support.v4.app.FragmentManager fm4 = getSupportFragmentManager();
-        android.support.v4.app.FragmentTransaction ft4 = fm4.beginTransaction();
+        FragmentManager fm4 = getSupportFragmentManager();
+        FragmentTransaction ft4 = fm4.beginTransaction();
 
         rgMain = (RadioGroup) findViewById(R.id.rg_main);
         rgMain.setOnCheckedChangeListener(radioGroupListener);
 
-        FragmentManager fm = getFragmentManager();  //获得Fragment管理器
+        FragmentManager fm = getSupportFragmentManager();  //获得Fragment管理器
         FragmentTransaction ft = fm.beginTransaction(); //开启一个事务
 
         homeFragment = new HomeFragment();
@@ -83,11 +82,11 @@ public class MainActivity extends FragmentActivity {
 
         @Override
         public void onCheckedChanged(RadioGroup group, int checkedId) {
-            FragmentManager fm = getFragmentManager();  //获得Fragment管理器
+            FragmentManager fm = getSupportFragmentManager();  //获得Fragment管理器
             FragmentTransaction ft = fm.beginTransaction(); //开启一个事务
 
-            android.support.v4.app.FragmentManager fm4 = getSupportFragmentManager();
-            android.support.v4.app.FragmentTransaction ft4 = fm4.beginTransaction();
+            FragmentManager fm4 = getSupportFragmentManager();
+            FragmentTransaction ft4 = fm4.beginTransaction();
 
             hideFragment(ft);
             switch (checkedId) {
