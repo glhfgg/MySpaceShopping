@@ -54,8 +54,6 @@ public class BusinessFragment extends Fragment {
     RadioButton rbtnSearch;//搜索
     int whichButton;
     //popupWindow
-    View vBtnSet;//弹出popupWindow的控件的view
-    Context context=getActivity();
     Button btnType;//全部分类
     Button btnCity;//全城
     Button btnOrder;//智能排序
@@ -68,7 +66,7 @@ public class BusinessFragment extends Fragment {
      */
     private List<SecondClassItemModel> secondList;
    //排序order的数据
-    private List<SecondClassItemModel> secondListOrder;
+    private List<FirstClassItemModel> FirstListOrder;
     /**
      * 使用PopupWindow显示一级分类和二级分类
      */
@@ -259,10 +257,10 @@ public class BusinessFragment extends Fragment {
 
     // 智能排序--data
     private void orderData() {
-        secondListOrder = new ArrayList<SecondClassItemModel>();
-        secondListOrder.add(new SecondClassItemModel(101, "智能排序"));
-        secondListOrder.add(new SecondClassItemModel(102, "好评优先"));
-        secondListOrder.add(new SecondClassItemModel(103, "离我最近"));
+        FirstListOrder = new ArrayList<FirstClassItemModel>();
+        FirstListOrder.add(new FirstClassItemModel(1, "智能排序",null));
+        FirstListOrder.add(new FirstClassItemModel(2, "好评优先",null));
+        FirstListOrder.add(new FirstClassItemModel(3, "离我最近",null));
     }
 
     //PopupWindow
@@ -357,7 +355,7 @@ public class BusinessFragment extends Fragment {
         popupWindow.setHeight(ViewPager.LayoutParams.WRAP_CONTENT);
         popupWindow.setWidth(ViewPager.LayoutParams.MATCH_PARENT);
          orderData();
-        final SecondClassAdapter secondOrderAdapter = new SecondClassAdapter(this.getActivity(),secondListOrder);
+        final FirstClassAdapter secondOrderAdapter = new FirstClassAdapter(this.getActivity(),FirstListOrder);
         orderLV.setAdapter(secondOrderAdapter);
 
         orderLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -365,7 +363,7 @@ public class BusinessFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //关闭popupWindow，显示用户选择的分类
                 popupWindow.dismiss();
-                String selectedName=secondListOrder.get(position).getName();
+                String selectedName=FirstListOrder.get(position).getName();
                 result(selectedName);
             }
         });
