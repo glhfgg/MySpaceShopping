@@ -13,6 +13,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!--允许读取手机状态 用于创建BmobInstallation-->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 相机 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- 振动 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
 
 
     <application
@@ -71,6 +75,14 @@
         <activity android:name=".activity.JuMyFansActivity" android:launchMode="singleTask"/>
         <activity android:name=".activity.HomeSearchDegitalActivity" android:launchMode="singleTask"/>
         <activity android:name=".activity.JuPersonUserActivity" android:launchMode="singleTask"/>
+        <activity
+            android:name="com.xys.libzxing.zxing.activity.CaptureActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="stateAlwaysHidden">
+
+        </activity>
 
     </application>
 
