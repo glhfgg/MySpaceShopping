@@ -90,8 +90,7 @@ public class MapBaiduActivity extends Activity implements OnReceiveLocationListe
 
     //弹出PopupWindow时，背景变暗的动画
     private Animation animIn, animOut;
-    //设定中心点坐标
-   // LatLng cenpt;
+
     //定义Maker坐标点
     LatLng point;
     @Override
@@ -123,13 +122,7 @@ public class MapBaiduActivity extends Activity implements OnReceiveLocationListe
                 }
                 onReceive(bdLocation);
                 textMapXY.setText(bdLocation.getAddrStr());
-               //设定中心点坐标
-                //cenpt=new LatLng(mLongitude,mLatitude);
 
-               // locData= new MyLocationData.Builder().accuracy(bdLocation.getRadius())
-                        // 此处设置开发者获取到的方向信息，顺时针0-360
-                     //   .direction(100).latitude(bdLocation.getLatitude())
-                       // .longitude(bdLocation.getLongitude()).build();
                 list= bdLocation.getPoiList();// POI数据
                 //定位没结果时返回数据
                 StringBuffer sb= new StringBuffer(256);
@@ -172,18 +165,11 @@ public class MapBaiduActivity extends Activity implements OnReceiveLocationListe
             }
         });
 
-       /* //定义地图状态
-        MapStatus mMapStatus=new MapStatus.Builder().target(cenpt).zoom(12).build();
-        //定义MapStatusUpdate对象，以便描述地图状态将要发生的变化
-        MapStatusUpdate mMapStatusUpdate= MapStatusUpdateFactory.newMapStatus(mMapStatus);
-        //改变地图状态
-        mBaiduMap.setMapStatus(mMapStatusUpdate);*/
-
 
         //定义Maker坐标点
 
         //构建Marker图标
-        mCurrentMarker = BitmapDescriptorFactory
+       /* mCurrentMarker = BitmapDescriptorFactory
                 .fromResource(R.mipmap.biaozhu);
         //构建MarkerOption，用于在地图上添加Marker
         OverlayOptions option = new MarkerOptions()
@@ -192,12 +178,9 @@ public class MapBaiduActivity extends Activity implements OnReceiveLocationListe
         //在地图上添加Marker，并显示
         mBaiduMap.addOverlay(option);
         // 开启定位图层
-        mBaiduMap.setMyLocationEnabled(true);
+        mBaiduMap.setMyLocationEnabled(true);*/
 
-       //mBaiduMap.setMyLocationData(locData);
-
-
-       //POI检索
+          //POI检索
         //创建POI检索实例
         mPoiSearch=PoiSearch.newInstance();
         //创建POI检索监听者
