@@ -85,7 +85,6 @@ public class JuCommentActivity extends Activity {
         setContentView(R.layout.activity_ju_comment);
         setList();
         setParisNum();
-
     }
 
     private void setIntentData(){
@@ -101,7 +100,6 @@ public class JuCommentActivity extends Activity {
         }
 
         username.setText(intent.getExtras().getString("JuUseNam").toString());
-
 
         String []str =intent.getExtras().getString("JuCrtTim").toString().split(" ");
 //        Log.i("life","my time------"+data.getScore());

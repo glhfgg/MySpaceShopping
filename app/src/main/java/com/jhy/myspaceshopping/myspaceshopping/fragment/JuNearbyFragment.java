@@ -111,7 +111,6 @@ public class JuNearbyFragment extends Fragment {
             @Override
             public void onSuccess(List<MyUser> object) {
                 // TODO Auto-generated method stub
-
                 Toast.makeText(JuNearbyFragment.this.getActivity(), "查询成功：共"+object.size()+"条数据。", Toast.LENGTH_SHORT).show();
                 for (int i =0;i<object.size();i++) {
                     //获得Name的信息
@@ -127,15 +126,12 @@ public class JuNearbyFragment extends Fragment {
                     }else{
                          img = "http://file.bmob.cn/M03/46/56/oYYBAFcfIiGAIh3gAAAEw_gSloU510.png";
                     }
-
                     String us =  object.get(i).getObjectId();
                     JuUniversalData data = new JuUniversalData(name,us,null,"500m",img,storecontent,userName,null,null);
                     Log.i("result","++++____"+img);
                     listdata.add(data);
                     data = null;
-
                 }
-
                 JuNearAdapter adapter = new JuNearAdapter(JuNearbyFragment.this.getActivity(),listdata);
                 list.setAdapter(adapter);
                 list.setOnItemClickListener(itemClick);

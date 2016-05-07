@@ -67,7 +67,6 @@ public class JuCreatePostActivity extends Activity{
         add = (ImageView) findViewById(R.id.ju_create_addimg);
         img = (ImageView) findViewById(R.id.ju_create_img);
         content = (EditText) findViewById(R.id.ju_create_content);
-
     }
 
     private void setClick(){
@@ -77,9 +76,6 @@ public class JuCreatePostActivity extends Activity{
         add.setOnClickListener(AddClick);
         camera.setOnClickListener(AddClick);
     }
-
-
-
 
 
     private void setData(){
@@ -165,31 +161,32 @@ public class JuCreatePostActivity extends Activity{
             }
         }
 
-
       //相机
         String name = new DateFormat().format("yyyyMMdd_hhmmss", Calendar.getInstance(Locale.CHINA)) + ".jpg";
         Toast.makeText(this, name, Toast.LENGTH_LONG).show();
         Bundle bundle = data.getExtras();
-        Bitmap bitmap = (Bitmap) bundle.get("data");// 获取相机返回的数据，并转换为Bitmap图片格式
-        FileOutputStream b = null;
-        File file = new File("/sdcard/myImage/");
-        path = "/sdcard/myImage/"+name;
-        file.mkdirs();// 创建文件夹
-        String fileName = "/sdcard/myImage/"+name;
-        try {
-            b = new FileOutputStream(fileName);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);// 把数据写入文件
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } finally {
+        if(bundle != null){
+            Bitmap bitmap = (Bitmap) bundle.get("data");// 获取相机返回的数据，并转换为Bitmap图片格式
+            FileOutputStream b = null;
+            File file = new File("/sdcard/myImage/");
+            path = "/sdcard/myImage/"+name;
+            file.mkdirs();// 创建文件夹
+            String fileName = "/sdcard/myImage/"+name;
             try {
-                b.flush();
-                b.close();
-            } catch (IOException e) {
+                b = new FileOutputStream(fileName);
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);// 把数据写入文件
+            } catch (FileNotFoundException e) {
                 e.printStackTrace();
+            } finally {
+                try {
+                    b.flush();
+                    b.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
+            img.setImageBitmap(bitmap);// 将图片显示在ImageView里
         }
-        img.setImageBitmap(bitmap);// 将图片显示在ImageView里
     }
 
 

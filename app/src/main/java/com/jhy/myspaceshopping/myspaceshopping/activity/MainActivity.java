@@ -68,7 +68,6 @@ public class MainActivity extends FragmentActivity {
                ft4.add(R.id.fragment_container,jufragment);
                ft4.commit();
            }
-
     }
 
     @Override
@@ -108,19 +107,18 @@ public class MainActivity extends FragmentActivity {
 
                 case R.id.rbtn_main_ju:
                    // Log.i("gl","!@!@!@!@!!!!"+"聚");
-
-//                    Log.i("result","~~~~~~~~~~~~~~~"+user.getUsername().equals(null));
+                   // Log.i("result","~~~~~~~~~~~~~~~"+user.getUsername().equals(null));
+                    user = BmobUser.getCurrentUser(MainActivity.this,MyUser.class);
                     if(user==null){
                         Intent intent = new Intent(MainActivity.this ,LoginActivity.class);
-                        Log.i("result","~~~~~~~~~~~~~~~");
                         startActivity(intent);
+                        finish();
                     }else {
                         if (jufragment == null) {
                             jufragment = new JuMainFragment();
-
+                            ft4.add(R.id.fragment_container,jufragment);
                             ft4.show(jufragment);
                             ft4.commit();
-                           // Log.i("result", "~~~~~~~~~~~~~~~jufragment");
                         }
                     }
 

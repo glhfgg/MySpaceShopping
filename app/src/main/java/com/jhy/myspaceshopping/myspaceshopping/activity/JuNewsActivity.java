@@ -88,9 +88,7 @@ public class JuNewsActivity extends Activity{
                        @Override
                        public void onSuccess(List<MyUser> object) {
                            // TODO Auto-generated method stub
-
                            for(int i =0;i<object.size();i++){
-
                                if(object.get(i).getUsername().toString().equals(user.getUsername().toString())){
                                    s++;
                                }
@@ -101,7 +99,6 @@ public class JuNewsActivity extends Activity{
                                attRed.setText(""+s);
                                attRed.setVisibility(View.VISIBLE);
                            }
-
                        }
 
                        @Override
@@ -117,7 +114,6 @@ public class JuNewsActivity extends Activity{
             public void onError(int code, String msg) {
                 // TODO Auto-generated method stub
                 Log.i("life", "查询失败："+code+"-"+msg);
-
             }
         });
     }
@@ -145,7 +141,6 @@ public class JuNewsActivity extends Activity{
                 case R.id.ju_news_back:
                     finish();
                     break;
-
             }
         }
     };

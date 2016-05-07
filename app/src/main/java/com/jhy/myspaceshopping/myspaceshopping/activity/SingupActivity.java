@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -71,24 +72,24 @@ public class SingupActivity extends Activity{
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KeyEvent.KEYCODE_BACK) { //监控/拦截/屏蔽返回键
+            Intent intent = new Intent(context, LoginActivity.class);
+            startActivity(intent);
+            return true;
+        } else if(keyCode == KeyEvent.KEYCODE_MENU) {
+            //监控/拦截菜单键
+        } else if(keyCode == KeyEvent.KEYCODE_HOME) {
+            //由于Home键为系统键，此处不能捕获，需要重写onAttachedToWindow()
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
     View.OnClickListener click = new View.OnClickListener(){
         @Override
         public void onClick(View v) {
             setUser();
-
-
 
         }
     };
