@@ -1,12 +1,15 @@
 package com.jhy.myspaceshopping.myspaceshopping.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jhy.myspaceshopping.myspaceshopping.R;
 import com.jhy.myspaceshopping.myspaceshopping.adapter.JuNearAdapter;
@@ -26,88 +29,74 @@ import cn.bmob.v3.listener.FindListener;
  */
 public class JuMyFansActivity extends Activity{
 
-    TextView title;
-    ListView list;
-    ImageView back;
-
-
     String img;
-    int j;
-
-    List<MyUser> object2;
+    TextView title;
+    ImageView back;
+    ListView list;
     List<JuUniversalData> listdata;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ju_popitem);
+
         title = (TextView) findViewById(R.id.ju_share_title);
         list = (ListView) findViewById(R.id.ju_share_list);
         back = (ImageView) findViewById(R.id.ju_share_back);
+        listdata = new ArrayList<>();
+        title.setText("我的Fans~");
         back.setOnClickListener(click);
-        title.setText("我的粉丝");
-        searchAttMy();
+        searchUser();
+
+
     }
 
-    private void searchAttMy(){
-        listdata = new ArrayList<>();
-        final MyUser user = BmobUser.getCurrentUser(this,MyUser.class);
-        BmobQuery<MyUser> query = new BmobQuery<MyUser>();
-        query.addWhereEqualTo("friend", true);
-        query.findObjects(this, new FindListener<MyUser>() {
 
+    private void searchUser(){
+        listdata = new ArrayList<>();
+        MyUser user = BmobUser.getCurrentUser(this,MyUser.class);
+        MyUser users = new MyUser();
+        BmobQuery<MyUser> query = new BmobQuery<MyUser>();
+        Log.i("life","USER-----------"+user.getUsername());
+        query.addWhereEqualTo("likes",  new BmobPointer(user));
+        //执行查询方法
+        query.findObjects(JuMyFansActivity.this, new FindListener<MyUser>() {
             @Override
             public void onSuccess(List<MyUser> object) {
                 // TODO Auto-generated method stub
-                Log.i("life", "查询个数："+object.size());
-                object2 = object;
-                for( j=0;j<object.size();j++){
 
-                    BmobQuery<MyUser> query = new BmobQuery<MyUser>();
-                    MyUser post = new MyUser();
-                    post.setObjectId( object.get(j).getObjectId());
-                    query.addWhereRelatedTo("likes", new BmobPointer(post));
-                    query.findObjects(JuMyFansActivity.this, new FindListener<MyUser>() {
+                Toast.makeText(JuMyFansActivity.this, "查询成功：共"+object.size()+"条数据。", Toast.LENGTH_SHORT).show();
+                for (int i =0;i<object.size();i++) {
+                    //获得Name的信息
+                    String name =  object.get(i).getPersonname();
+                    //获得用户自我介绍
+                    String  storecontent =  object.get(i).getContent();
+                    String userName = object.get(i).getUsername();
 
-                        @Override
-                        public void onSuccess(List<MyUser> objects) {
-                            // TODO Auto-generated method stub
+                    //获取用户头像
+                    if(object.get(i).getIcon() != null){
+                        img ="http://file.bmob.cn/"+ object.get(i).getIcon().getUrl();
+                    }else{
+                        img = "http://file.bmob.cn/M03/46/56/oYYBAFcfIiGAIh3gAAAEw_gSloU510.png";
+                    }
 
-                            for(int i =0;i<objects.size();i++){
-                                if(objects.get(i).getUsername().toString().equals(user.getUsername().toString())){
-                                    String name =  object2.get(j-1).getPersonname();
-                                    String  storecontent =  object2.get(j-1).getContent();
-                                    if(object2.get(j-1).getIcon() != null){
-                                        img ="http://file.bmob.cn/"+ object2.get(j-1).getIcon().getUrl();
-                                    }else{
-                                        img = "http://file.bmob.cn/M03/46/56/oYYBAFcfIiGAIh3gAAAEw_gSloU510.png";
-                                    }
-                                    String us =  object2.get(j-1).getObjectId();
-                                    JuUniversalData data = new JuUniversalData(name,us,null,"500m",img,storecontent,null,null,null);
-                                    listdata.add(data);
-                                    data =null;
-                                    JuNearAdapter adpater = new JuNearAdapter(JuMyFansActivity.this,listdata);
-                                    list.setAdapter(adpater);
-
-                                    return;
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onError(int code, String msg) {
-                            // TODO Auto-generated method stub
-                            Log.i("life", "查询失败："+code+"-"+msg);
-                        }
-                    });
+                    String us =  object.get(i).getObjectId();
+                    JuUniversalData data = new JuUniversalData(name,us,null,"500m",img,storecontent,userName,null,null);
+                    Log.i("result","++++____"+img);
+                    listdata.add(data);
+                    data = null;
                 }
+
+                JuNearAdapter adapter = new JuNearAdapter(JuMyFansActivity.this,listdata);
+                list.setAdapter(adapter);
+                list.setOnItemClickListener(ListClick);
             }
 
             @Override
             public void onError(int code, String msg) {
                 // TODO Auto-generated method stub
-                Log.i("life", "查询失败："+code+"-"+msg);
-
+                Toast.makeText(JuMyFansActivity.this,"查询失败："+msg, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -119,5 +108,16 @@ public class JuMyFansActivity extends Activity{
         }
     };
 
+    AdapterView.OnItemClickListener ListClick = new AdapterView.OnItemClickListener(){
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            Intent intent = new Intent(JuMyFansActivity.this, JuPersonUserActivity.class);
+            intent.putExtra("PersonUser",listdata.get(position).getScore());
+            intent.putExtra("PersonUserName",listdata.get(position).getSalebefore());
+            intent.putExtra("PersonUserPhoto",listdata.get(position).getPhoto());
+            startActivity(intent);
+        }
+    };
 
 }

@@ -81,7 +81,6 @@ public class JuFriendsAdapter extends BaseAdapter {
             holder.salebefore = (TextView) convertView.findViewById(R.id.ju_forwarding);
             holder.salenum = (TextView) convertView.findViewById(R.id.ju_clickpraise);
 
-            textss =   holder.salenum;
             holder.contentphoto = (ImageView) convertView.findViewById(R.id.ju_contentphoto);
             convertView.setTag(holder);
         }
@@ -177,9 +176,6 @@ public class JuFriendsAdapter extends BaseAdapter {
         }else{
             holder.score.setText(data.getScore());
         }
-
-
-
 
 
         holder.names.setText(data.getName());

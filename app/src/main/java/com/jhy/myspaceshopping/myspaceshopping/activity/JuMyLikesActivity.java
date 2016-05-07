@@ -5,10 +5,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,7 +23,9 @@ import java.util.List;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobPointer;
+import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.GetListener;
 
 /**
  * Created by 俊峰 on 2016/5/2.
@@ -48,22 +48,24 @@ public class JuMyLikesActivity  extends Activity{
         title = (TextView) findViewById(R.id.ju_share_title);
         list = (ListView) findViewById(R.id.ju_share_list);
         back = (ImageView) findViewById(R.id.ju_share_back);
-
+        listdata = new ArrayList<>();
         title.setText("我的关注");
         back.setOnClickListener(click);
         searchUser();
-        list.setOnItemClickListener(ListClick);
+        Log.i("life","CREATE-----------");
     }
-
 
 
     private void searchUser(){
         listdata = new ArrayList<>();
         MyUser user = BmobUser.getCurrentUser(this,MyUser.class);
+        MyUser users = new MyUser();
         BmobQuery<MyUser> query = new BmobQuery<MyUser>();
-        //查询playerName叫“比目”的数据
-        query.addWhereEqualTo("likes", new BmobPointer(user));
-        //返回50条数据，如果不加上这条语句，默认返回10条数据
+        Log.i("life","USERBmobPointer-----------"+new BmobPointer(user));
+        Log.i("life","USERBmobRelation-----------"+new BmobRelation(user));
+        Log.i("life","USERgetLikes-----------"+ user.getLikes().toString());
+
+        query.addWhereRelatedTo("likes", new BmobPointer(user));
         //执行查询方法
         query.findObjects(JuMyLikesActivity.this, new FindListener<MyUser>() {
             @Override
@@ -90,13 +92,13 @@ public class JuMyLikesActivity  extends Activity{
                     Log.i("result","++++____"+img);
                     listdata.add(data);
                     data = null;
-
                 }
 
                 JuNearAdapter adapter = new JuNearAdapter(JuMyLikesActivity.this,listdata);
                 list.setAdapter(adapter);
-
+                list.setOnItemClickListener(ListClick);
             }
+
             @Override
             public void onError(int code, String msg) {
                 // TODO Auto-generated method stub
@@ -115,7 +117,6 @@ public class JuMyLikesActivity  extends Activity{
     AdapterView.OnItemClickListener ListClick = new AdapterView.OnItemClickListener(){
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
 
              Intent intent = new Intent(JuMyLikesActivity.this, JuPersonUserActivity.class);
             intent.putExtra("PersonUser",listdata.get(position).getScore());

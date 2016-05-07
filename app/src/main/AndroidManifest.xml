@@ -62,9 +62,6 @@
 
         </activity>
 
-
-
-
         <activity
             android:name=".activity.HomeSearchCityActivity"
             android:launchMode="singleTask">
@@ -89,13 +86,7 @@
 
         </activity>
 
-        <activity android:name=".activity.LoginActivity" android:launchMode="singleTask">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".activity.LoginActivity" android:launchMode="singleTask"/>
 
         <activity android:name=".activity.JuPersonActivity" android:launchMode="singleTask"/>
         <activity android:name=".activity.JuCommentActivity" android:launchMode="singleTask"/>
@@ -105,6 +96,11 @@
         <activity android:name=".activity.JuPersonModifyActivity" android:launchMode="singleTask"/>
         <activity android:name=".activity.JuUploadImgActivity" android:launchMode="singleTask"/>
         <activity android:name=".activity.JuCreatePostActivity" android:launchMode="singleTask"/>
+        <activity android:name=".activity.JuMyFansActivity" android:launchMode="singleTask"/>
+        <activity android:name=".activity.JuMyLikesActivity" android:launchMode="singleTask"/>
+        <activity android:name=".activity.JuMyShareActivity" android:launchMode="singleTask"/>
+        <activity android:name=".activity.JuPersonUserActivity" android:launchMode="singleTask"/>
+
         <activity
             android:name=".activity.MoreActivity"
             android:launchMode="singleTask"/>

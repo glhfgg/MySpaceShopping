@@ -89,7 +89,7 @@ public class JuMainFragment extends Fragment {
         user = BmobUser.getCurrentUser(this.getActivity(), MyUser.class);
 
         if(user == null){
-        }else{  name.setText(user.getPersonname());}
+        }else{  name.setText(user.getPersonname()+"  +");}
 
         searchImg();
         setPopuWindow();
@@ -102,7 +102,7 @@ public class JuMainFragment extends Fragment {
     public void onResume() {
         super.onResume();
         MyUser   user = BmobUser.getCurrentUser(this.getActivity(), MyUser.class);
-        name.setText(user.getPersonname());
+        name.setText(user.getPersonname()+"  +");
         if(user.getIcon() != null){
             Picasso.with(this.getActivity()).load("http://file.bmob.cn/"+user.getIcon().getUrl().toString()).into(img);
         }
@@ -235,9 +235,10 @@ public class JuMainFragment extends Fragment {
     OnClickListener modifyClick = new OnClickListener(){
         @Override
         public void onClick(View v) {
+            Intent intent;
             switch (v.getId()){
                 case R.id.ju_more_changedata:
-                    Intent intent = new Intent(getActivity(), JuPersonModifyActivity.class);
+                     intent = new Intent(getActivity(), JuPersonModifyActivity.class);
                     startActivity(intent);
                     break;
 
@@ -278,7 +279,7 @@ public class JuMainFragment extends Fragment {
 
 
                    }
-               Log.i("result","sssssssddddddd---"+   Picasso.with(JuMainFragment.this.getActivity()).load(t).toString());
+//               Log.i("result","sssssssddddddd---"+   Picasso.with(JuMainFragment.this.getActivity()).load(t).toString());
            }
 
            @Override
