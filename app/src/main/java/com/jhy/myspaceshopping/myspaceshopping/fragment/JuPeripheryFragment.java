@@ -102,15 +102,15 @@ public class JuPeripheryFragment extends Fragment {
         if(peri!=null){
             for (int i = 0; i < peri.getData().getShops().size(); i++) {
                 String name = peri.getData().getShops().get(i).getShop_name();
-                String score ="用户评分"+peri.getData().getShops().get(i).getDeals().get(0).getScore();
+                String score ="用户评分:"+peri.getData().getShops().get(i).getDeals().get(0).getScore();
                 String distance = peri.getData().getShops().get(i).getDistance(); //商户的距离
                 String storephoto = peri.getData().getShops().get(i).getDeals().get(0).getImage();   //商户图片
                 String storecontent = peri.getData().getShops().get(i).getDeals().get(0).getDescription(); //团购内容
                 double salebefores = peri.getData().getShops().get(i).getDeals().get(0).getMarket_price();   //打折前的价格
                 double salelaters = peri.getData().getShops().get(i).getDeals().get(0).getCurrent_price();    //折后价
-                String salenum ="销量"+peri.getData().getShops().get(i).getDeals().get(0).getSale_num();      //销量
-                String salebefore = "$"+salebefores/100;//折后价
-                String salelater = "$"+salelaters/100;//打折前的价格
+                String salenum ="销量:"+peri.getData().getShops().get(i).getDeals().get(0).getSale_num();      //销量
+                String salebefore = "￥"+salebefores/100;//折后价
+                String salelater = "￥"+salelaters/100;//打折前的价格
 
                 JuUniversalData data = new JuUniversalData(name, score, null, distance, storephoto, storecontent, salelater, salebefore, salenum);
                 listdata.add(data);

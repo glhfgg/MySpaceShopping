@@ -102,7 +102,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="评论"
-            android:clickable="true"
             android:drawableLeft="@mipmap/pinglun2"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
