@@ -122,6 +122,7 @@ public class BusinessFragment extends Fragment {
         //自定义的PagerAdapter，将ViewPager与fragment建立连接
         PagerAdapter pagerAdap = new PagerAdapter(fragmentManager, list);
         vpagerStore.setAdapter(pagerAdap);
+        Log.i("gl","666666666666666"+"BusinessFragment Create了");
         return v;
 
     }
@@ -179,6 +180,7 @@ public class BusinessFragment extends Fragment {
         list = new ArrayList<Fragment>();
         list.add(new StoreAllFragment());
         list.add(new StoreCheapFragment());
+        Log.i("gl","DDDDDDDDDDDDDDDDD"+"data()执行了");
     }
 
     //PopupWindow中ListView中存进的数据

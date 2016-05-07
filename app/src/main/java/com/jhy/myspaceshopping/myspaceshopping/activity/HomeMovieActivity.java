@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +35,7 @@ import java.util.Map;
 /**
  * Created by Administrator on 2016/4/21.
  */
-public class HomeMovieActivity extends Activity {
+public class HomeMovieActivity extends FragmentActivity {
     PullToRefreshListView listView;
     ListView distancePopList;
     LayoutInflater inflate;

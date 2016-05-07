@@ -1,4 +1,5 @@
 package com.jhy.myspaceshopping.myspaceshopping.activity;
+
 import android.support.v4.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.RadioGroup;
 
 import com.jhy.myspaceshopping.myspaceshopping.R;
 import com.jhy.myspaceshopping.myspaceshopping.fragment.BannerFragment;
+import com.jhy.myspaceshopping.myspaceshopping.fragment.BusinessFragment;
 import com.jhy.myspaceshopping.myspaceshopping.fragment.HomeFragment;
 import com.jhy.myspaceshopping.myspaceshopping.fragment.JuMainFragment;
 import com.jhy.myspaceshopping.myspaceshopping.object.MyUser;
@@ -25,11 +27,11 @@ import cn.bmob.v3.BmobUser;
 public class MainActivity extends FragmentActivity {
     RadioGroup rgMain;
     Fragment homeFragment;//首页-fragment
-    Fragment bannerFragment;
     Fragment businessFragment;//周边-fragment
     String city;
-    JuMainFragment  jufragment;
+    JuMainFragment jufragment;
     MyUser user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +53,7 @@ public class MainActivity extends FragmentActivity {
     }
 
     private void init() {
-        user = BmobUser.getCurrentUser(MainActivity.this,MyUser.class);
+        user = BmobUser.getCurrentUser(MainActivity.this, MyUser.class);
         FragmentManager fm4 = getSupportFragmentManager();
         FragmentTransaction ft4 = fm4.beginTransaction();
 
@@ -60,16 +62,16 @@ public class MainActivity extends FragmentActivity {
 
         FragmentManager fm = getSupportFragmentManager();  //获得Fragment管理器
         FragmentTransaction ft = fm.beginTransaction(); //开启一个事务
-
         homeFragment = new HomeFragment();
         ft.add(R.id.fragment_container, homeFragment);
         ft.commit();
 
-           if( user != null){
-               jufragment = new JuMainFragment();
-               ft4.add(R.id.fragment_container,jufragment);
-               ft4.commit();
-           }
+        if (user != null) {
+            jufragment = new JuMainFragment();
+            ft4.add(R.id.fragment_container, jufragment);
+            ft4.commit();
+        }
+
     }
 
     @Override
@@ -86,42 +88,39 @@ public class MainActivity extends FragmentActivity {
             FragmentManager fm = getSupportFragmentManager();  //获得Fragment管理器
             FragmentTransaction ft = fm.beginTransaction(); //开启一个事务
 
-            FragmentManager fm4 = getSupportFragmentManager();
-            FragmentTransaction ft4 = fm4.beginTransaction();
 
-            hideFragment(ft);
             switch (checkedId) {
                 case R.id.rbtn_main_zhuye:
-                   // Log.i("gl","!!@#!!!!!!!!!"+"主页");
-                    if (homeFragment == null) {
+                    // Log.i("gl","!!@#!!!!!!!!!"+"主页");
+                    if(homeFragment==null){
+
                         homeFragment = new HomeFragment();
                     }
-                    ft.show(homeFragment);
+                    ft.replace(R.id.fragment_container, homeFragment);
                     break;
 
                 case R.id.rbtn_main_zhoubian:
-                   // Log.i("gl","!@!@!@!@!!!!"+"周边");
-                    if (bannerFragment == null) {
-                        bannerFragment = new BannerFragment();
-                    }
-                    ft.show(bannerFragment);
+                    Log.i("gl","!@!@!@!@!!!!"+"周边");
+                    businessFragment = new BusinessFragment();
+                    ft.replace(R.id.fragment_container, businessFragment);
                     break;
 
                 case R.id.rbtn_main_ju:
-                   // Log.i("gl","!@!@!@!@!!!!"+"聚");
-                   // Log.i("result","~~~~~~~~~~~~~~~"+user.getUsername().equals(null));
-                    user = BmobUser.getCurrentUser(MainActivity.this,MyUser.class);
-                    if(user==null){
-                        Intent intent = new Intent(MainActivity.this ,LoginActivity.class);
+                    // Log.i("gl","!@!@!@!@!!!!"+"聚");
+
+//                    Log.i("result","~~~~~~~~~~~~~~~"+user.getUsername().equals(null));
+                    if (user == null) {
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        Log.i("result", "~~~~~~~~~~~~~~~");
                         startActivity(intent);
-                        finish();
-                    }else {
-                        if (jufragment == null) {
-                            jufragment = new JuMainFragment();
-                            ft4.add(R.id.fragment_container,jufragment);
-                            ft4.show(jufragment);
-                            ft4.commit();
-                        }
+                    } else {
+
+                        jufragment = new JuMainFragment();
+
+                        ft.replace(R.id.fragment_container, jufragment);
+                        //ft.commit();
+                        // Log.i("result", "~~~~~~~~~~~~~~~jufragment");
+
                     }
 
                     break;
@@ -139,19 +138,6 @@ public class MainActivity extends FragmentActivity {
 
         }
     };
-
-    private void hideFragment(FragmentTransaction fragmentTransaction) {
-        if (homeFragment != null) {
-            fragmentTransaction.hide(homeFragment);
-        }
-        if (bannerFragment != null) {
-            fragmentTransaction.hide(bannerFragment);
-        }
-        if (bannerFragment != null) {
-            fragmentTransaction.hide(bannerFragment);
-        }
-    }
-
 
 
 }

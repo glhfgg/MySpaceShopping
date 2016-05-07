@@ -198,7 +198,7 @@ public class SearchShop {
                 }
 
                 public int getMarket_price() {
-                    return market_price;
+                    return market_price/100;
                 }
 
                 public void setMarket_price(int market_price) {
@@ -206,7 +206,7 @@ public class SearchShop {
                 }
 
                 public int getCurrent_price() {
-                    return current_price;
+                    return current_price/100;
                 }
 
                 public void setCurrent_price(int current_price) {

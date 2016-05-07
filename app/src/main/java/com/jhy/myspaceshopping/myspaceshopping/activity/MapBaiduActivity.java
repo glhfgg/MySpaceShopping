@@ -427,8 +427,9 @@ public class MapBaiduActivity extends Activity implements OnReceiveLocationListe
         }
     //返回控件点击事件
     public void onClickBack(View view) {
-        Intent intent = new Intent(MapBaiduActivity.this, BusinessActivity.class);
-        startActivity(intent);
+        /*Intent intent = new Intent(MapBaiduActivity.this, BusinessActivity.class);
+        startActivity(intent);*/
+        finish();
     }
 
     @Override

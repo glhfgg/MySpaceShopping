@@ -73,7 +73,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         homeFragmentView = inflater.inflate(R.layout.activity_home_main, container, false);
         view = homeFragmentView.findViewById(R.id.btn_city_choose);
-        Log.i("gl","!!!!!!!!!!@@@@@@@@@"+"我又进来了");
+        //Log.i("gl","!!!!!!!!!!@@@@@@@@@"+"我又进来了");
         this.inflater = inflater;
         init();
         getCityDataRun();//开启异步线程获取城市数据

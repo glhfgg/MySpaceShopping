@@ -1,6 +1,7 @@
 package com.jhy.myspaceshopping.myspaceshopping.adapter;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,6 +65,7 @@ public class SearchShopAdapter extends BaseAdapter{
         viewHolder.list_title.setText(shops.getShop_name());
         viewHolder.list_description.setText(shops.getDeals().get(0).getDescription());
         viewHolder.list_current_price.setText("￥ "+shops.getDeals().get(0).getCurrent_price());
+        viewHolder.list_market_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         viewHolder.list_market_price.setText(shops.getDeals().get(0).getMarket_price()+"");
         viewHolder.list_score.setText(shops.getDeals().get(0).getScore()+"");
         Picasso.with(context).load(shops.getDeals().get(0).getTiny_image()).into(viewHolder.list_image);

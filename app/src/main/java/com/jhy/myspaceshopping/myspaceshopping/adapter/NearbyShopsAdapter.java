@@ -1,6 +1,7 @@
 package com.jhy.myspaceshopping.myspaceshopping.adapter;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +64,7 @@ public class NearbyShopsAdapter extends BaseAdapter {
         viewHolder.list_title.setText(deals.getTitle());
         viewHolder.list_description.setText(deals.getDescription());
         viewHolder.list_current_price.setText("￥ "+deals.getCurrent_price());
+        viewHolder.list_market_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         viewHolder.list_market_price.setText(deals.getMarket_price()+"");
         viewHolder.list_score.setText(deals.getScore()+"");
         Picasso.with(context).load(deals.getTiny_image()).into(viewHolder.list_image);

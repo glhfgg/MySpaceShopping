@@ -40,17 +40,24 @@
 
 
     <application
+
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/shop"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:name=".activity.MapApplication">
         <!-- 将我们以前一直用的默认Application设置成自定义的MapApplication -->
         <!--百度地图 添加开发密钥 -->
+
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="mFtTyrALsxs9p904ndgESKAL7lNKEUFh" />
         <!--百度定位中的服务-->
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote"></service>
 
         <activity android:name=".activity.MainActivity"
             android:launchMode="singleTask">
@@ -62,6 +69,9 @@
 
         </activity>
 
+
+
+
         <activity
             android:name=".activity.HomeSearchCityActivity"
             android:launchMode="singleTask">
@@ -72,6 +82,9 @@
             android:launchMode="singleTask">
 
         </activity>
+
+        <activity android:name=".activity.HomeSearchDegitalActivity"/>
+
         <activity
             android:name=".activity.HomeMovieActivity"
             android:launchMode="singleTask">
@@ -86,7 +99,8 @@
 
         </activity>
 
-        <activity android:name=".activity.LoginActivity" android:launchMode="singleTask"/>
+        <activity android:name=".activity.LoginActivity" android:launchMode="singleTask">
+        </activity>
 
         <activity android:name=".activity.JuPersonActivity" android:launchMode="singleTask"/>
         <activity android:name=".activity.JuCommentActivity" android:launchMode="singleTask"/>
@@ -100,10 +114,10 @@
         <activity android:name=".activity.JuMyLikesActivity" android:launchMode="singleTask"/>
         <activity android:name=".activity.JuMyShareActivity" android:launchMode="singleTask"/>
         <activity android:name=".activity.JuPersonUserActivity" android:launchMode="singleTask"/>
-
         <activity
             android:name=".activity.MoreActivity"
             android:launchMode="singleTask"/>
+        <activity android:name=".activity.MapBaiduActivity" android:launchMode="singleTask"/>
     </application>
 
 </manifest>
