@@ -8,26 +8,26 @@
        android:id="@+id/test_username"
        android:layout_height="wrap_content"
        android:layout_width="match_parent"
-       android:hint="请输入用户名"
+       android:hint="@string/hint_test_username"
        />
 
     <EditText
         android:id="@+id/test_userpass"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:hint="请输入密码"
+        android:hint="@string/hint_test_userpass"
         />
     <Button
         android:id="@+id/test_login"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="登录"
+        android:text="@string/title_login"
         />
 
     <Button
         android:id="@+id/test_singup"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="注册"
+        android:text="@string/btn_register"
         />
 </LinearLayout>

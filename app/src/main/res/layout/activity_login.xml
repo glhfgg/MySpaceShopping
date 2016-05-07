@@ -7,7 +7,7 @@
         android:id="@+id/text_login"
         android:textSize="28sp"
         android:layout_margin="15dp"
-        android:text="登录"
+        android:text="@string/title_login"
         android:textColor="#000000"
         android:textStyle="bold"/>
     <TextView
@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/btn_register"
         android:textSize="20sp"
-        android:text="注册"
+        android:text="@string/btn_register"
         android:layout_margin="10dp"
         android:textColor="#000000"
         android:textStyle="bold"
@@ -33,7 +33,7 @@
         android:id="@+id/edit_user_name"
         android:layout_below="@id/lineUserName"
         android:padding="15dp"
-        android:hint="手机/邮箱/用户名"
+        android:hint="@string/hint_edit_user_name"
         android:singleLine="true"
         android:background="#FFFFFF"
         />
@@ -49,7 +49,7 @@
         android:id="@+id/edit_user_passward"
         android:layout_below="@id/lineUserPassword"
         android:padding="15dp"
-        android:hint="密码"
+        android:hint="@string/hint_edit_user_passward"
         android:singleLine="true"
         android:inputType="textPassword"
         android:background="#FFFFFF"
@@ -69,7 +69,7 @@
         android:layout_marginRight="10dp"
         android:textSize="18sp"
         android:textColor="#FFFFFF"
-        android:text="登录"
+        android:text="@string/title_login"
         android:layout_below="@id/lineUserPasswordDown"
         android:background="#25BFB3"/>
     <TextView
@@ -81,7 +81,7 @@
         android:layout_marginTop="20dp"
         android:textSize="18sp"
         android:textColor="#25BFB3"
-        android:text="找回密码"/>
+        android:text="@string/link_findPassword"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -91,5 +91,5 @@
         android:layout_marginTop="20dp"
         android:textSize="18sp"
         android:textColor="#25BFB3"
-        android:text="手机号快捷登陆" />
+        android:text="@string/link_phone_login" />
 </RelativeLayout>

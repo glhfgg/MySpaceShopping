@@ -11,7 +11,7 @@
         android:id="@+id/ju_person_title"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:text="用户主页"
+        android:text="@string/title_ju_person"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="20sp"

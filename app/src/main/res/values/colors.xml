@@ -9,4 +9,14 @@
     <color name="graytransparent">#BEBEBEEE</color>
     <color name="whitegray">#ece9e9</color>
 
+    <color name="text_Blue">#00bbd3</color>
+    <color name="text_Black">#000000</color>
+    <color name="bg_home">#d3d3d3</color>
+    <color name="bg_head">#ffffff</color>
+
+    <color name="dark_bg">#8000</color>
+    <color name="bg_popup_left">#eee</color>
+    <color name="bg_popup_right">#ddd</color>
+    <color name="popup_right_bg_selected">#ccc</color>
+    <color name="div_gray">#ccc</color>
 </resources>

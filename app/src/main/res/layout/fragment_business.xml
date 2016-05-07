@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioGroup
+            android:id="@+id/grp_business"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <RadioButton
+                android:id="@+id/rbtn_businessall"
+                style="@style/rbbusiness_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:drawableBottom="@drawable/buytitle_selector"
+                android:padding="5dp"
+                android:text="@string/label_businessall"
+                android:textColor="@color/color_selector"
+                android:textSize="15sp" />
+
+            <RadioButton
+                android:id="@+id/rbtn_businesscheap"
+                style="@style/rbbusiness_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/rbtn_businessall"
+                android:drawableBottom="@drawable/buytitle_selector"
+                android:padding="5dp"
+                android:text="@string/label_cheap"
+                android:textColor="@color/color_selector"
+                android:textSize="15sp" />
+        </RadioGroup>
+
+        <RadioButton
+            android:id="@+id/rbtn_map"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/rbtn_search"
+            android:layout_toLeftOf="@+id/rbtn_search"
+            android:layout_toStartOf="@+id/rbtn_search"
+            android:background="@mipmap/dingwei"
+            android:button="@null"
+            />
+
+        <RadioButton
+            android:id="@+id/rbtn_search"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
+            android:background="@mipmap/sou"
+            android:button="@null"
+            android:paddingRight="5dp" />
+    </RelativeLayout>
+    .
+
+    <include
+        android:id="@+id/include_upbuttonset"
+        layout="@layout/upbuttonset_layout"></include>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vpager_storeall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"></android.support.v4.view.ViewPager>
+
+
+</LinearLayout>

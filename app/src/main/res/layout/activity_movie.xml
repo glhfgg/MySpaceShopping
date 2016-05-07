@@ -26,7 +26,7 @@
                 android:button="@null"
                 android:textColor="#ffffff"
                 android:padding="5dp"
-                android:text="正在热映"
+                android:text="@string/rbtn_movie_release"
                 android:background="#27c48d"/>
             <RadioButton
                 android:layout_width="wrap_content"
@@ -34,7 +34,7 @@
                 android:id="@+id/rbtn_movie_impending"
                 android:button="@null"
                 android:padding="5dp"
-                android:text="即将上映"/>
+                android:text="@string/rbtn_movie_impending"/>
         </RadioGroup>
         <ImageView
             android:layout_width="wrap_content"
@@ -56,7 +56,7 @@
             android:padding="10dp"
             android:gravity="center"
             android:textSize="14sp"
-            android:text="品牌" />
+            android:text="@string/tab_movie_brand" />
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
             android:padding="10dp"
             android:gravity="center"
             android:textSize="14sp"
-            android:text="全城"/>
+            android:text="@string/tab_city"/>
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
             android:padding="10dp"
             android:gravity="center"
             android:textSize="14sp"
-            android:text="离我最近"
+            android:text="@string/tab_movie_distance"
             android:drawableEnd="@mipmap/sanjiaoxing"
             android:drawableRight="@mipmap/sanjiaoxing"/>
         <TextView
@@ -85,7 +85,7 @@
             android:padding="10dp"
             android:gravity="center"
             android:textSize="14sp"
-            android:text="特效"/>
+            android:text="@string/tab_movie_effects"/>
 
     </LinearLayout>
     <com.handmark.pulltorefresh.library.PullToRefreshListView
