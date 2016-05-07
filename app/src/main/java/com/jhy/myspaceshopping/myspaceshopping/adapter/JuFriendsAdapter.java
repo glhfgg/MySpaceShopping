@@ -21,6 +21,7 @@ import com.squareup.picasso.Picasso;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
@@ -193,12 +194,15 @@ public class JuFriendsAdapter extends BaseAdapter {
                 MyUser user = BmobUser.getCurrentUser(context,MyUser.class);
                 Post post = new Post();
                 post.setContent("转发："+data.getContent());
+                BmobFile bmobfile =new BmobFile(data.getName()+".png","",data.getDistance());
+                post.setImage(bmobfile);
                 post.setAuthor(user);
                 post.save(context, new SaveListener() {
                     @Override
                     public void onSuccess() {
                         // TODO Auto-generated method stub
-//                        Toast.makeText(context, "转发成功", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "转发成功", Toast.LENGTH_SHORT).show();
+
                     }
                     @Override
                     public void onFailure(int code, String msg) {

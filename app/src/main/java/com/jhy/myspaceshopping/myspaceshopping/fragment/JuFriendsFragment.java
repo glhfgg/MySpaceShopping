@@ -107,14 +107,13 @@ public class JuFriendsFragment extends Fragment {
             @Override
             public void onSuccess(List<Post> object) {
                 // TODO Auto-generated method stub
-
                 if(object.size() != 0){
                     for(int i=0;i<object.size();i++){
                         String  username  =  object.get(i).getAuthor().getPersonname();
                         String  userscore = object.get(i).getCreatedAt();
 
                         if(object.get(i).getAuthor().getIcon() != null){
-                            storephoto= "http://file.bmob.cn/"+ object.get(i).getAuthor().getIcon().getUrl();
+                            storephoto= "http://file.bmob.cn/"+ object.get(i).getAuthor().getIcon().getUrl().toString();
                         }else{
                             storephoto = "http://file.bmob.cn/M03/46/56/oYYBAFcfIiGAIh3gAAAEw_gSloU510.png";
                         }
@@ -123,32 +122,28 @@ public class JuFriendsFragment extends Fragment {
                         String  praice="点赞"+i;
 
                         if(object.get(i).getImage() != null){
-                            contentphoto = "http://file.bmob.cn/"+object.get(i).getImage().getUrl();
+                            contentphoto = object.get(i).getImage().getUrl().toString();
                         }else{
                             contentphoto = null;
                         }
-
                         String  Id =  object.get(i).getObjectId().toString();
                         ID.add(Id);
-//                        Log.i("result","IDDD-----------"+Id);
+
                         JuUniversalData data = new JuUniversalData(username,userscore,null,contentphoto,storephoto,storecontent,null,Id,praice);
                         listdata.add(data);
                         data = null;
-
                     }
 
                     JuFriendsAdapter adapter = new JuFriendsAdapter(JuFriendsFragment.this.getActivity(),listdata);
                     list.setAdapter(adapter);
                     list.setOnItemClickListener(itmeClick);
                     list.onRefreshComplete();
-
                 }
             }
 
             @Override
             public void onError(int code, String msg) {
                 // TODO Auto-generated method stub
-
                 Toast.makeText(JuFriendsFragment.this.getActivity(),"查询失败:"+msg, Toast.LENGTH_SHORT).show();
             }
         });
