@@ -21,7 +21,7 @@
             android:gravity="center"
             android:textSize="20sp"
             android:textColor="#000000"
-            android:text="立即注册"
+            android:text="@string/title_register"
             />
     </LinearLayout>
         <ImageView
@@ -36,7 +36,7 @@
             android:id="@+id/register_edit_user_name"
             android:layout_below="@id/lineRegisterUserName"
             android:padding="15dp"
-            android:hint="账号"
+            android:hint="@string/hint_register_edit_user_name"
             android:singleLine="true"
             android:background="#FFFFFF"
             />
@@ -53,7 +53,7 @@
         android:layout_below="@id/lineRegisterUserPaswword"
         android:padding="15dp"
         android:inputType="textPassword"
-        android:hint="密码"
+        android:hint="@string/hint_edit_user_passward"
         android:singleLine="true"
         android:background="#FFFFFF"
         />
@@ -69,7 +69,7 @@
         android:id="@+id/register_edit_user_mail"
         android:layout_below="@id/lineRegisterMail"
         android:padding="15dp"
-        android:hint="邮箱"
+        android:hint="@string/hint_register_edit_user_mail"
         android:inputType="textEmailAddress"
         android:singleLine="true"
         android:background="#FFFFFF"
@@ -89,7 +89,7 @@
         android:layout_marginRight="10dp"
         android:textSize="18sp"
         android:textColor="#FFFFFF"
-        android:text="登录"
+        android:text="@string/title_login"
         android:layout_below="@id/lineRegisterMailDown"
         android:background="@drawable/filter_ok_btn_pressed"/>
 

@@ -13,10 +13,30 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!--允许读取手机状态 用于创建BmobInstallation-->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <!-- 相机 -->
-    <uses-permission android:name="android.permission.CAMERA" />
-    <!-- 振动 -->
-    <uses-permission android:name="android.permission.VIBRATE" />
+    <!--百度地图 添加所需权限 -->
+    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 这个权限用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 用于读取手机当前的状态-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- SD卡读取权限，用户写入离线定位数据-->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <!-- 这个权限用于访问GPS定位-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <!-- SD卡读取权限，用户写入离线定位数据-->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"></uses-permission>
 
 
     <application
@@ -25,6 +45,12 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <!-- 将我们以前一直用的默认Application设置成自定义的MapApplication -->
+        <!--百度地图 添加开发密钥 -->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="mFtTyrALsxs9p904ndgESKAL7lNKEUFh" />
+        <!--百度定位中的服务-->
 
         <activity android:name=".activity.MainActivity"
             android:launchMode="singleTask">
@@ -35,6 +61,9 @@
             </intent-filter>
 
         </activity>
+
+
+
 
         <activity
             android:name=".activity.HomeSearchCityActivity"
@@ -60,7 +89,13 @@
 
         </activity>
 
-        <activity android:name=".activity.LoginActivity" android:launchMode="singleTask"/>
+        <activity android:name=".activity.LoginActivity" android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity android:name=".activity.JuPersonActivity" android:launchMode="singleTask"/>
         <activity android:name=".activity.JuCommentActivity" android:launchMode="singleTask"/>
@@ -70,20 +105,9 @@
         <activity android:name=".activity.JuPersonModifyActivity" android:launchMode="singleTask"/>
         <activity android:name=".activity.JuUploadImgActivity" android:launchMode="singleTask"/>
         <activity android:name=".activity.JuCreatePostActivity" android:launchMode="singleTask"/>
-        <activity android:name=".activity.JuMyShareActivity" android:launchMode="singleTask"/>
-        <activity android:name=".activity.JuMyLikesActivity" android:launchMode="singleTask"/>
-        <activity android:name=".activity.JuMyFansActivity" android:launchMode="singleTask"/>
-        <activity android:name=".activity.HomeSearchDegitalActivity" android:launchMode="singleTask"/>
-        <activity android:name=".activity.JuPersonUserActivity" android:launchMode="singleTask"/>
         <activity
-            android:name="com.xys.libzxing.zxing.activity.CaptureActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-            android:windowSoftInputMode="stateAlwaysHidden">
-
-        </activity>
-
+            android:name=".activity.MoreActivity"
+            android:launchMode="singleTask"/>
     </application>
 
 </manifest>

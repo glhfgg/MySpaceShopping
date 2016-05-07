@@ -9,6 +9,7 @@ import android.util.Log;
 
 import android.widget.RadioGroup;
 
+
 import com.jhy.myspaceshopping.myspaceshopping.R;
 import com.jhy.myspaceshopping.myspaceshopping.fragment.BannerFragment;
 import com.jhy.myspaceshopping.myspaceshopping.fragment.HomeFragment;
@@ -23,8 +24,9 @@ import cn.bmob.v3.BmobUser;
  */
 public class MainActivity extends FragmentActivity {
     RadioGroup rgMain;
-    Fragment homeFragment;
+    Fragment homeFragment;//首页-fragment
     Fragment bannerFragment;
+    Fragment businessFragment;//周边-fragment
     String city;
     JuMainFragment  jufragment;
     MyUser user;
