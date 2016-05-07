@@ -30,12 +30,14 @@ import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.listener.FindListener;
@@ -291,7 +293,6 @@ public class JuCommentActivity extends Activity {
                 huifu.setText("");
                 enter.setVisibility(View.GONE);
                 Toast.makeText(JuCommentActivity.this, "回复Ok~", Toast.LENGTH_SHORT).show();
-
             }
 
             @Override
@@ -307,7 +308,6 @@ public class JuCommentActivity extends Activity {
 
     //查询该帖子点赞数
     private void setParisNum(){
-
         BmobQuery<MyUser> query = new BmobQuery<MyUser>();
         Post post = new Post();
         post.setObjectId(i);
@@ -324,8 +324,8 @@ public class JuCommentActivity extends Activity {
                 if(paris != null){
                     paris.setText(num);
                 }
-               
             }
+
             @Override
             public void onError(int code, String msg) {
                 // TODO Auto-generated method stub
@@ -368,7 +368,6 @@ public class JuCommentActivity extends Activity {
         }
     };
 
-
     View.OnClickListener Click = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -378,18 +377,23 @@ public class JuCommentActivity extends Activity {
                              MyUser user = BmobUser.getCurrentUser(JuCommentActivity.this,MyUser.class);
                              Post post = new Post();
 
-                             post.setContent("转发：  "+intent.getExtras().getString("JuConTex").toString());
+                             post.setContent("转发："+intent.getExtras().getString("JuConTex").toString());
+                     Log.i("life","IMG---------"+intent.getExtras().getString("JuConImg").toString());
 
+                             BmobFile  bmobfile = new BmobFile( new File(intent.getExtras().getString("JuConImg").toString()));
+                             post.setImage(bmobfile);
                              post.setAuthor(user);
                              post.save(JuCommentActivity.this, new SaveListener() {
                                  @Override
                                  public void onSuccess() {
                                      // TODO Auto-generated method stub
                                      Toast.makeText(JuCommentActivity.this, "转发成功", Toast.LENGTH_SHORT).show();
+
                                  }
                                  @Override
                                  public void onFailure(int code, String msg) {
                                      // TODO Auto-generated method stub
+                                     Toast.makeText(JuCommentActivity.this, "失败"+msg, Toast.LENGTH_SHORT).show();
                                  }
                              });
                      break;

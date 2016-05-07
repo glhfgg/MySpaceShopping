@@ -156,6 +156,7 @@ public class JuCreatePostActivity extends Activity{
                 cursor.moveToFirst();
                 //最后根据索引值获取图片路径
                 path = cursor.getString(column_index);
+                setMyBit();
             }catch (IOException e) {
                 Log.e("result",e.toString());
             }
@@ -188,12 +189,6 @@ public class JuCreatePostActivity extends Activity{
             img.setImageBitmap(bitmap);// 将图片显示在ImageView里
         }
     }
-
-
-
-
-
-
 
     private void addImg(){
         if (Environment.getExternalStorageState().equals( Environment.MEDIA_MOUNTED)) {
@@ -233,9 +228,6 @@ public class JuCreatePostActivity extends Activity{
                     startActivityForResult(intent, 1);
                     break;
             }
-
-
-
         }
     };
 
@@ -255,8 +247,6 @@ public class JuCreatePostActivity extends Activity{
                         finish();
                     }
                     break;
-
-
             }
         }
     };

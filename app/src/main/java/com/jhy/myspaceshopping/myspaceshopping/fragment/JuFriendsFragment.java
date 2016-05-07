@@ -130,7 +130,7 @@ public class JuFriendsFragment extends Fragment {
 
                         String  Id =  object.get(i).getObjectId().toString();
                         ID.add(Id);
-                        Log.i("result","IDDD-----------"+Id);
+//                        Log.i("result","IDDD-----------"+Id);
                         JuUniversalData data = new JuUniversalData(username,userscore,null,contentphoto,storephoto,storecontent,null,Id,praice);
                         listdata.add(data);
                         data = null;
@@ -177,51 +177,6 @@ public class JuFriendsFragment extends Fragment {
             intent.putExtra("JuPraNum", listdata.get(position-1).getSalenum());
             intent.putExtra("JuId", ID.get(position-1).toString());
             startActivity(intent);
-
-
-            texts = (TextView) view.findViewById(R.id.ju_comments);
-            texts.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getContext(),JuCommentActivity.class);
-                    intent.putExtra("JuId",ID.get(j).toString() );
-                    intent.putExtra("JuConImg", listdata.get(j-1).getDistance());
-                    intent.putExtra("JuUseImg", listdata.get(j-1).getPhoto());
-                    intent.putExtra("JuConTex", listdata.get(j-1).getContent());
-                    intent.putExtra("JuUseNam", listdata.get(j-1).getName());
-                    intent.putExtra("JuCrtTim", listdata.get(j-1).getScore());
-                    intent.putExtra("JuForNum", listdata.get(j-1).getSalebefore());
-                    intent.putExtra("JuConNum", listdata.get(j-1).getSalelater());
-                    intent.putExtra("JuPraNum", listdata.get(j-1).getSalenum());
-                    startActivity(intent);
-                }
-            });
-
-            zhuanfa = (TextView) view.findViewById(R.id.ju_forwarding);
-            zhuanfa.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    MyUser user = BmobUser.getCurrentUser(getContext(),MyUser.class);
-                    Post post = new Post();
-
-                    post.setContent("转发：  "+listdata.get(j-1).getContent());
-                    Log.i("result","zzz----------"+listdata.get(j-1).getContent());
-                    post.setAuthor(user);
-                    post.save(getContext(), new SaveListener() {
-                        @Override
-                        public void onSuccess() {
-                            // TODO Auto-generated method stub
-                            Toast.makeText(JuFriendsFragment.this.getContext(), "转发成功", Toast.LENGTH_SHORT).show();
-                        }
-                        @Override
-                        public void onFailure(int code, String msg) {
-                            // TODO Auto-generated method stub
-                        }
-                    });
-                }
-            });
-
 
         }
     };

@@ -1,6 +1,7 @@
 package com.jhy.myspaceshopping.myspaceshopping.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,8 +9,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jhy.myspaceshopping.myspaceshopping.R;
+import com.jhy.myspaceshopping.myspaceshopping.activity.JuCommentActivity;
 import com.jhy.myspaceshopping.myspaceshopping.object.JuUniversalData;
 import com.jhy.myspaceshopping.myspaceshopping.object.MyUser;
 import com.jhy.myspaceshopping.myspaceshopping.object.Post;
@@ -19,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobRelation;
+import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 
 /**
@@ -41,8 +45,8 @@ public class JuFriendsAdapter extends BaseAdapter {
     TextView textss;
     String datas;
     //获取系统时间
-    SimpleDateFormat    sDateFormat    =   new SimpleDateFormat("yyyy-MM-dd    hh:mm:ss");
-    String    date    =    sDateFormat.format(new    java.util.Date());
+    SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd    hh:mm:ss");
+    String  date = sDateFormat.format(new  java.util.Date());
 
     public JuFriendsAdapter(Context context, List<JuUniversalData> listdata){
         this.list = listdata;
@@ -80,7 +84,6 @@ public class JuFriendsAdapter extends BaseAdapter {
             holder.storecontent = (TextView) convertView.findViewById(R.id.ju_usercontents);
             holder.salebefore = (TextView) convertView.findViewById(R.id.ju_forwarding);
             holder.salenum = (TextView) convertView.findViewById(R.id.ju_clickpraise);
-
             holder.contentphoto = (ImageView) convertView.findViewById(R.id.ju_contentphoto);
             convertView.setTag(holder);
         }
@@ -88,9 +91,6 @@ public class JuFriendsAdapter extends BaseAdapter {
         holder = (ViewHolderFriends) convertView.getTag();
 
         final  JuUniversalData data = list.get(position);
-
-
-
 
         String []str = data.getScore().split(" ");
         Log.i("life","my time------"+data.getScore());
@@ -181,9 +181,32 @@ public class JuFriendsAdapter extends BaseAdapter {
         holder.names.setText(data.getName());
         Picasso.with(context).load(data.getPhoto()).into( holder.storephoto);
         holder.storecontent.setText(data.getContent());
-        holder.salebefore.setText(data.getSalebefore());
+
+
         Picasso.with(context).load(data.getDistance()).into( holder.contentphoto);
         datas = data.getSalelater();
+
+
+        holder.salebefore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyUser user = BmobUser.getCurrentUser(context,MyUser.class);
+                Post post = new Post();
+                post.setContent("转发："+data.getContent());
+                post.setAuthor(user);
+                post.save(context, new SaveListener() {
+                    @Override
+                    public void onSuccess() {
+                        // TODO Auto-generated method stub
+//                        Toast.makeText(context, "转发成功", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public void onFailure(int code, String msg) {
+                        // TODO Auto-generated method stub
+                    }
+                });
+            }
+        });
 
 
         holder.salenum.setOnClickListener(new View.OnClickListener() {
@@ -237,4 +260,5 @@ class ViewHolderFriends{
     TextView storecontent;
     TextView salenum;
     TextView salebefore;
+
 }

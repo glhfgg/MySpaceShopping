@@ -62,6 +62,7 @@ public class JuMainFragment extends Fragment {
     TextView share;   //我的分享
     TextView fans;    //我的粉丝
     TextView likes;   //我的关注
+    TextView post;
 
     String s ;   // Bmob 上传图片的URL
     String t;
@@ -89,7 +90,7 @@ public class JuMainFragment extends Fragment {
         user = BmobUser.getCurrentUser(this.getActivity(), MyUser.class);
 
         if(user == null){
-        }else{  name.setText(user.getPersonname()+"  +");}
+        }else{  name.setText(user.getPersonname());}
 
         searchImg();
         setPopuWindow();
@@ -102,7 +103,7 @@ public class JuMainFragment extends Fragment {
     public void onResume() {
         super.onResume();
         MyUser   user = BmobUser.getCurrentUser(this.getActivity(), MyUser.class);
-        name.setText(user.getPersonname()+"  +");
+        name.setText(user.getPersonname());
         if(user.getIcon() != null){
             Picasso.with(this.getActivity()).load("http://file.bmob.cn/"+user.getIcon().getUrl().toString()).into(img);
         }
@@ -158,7 +159,9 @@ public class JuMainFragment extends Fragment {
         share = (TextView) popu.findViewById(R.id.ju_more_myshare);   //我的分享
         fans = (TextView) popu.findViewById(R.id.ju_more_myfans);    //我的粉丝
         likes = (TextView) popu.findViewById(R.id.ju_more_myfocus);   //我的关注
+        post = (TextView) popu.findViewById(R.id.ju_more_createpost);
 
+        post.setOnClickListener(modifyClick);
         modify.setOnClickListener(modifyClick);
         share.setOnClickListener(modifyClick);
         fans.setOnClickListener(modifyClick);
@@ -256,6 +259,11 @@ public class JuMainFragment extends Fragment {
                      intent = new Intent(getActivity(), JuMyShareActivity.class);
                     startActivity(intent);
                     break;
+
+                case R.id.ju_more_createpost:
+                    intent = new Intent(getActivity(),JuCreatePostActivity.class);
+                    startActivity(intent);
+
             }
         }
     };

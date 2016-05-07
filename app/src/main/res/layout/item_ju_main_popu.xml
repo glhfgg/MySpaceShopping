@@ -38,5 +38,12 @@
         android:padding="15dp"
         />
 
+    <TextView
+        android:id="@+id/ju_more_createpost"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="新增博客"
+        android:padding="15dp"
+        />
 
 </LinearLayout>

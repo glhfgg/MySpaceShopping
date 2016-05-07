@@ -57,7 +57,6 @@ public class JuUploadImgActivity extends Activity {
         back = (ImageView) findViewById(R.id.ju_upload_back);
         enter = (TextView) findViewById(R.id.ju_upload_enter);
 
-
         img.setOnClickListener(Click);
         back.setOnClickListener(Click);
         enter.setOnClickListener(Click);
