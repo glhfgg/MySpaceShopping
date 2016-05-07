@@ -13,11 +13,12 @@
         android:text="吾饮良品（大东门店）"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="#3c3c3c"
+        android:textColor="#268181"
         />
 
     <TextView
         android:id="@+id/ju_userscore"
+        android:textColor="#dfdf8909"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="4.5分"
@@ -56,6 +57,7 @@
         android:layout_alignTop="@id/ju_storephoto"
         android:layout_below="@id/ju_userscore"
         android:paddingBottom="5dp"
+        android:maxLines="2"
         />
     <TextView
         android:id="@+id/ju_salebefore"
@@ -63,8 +65,9 @@
         android:layout_width="wrap_content"
         android:paddingLeft="5dp"
         android:text="$13.9"
-        android:textSize="15sp"
-        android:textColor="#00E3E3"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:textColor="#d2372c"
         android:layout_toRightOf="@id/ju_storephoto"
         android:layout_below="@id/ju_storecontent"
         />
@@ -74,7 +77,7 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="17"
-        android:textSize="13sp"
+        android:textSize="15sp"
         android:textColor="@color/gray"
         android:paddingLeft="5dp"
         android:layout_toRightOf="@id/ju_salebefore"
