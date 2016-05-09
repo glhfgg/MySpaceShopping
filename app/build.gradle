@@ -25,7 +25,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
@@ -44,4 +44,6 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.0.0'
     compile 'com.google.zxing:zxing-parent:3.2.1'
     compile project(path: ':libzxing')
+    compile files('libs/open_sdk_r5509.jar')
+    compile files('libs/mta-sdk-1.6.2.jar')
 }

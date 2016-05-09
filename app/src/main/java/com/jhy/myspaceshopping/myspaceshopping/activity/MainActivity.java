@@ -12,18 +12,17 @@ import android.widget.RadioGroup;
 
 
 import com.jhy.myspaceshopping.myspaceshopping.R;
-import com.jhy.myspaceshopping.myspaceshopping.fragment.BannerFragment;
 import com.jhy.myspaceshopping.myspaceshopping.fragment.BusinessFragment;
 import com.jhy.myspaceshopping.myspaceshopping.fragment.HomeFragment;
 import com.jhy.myspaceshopping.myspaceshopping.fragment.JuMainFragment;
 import com.jhy.myspaceshopping.myspaceshopping.object.MyUser;
 
-import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobUser;
 
 /**
  * Created by Administrator on 2016/4/27.
  */
+
 public class MainActivity extends FragmentActivity {
     RadioGroup rgMain;
     Fragment homeFragment;//首页-fragment
@@ -37,20 +36,19 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
-
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        /*if (user != null) {
-            jufragment = new JuMainFragment();
-            android.support.v4.app.FragmentManager fm4 = getSupportFragmentManager();
-            android.support.v4.app.FragmentTransaction ft4 = fm4.beginTransaction();
-            ft4.add(R.id.fragment_container, jufragment);
-            ft4.commit();
-        }*/
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        if (user != null) {
+//            jufragment = new JuMainFragment();
+//            android.support.v4.app.FragmentManager fm4 = getSupportFragmentManager();
+//            android.support.v4.app.FragmentTransaction ft4 = fm4.beginTransaction();
+//            ft4.add(R.id.fragment_container, jufragment);
+//            ft4.commit();
+//        }
+//    }
 
     private void init() {
         user = BmobUser.getCurrentUser(MainActivity.this, MyUser.class);
@@ -70,6 +68,7 @@ public class MainActivity extends FragmentActivity {
             jufragment = new JuMainFragment();
             ft4.add(R.id.fragment_container, jufragment);
             ft4.commit();
+            Log.i("life","JU------init--");
         }
 
     }
@@ -87,6 +86,8 @@ public class MainActivity extends FragmentActivity {
         public void onCheckedChanged(RadioGroup group, int checkedId) {
             FragmentManager fm = getSupportFragmentManager();  //获得Fragment管理器
             FragmentTransaction ft = fm.beginTransaction(); //开启一个事务
+            FragmentManager fm4 = getSupportFragmentManager();
+            FragmentTransaction ft4 = fm4.beginTransaction();
 
 
             switch (checkedId) {
@@ -111,16 +112,13 @@ public class MainActivity extends FragmentActivity {
 //                    Log.i("result","~~~~~~~~~~~~~~~"+user.getUsername().equals(null));
                     if (user == null) {
                         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                        Log.i("result", "~~~~~~~~~~~~~~~");
                         startActivity(intent);
+                        finish();
                     } else {
-
                         jufragment = new JuMainFragment();
-
-                        ft.replace(R.id.fragment_container, jufragment);
-                        //ft.commit();
-                        // Log.i("result", "~~~~~~~~~~~~~~~jufragment");
-
+                        ft4.replace(R.id.fragment_container, jufragment);
+                        ft4.commit();
+                        Log.i("life","JU------Click--");
                     }
 
                     break;

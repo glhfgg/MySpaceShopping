@@ -147,13 +147,12 @@ public class JuPersonUserActivity extends Activity{
 
                             storephoto = intent.getExtras().getString("PersonUserPhoto").toString();
 
-
                         String storecontent = object.get(i).getContent();
                         String forwarding = "转发";
                         String comments = "评论";
                         String praice = "点赞" + i;
                         if (object.get(i).getImage() != null) {
-                            contentphoto = "http://file.bmob.cn/" + object.get(i).getImage().getUrl();
+                            contentphoto =  object.get(i).getImage().getUrl().toString();
                         } else {
                             contentphoto = null;
                         }
@@ -221,56 +220,12 @@ public class JuPersonUserActivity extends Activity{
             }
 
 
-            if(j>=1){
-                texts = (TextView) view.findViewById(R.id.ju_comments);
-                texts.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(JuPersonUserActivity.this,JuCommentActivity.class);
-                        intent.putExtra("JuId",ID.get(j).toString() );
-                        intent.putExtra("JuConImg", listdata.get(j-1).getDistance());
-                        intent.putExtra("JuUseImg", listdata.get(j-1).getPhoto());
-                        intent.putExtra("JuConTex", listdata.get(j-1).getContent());
-                        intent.putExtra("JuUseNam", listdata.get(j-1).getName());
-                        intent.putExtra("JuCrtTim", listdata.get(j-1).getScore());
-                        intent.putExtra("JuForNum", listdata.get(j-1).getSalebefore());
-                        intent.putExtra("JuConNum", listdata.get(j-1).getSalelater());
-                        intent.putExtra("JuPraNum", listdata.get(j-1).getSalenum());
-                        startActivity(intent);
-                    }
-                });
-
-                zhuanfa = (TextView) view.findViewById(R.id.ju_forwarding);
-                zhuanfa.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        MyUser user = BmobUser.getCurrentUser(JuPersonUserActivity.this,MyUser.class);
-                        Post post = new Post();
-
-                        post.setContent("转发：  "+listdata.get(j-1).getContent());
-                        Log.i("result","zzz----------"+listdata.get(j-1).getContent());
-                        post.setAuthor(user);
-                        post.save(JuPersonUserActivity.this, new SaveListener() {
-                            @Override
-                            public void onSuccess() {
-                                // TODO Auto-generated method stub
-                                Toast.makeText(JuPersonUserActivity.this, "转发成功", Toast.LENGTH_SHORT).show();
-                            }
-                            @Override
-                            public void onFailure(int code, String msg) {
-                                // TODO Auto-generated method stub
-                            }
-                        });
-                    }
-                });
-
             }
 
 
 
 
-        }
+
     };
 
 }

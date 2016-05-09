@@ -8,7 +8,7 @@
         android:textSize="28sp"
         android:layout_margin="15dp"
         android:text="@string/title_login"
-        android:textColor="#000000"
+        android:textColor="#eb2b2b2b"
         android:textStyle="bold"/>
     <TextView
         android:layout_width="wrap_content"
@@ -16,11 +16,14 @@
         android:id="@+id/btn_register"
         android:textSize="20sp"
         android:text="@string/btn_register"
-        android:layout_margin="10dp"
-        android:textColor="#000000"
+        android:textColor="#eb2b2b2b"
         android:textStyle="bold"
+        android:gravity="center"
+        android:paddingRight="15dp"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@id/text_login"/>
+        android:layout_alignTop="@id/text_login"
+        android:layout_alignBottom="@id/text_login"
+        />
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="5dp"
@@ -32,11 +35,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/edit_user_name"
         android:layout_below="@id/lineUserName"
+        android:layout_margin="3dp"
         android:padding="15dp"
         android:hint="@string/hint_edit_user_name"
         android:singleLine="true"
         android:background="#FFFFFF"
         />
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="5dp"
@@ -44,6 +49,7 @@
         android:src="@mipmap/line_gradient"
         android:layout_below="@id/edit_user_name"/>
     <EditText
+        android:layout_margin="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/edit_user_passward"
@@ -67,11 +73,12 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textColor="#FFFFFF"
         android:text="@string/title_login"
+        android:textStyle="bold"
         android:layout_below="@id/lineUserPasswordDown"
-        android:background="#25BFB3"/>
+        android:background="@drawable/ju_upload_enter"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -92,4 +99,48 @@
         android:textSize="18sp"
         android:textColor="#25BFB3"
         android:text="@string/link_phone_login" />
+
+
+<ImageView
+    android:id="@+id/login_xinlang"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@mipmap/xinlang"
+   android:layout_alignParentBottom="true"
+    android:padding="30dp"
+    />
+
+
+    <ImageView
+        android:id="@+id/login_baidu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/baidu"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:padding="30dp"
+        />
+
+
+    <ImageView
+        android:id="@+id/login_qq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/qq"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:padding="30dp"
+        />
+
+
+    <TextView
+        android:id="@+id/lign_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="使用第三方账号登录"
+        android:gravity="center"
+        android:layout_above="@id/login_baidu"
+        android:layout_centerHorizontal="true"
+        />
+
 </RelativeLayout>

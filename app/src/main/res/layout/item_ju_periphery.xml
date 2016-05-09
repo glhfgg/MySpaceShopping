@@ -59,6 +59,7 @@
         android:paddingBottom="5dp"
         android:maxLines="2"
         />
+
     <TextView
         android:id="@+id/ju_salebefore"
         android:layout_height="wrap_content"
@@ -67,7 +68,7 @@
         android:text="$13.9"
         android:textStyle="bold"
         android:textSize="25sp"
-        android:textColor="#d2372c"
+        android:textColor="#fd3f32"
         android:layout_toRightOf="@id/ju_storephoto"
         android:layout_below="@id/ju_storecontent"
         />

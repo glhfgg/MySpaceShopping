@@ -154,14 +154,7 @@ public class JuFriendsFragment extends Fragment {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent = new Intent(getActivity(), JuCommentActivity.class);
                            j = position;
-//            listdata.get(position).getDistance();    //内容图片
-//            listdata.get(position).getPhoto();       //用户头像
-//            listdata.get(position).getContent();     //发布内容
-//            listdata.get(position).getName();        //用户名
-//            listdata.get(position).getScore();       //发布日期
-//            listdata.get(position).getSalebefore();  //转发
-//            listdata.get(position).getSalelater();   //评论
-//            listdata.get(position).getSalenum();     // 点赞
+
             intent.putExtra("JuConImg", listdata.get(position-1).getDistance());
             intent.putExtra("JuUseImg", listdata.get(position-1).getPhoto());
             intent.putExtra("JuConTex", listdata.get(position-1).getContent());

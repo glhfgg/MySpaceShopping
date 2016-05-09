@@ -236,7 +236,7 @@ public class JuFriendsAdapter extends BaseAdapter {
                     @Override
                     public void onFailure(int arg0, String arg1) {
                         // TODO Auto-generated method stub
-                        Log.i("life","多对多关联添加失败");
+                        Log.i("life","多对多关联添加失败"+arg1);
                     }
                 });
             }

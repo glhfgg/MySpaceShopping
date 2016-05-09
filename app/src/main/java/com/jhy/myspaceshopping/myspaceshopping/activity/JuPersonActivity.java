@@ -166,25 +166,21 @@ public class JuPersonActivity extends Activity {
                               storephoto = "http://file.bmob.cn/M03/46/56/oYYBAFcfIiGAIh3gAAAEw_gSloU510.png";
                         }
                         String  storecontent= object.get(i).getContent();;
-                        String  forwarding="转发";
-                        String  comments="评论";
                         String  praice="点赞"+i;
                         if(object.get(i).getImage() != null){
-                              contentphoto = "http://file.bmob.cn/"+object.get(i).getImage().getUrl();
+                              contentphoto = object.get(i).getImage().getUrl().toString();
                         }else{
                               contentphoto = null;
                         }
-
-                        JuUniversalData data = new JuUniversalData(username,userscore,null,contentphoto,storephoto,storecontent,forwarding,comments,praice);
+                        String  Id =  object.get(i).getObjectId();
+                        JuUniversalData data = new JuUniversalData(username,userscore,null,contentphoto,storephoto,storecontent,null,Id,praice);
                         listdata.add(data);
                         data = null;
 
-                        String  Id =  object.get(i).getObjectId();
                         ID.add(Id);
                         Id = null;
                     }
                 }
-
                 JuFriendsAdapter adapter = new JuFriendsAdapter(JuPersonActivity.this,listdata);
                 list.setAdapter(adapter);
             }
@@ -230,15 +226,6 @@ public class JuPersonActivity extends Activity {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent intent = new Intent(JuPersonActivity.this, JuCommentActivity.class);
                j = position;
-//            listdata.get(position).getDistance();    //内容图片
-//            listdata.get(position).getPhoto();       //用户头像
-//            listdata.get(position).getContent();     //发布内容
-//            listdata.get(position).getName();        //用户名
-//            listdata.get(position).getScore();       //发布日期
-//            listdata.get(position).getSalebefore();  //转发
-//            listdata.get(position).getSalelater();   //评论
-//            listdata.get(position).getSalenum();     // 点赞
-
 
             if(position ==0){
                 intent = new Intent(JuPersonActivity.this,JuPersonModifyActivity.class);
@@ -258,56 +245,6 @@ public class JuPersonActivity extends Activity {
                 Log.i("result","ID-----------"+ ID.get(position-1).toString());
                 startActivity(intent);
             }
-
-            if(j>=1){
-                texts = (TextView) view.findViewById(R.id.ju_comments);
-                texts.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(JuPersonActivity.this,JuCommentActivity.class);
-                        intent.putExtra("JuId",ID.get(j-1).toString() );
-                        intent.putExtra("JuConImg", listdata.get(j-1).getDistance());
-                        intent.putExtra("JuUseImg", listdata.get(j-1).getPhoto());
-                        intent.putExtra("JuConTex", listdata.get(j-1).getContent());
-                        intent.putExtra("JuUseNam", listdata.get(j-1).getName());
-                        intent.putExtra("JuCrtTim", listdata.get(j-1).getScore());
-                        intent.putExtra("JuForNum", listdata.get(j-1).getSalebefore());
-                        intent.putExtra("JuConNum", listdata.get(j-1).getSalelater());
-                        intent.putExtra("JuPraNum", listdata.get(j-1).getSalenum());
-                        startActivity(intent);
-                    }
-                });
-
-                zhuanfa = (TextView) view.findViewById(R.id.ju_forwarding);
-                zhuanfa.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        MyUser user = BmobUser.getCurrentUser(JuPersonActivity.this,MyUser.class);
-                        Post post = new Post();
-
-                        post.setContent("转发：  "+listdata.get(j-1).getContent());
-                        Log.i("result","zzz----------"+listdata.get(j-1).getContent());
-                        post.setAuthor(user);
-                        post.save(JuPersonActivity.this, new SaveListener() {
-                            @Override
-                            public void onSuccess() {
-                                // TODO Auto-generated method stub
-                                Toast.makeText(JuPersonActivity.this, "转发成功", Toast.LENGTH_SHORT).show();
-                            }
-                            @Override
-                            public void onFailure(int code, String msg) {
-                                // TODO Auto-generated method stub
-                            }
-                        });
-                    }
-                });
-            }
-
-
-
-
         }
     };
-
 }
