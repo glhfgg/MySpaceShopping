@@ -105,7 +105,12 @@ public class JuPersonUserActivity extends Activity{
                 city.setText(object.get(0).getCity());
 
                 if( object.get(0).getIcon() != null){
-                    Picasso.with(context).load("http://file.bmob.cn/"+object.get(0).getIcon().getUrl().toString()).into(img);
+                    if( object.get(0).getLoginQQ()){
+                        Picasso.with(context).load(object.get(0).getIcon().getUrl().toString()).into(img);
+                    }else{
+                        Picasso.with(context).load("http://file.bmob.cn/"+object.get(0).getIcon().getUrl().toString()).into(img);
+                    }
+
                 }else{
                     Picasso.with(context).load("http://file.bmob.cn/M03/46/56/oYYBAFcfIiGAIh3gAAAEw_gSloU510.png").into(img);
                 }

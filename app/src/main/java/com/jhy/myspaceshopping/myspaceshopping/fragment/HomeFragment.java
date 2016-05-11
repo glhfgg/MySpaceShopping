@@ -372,15 +372,12 @@ public class HomeFragment extends Fragment {
     }
 
     private void getCityDataRun() {
-
         Map<String, String> cityMap = new HashMap<>();
         cityMap.put("city_id", "400010000");
         OkHttpUtils.getInstance().doGet("http://apis.baidu.com/baidunuomi/openapi/districts", cityMap, "eca37bd5318ddde48b144c6a37bd82e5").excute(new OKCallBack() {
             @Override
             public void onFailure(String message) {
-
             }
-
             @Override
             public void onResponse(String message) {
                 cityResult = message;

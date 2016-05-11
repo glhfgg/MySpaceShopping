@@ -51,6 +51,7 @@ public class SingupActivity extends Activity{
         bu.setBirthday("请输入生日");
         bu.setSex(true);
         bu.setFriend(true);
+        bu.setLoginQQ(false);
 //        bu.setSex(true);
         //每个账号对应一个emil地址 （用户填写后会有邮件进行确认）
         bu.setEmail(email.getText().toString());

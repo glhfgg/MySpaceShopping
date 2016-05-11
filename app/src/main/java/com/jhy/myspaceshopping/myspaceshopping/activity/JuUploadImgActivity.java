@@ -123,8 +123,6 @@ public class JuUploadImgActivity extends Activity {
     }
 
 
-
-
     View.OnClickListener Click = new View.OnClickListener(){
         @Override
         public void onClick(View v) {
@@ -171,9 +169,6 @@ public class JuUploadImgActivity extends Activity {
                 user.setIcon(bmobFile);
                  Log.i("result","BmobFile---------"+bmobFile.getFileUrl(JuUploadImgActivity.this));
 //                user.setIcon(bmobFile.getFileUrl(JuUploadImgActivity.this));
-
-
-
 
                 user.update(JuUploadImgActivity.this, user.getObjectId(), new UpdateListener() {
                     @Override

@@ -35,7 +35,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/edit_user_name"
         android:layout_below="@id/lineUserName"
-        android:layout_margin="3dp"
         android:padding="15dp"
         android:hint="@string/hint_edit_user_name"
         android:singleLine="true"
@@ -49,7 +48,6 @@
         android:src="@mipmap/line_gradient"
         android:layout_below="@id/edit_user_name"/>
     <EditText
-        android:layout_margin="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/edit_user_passward"

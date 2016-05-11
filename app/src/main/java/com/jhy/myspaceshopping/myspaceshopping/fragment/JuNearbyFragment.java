@@ -56,6 +56,9 @@ public class JuNearbyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+
+        Log.i("ftest","Near------------------");
+
         View v = inflater.inflate(R.layout.fragment_ju_list,container,false);
 
         list = (PullToRefreshListView) v.findViewById(R.id.listJu);
@@ -111,7 +114,7 @@ public class JuNearbyFragment extends Fragment {
             @Override
             public void onSuccess(List<MyUser> object) {
                 // TODO Auto-generated method stub
-                Toast.makeText(JuNearbyFragment.this.getActivity(), "查询成功：共"+object.size()+"条数据。", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(JuNearbyFragment.this.getActivity(), "查询成功：共"+object.size()+"条数据。", Toast.LENGTH_SHORT).show();
                 for (int i =0;i<object.size();i++) {
                     //获得Name的信息
                String name =  object.get(i).getPersonname();
@@ -120,9 +123,15 @@ public class JuNearbyFragment extends Fragment {
 
                String userName = object.get(i).getUsername();
 
+                  MyUser user = BmobUser.getCurrentUser(JuNearbyFragment.this.getActivity(),MyUser.class);
+                    Log.i("test","!!!@@@###---------"+user.getLoginQQ());
                     //获取用户头像
                     if(object.get(i).getIcon() != null){
-                         img ="http://file.bmob.cn/"+ object.get(i).getIcon().getUrl();
+                        if(object.get(i).getLoginQQ()){
+                            img = object.get(i).getIcon().getUrl();
+                        }else{
+                            img ="http://file.bmob.cn/"+ object.get(i).getIcon().getUrl();
+                        }
                     }else{
                          img = "http://file.bmob.cn/M03/46/56/oYYBAFcfIiGAIh3gAAAEw_gSloU510.png";
                     }

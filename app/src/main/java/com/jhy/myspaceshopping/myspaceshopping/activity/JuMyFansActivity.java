@@ -66,7 +66,10 @@ public class JuMyFansActivity extends Activity{
             public void onSuccess(List<MyUser> object) {
                 // TODO Auto-generated method stub
 
-                Toast.makeText(JuMyFansActivity.this, "查询成功：共"+object.size()+"条数据。", Toast.LENGTH_SHORT).show();
+                if(object.size() == 0){
+                    Toast.makeText(JuMyFansActivity.this, "空空如也哦~", Toast.LENGTH_SHORT).show();
+                }
+
                 for (int i =0;i<object.size();i++) {
                     //获得Name的信息
                     String name =  object.get(i).getPersonname();

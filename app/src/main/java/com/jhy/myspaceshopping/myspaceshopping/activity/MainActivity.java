@@ -68,7 +68,7 @@ public class MainActivity extends FragmentActivity {
             jufragment = new JuMainFragment();
             ft4.add(R.id.fragment_container, jufragment);
             ft4.commit();
-            Log.i("life","JU------init--");
+//            Log.i("life","JU------init--");
         }
 
     }
@@ -93,15 +93,13 @@ public class MainActivity extends FragmentActivity {
             switch (checkedId) {
                 case R.id.rbtn_main_zhuye:
                     // Log.i("gl","!!@#!!!!!!!!!"+"主页");
-                    if(homeFragment==null){
 
                         homeFragment = new HomeFragment();
-                    }
                     ft.replace(R.id.fragment_container, homeFragment);
                     break;
 
                 case R.id.rbtn_main_zhoubian:
-                    Log.i("gl","!@!@!@!@!!!!"+"周边");
+//                    Log.i("gl","!@!@!@!@!!!!"+"周边");
                     businessFragment = new BusinessFragment();
                     ft.replace(R.id.fragment_container, businessFragment);
                     break;
@@ -118,7 +116,7 @@ public class MainActivity extends FragmentActivity {
                         jufragment = new JuMainFragment();
                         ft4.replace(R.id.fragment_container, jufragment);
                         ft4.commit();
-                        Log.i("life","JU------Click--");
+//                        Log.i("life","JU------Click--");
                     }
 
                     break;

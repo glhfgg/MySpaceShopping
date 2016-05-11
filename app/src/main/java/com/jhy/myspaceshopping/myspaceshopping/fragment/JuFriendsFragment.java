@@ -23,6 +23,8 @@ import com.jhy.myspaceshopping.myspaceshopping.R;
 import com.jhy.myspaceshopping.myspaceshopping.object.MyUser;
 import com.jhy.myspaceshopping.myspaceshopping.object.Post;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,11 +47,12 @@ public class JuFriendsFragment extends Fragment {
     List<String> ID;
     int j;
     int num = 5;
-    TextView texts ;
-    TextView zhuanfa;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        Log.i("ftest","Friends---------------");
 
         View v = inflater.inflate(R.layout.fragment_ju_list,container,false);
 
@@ -111,9 +114,13 @@ public class JuFriendsFragment extends Fragment {
                     for(int i=0;i<object.size();i++){
                         String  username  =  object.get(i).getAuthor().getPersonname();
                         String  userscore = object.get(i).getCreatedAt();
-
-                        if(object.get(i).getAuthor().getIcon() != null){
-                            storephoto= "http://file.bmob.cn/"+ object.get(i).getAuthor().getIcon().getUrl().toString();
+                        if(object.get(i).getAuthor().getIcon() != null) {
+                            MyUser user = BmobUser.getCurrentUser(JuFriendsFragment.this.getActivity(), MyUser.class);
+                            if (object.get(i).getAuthor().getLoginQQ()) {
+                                storephoto = object.get(i).getAuthor().getIcon().getUrl();
+                            } else {
+                                storephoto = "http://file.bmob.cn/" + object.get(i).getAuthor().getIcon().getUrl();
+                            }
                         }else{
                             storephoto = "http://file.bmob.cn/M03/46/56/oYYBAFcfIiGAIh3gAAAEw_gSloU510.png";
                         }

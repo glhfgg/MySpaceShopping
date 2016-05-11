@@ -49,8 +49,6 @@ public class JuPersonActivity extends Activity {
     ImageView img;
     Intent intent;
 
-    TextView texts ;
-    TextView zhuanfa;
     int j;
     List<String> ID;
     @Override
@@ -59,33 +57,21 @@ public class JuPersonActivity extends Activity {
         setContentView(R.layout.activity_ju_person);
         //初始化控件 添加listView 的 Header
         init();
-        getMyIntent();
+
         searchPost();
         back.setOnClickListener(click);
         list.setOnItemClickListener(Click);
     }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        MyUser  user = BmobUser.getCurrentUser(this, MyUser.class);
-//
-//        Log.i("result","user0--------------"+user.getIcon().getUrl().toString());
-//
-//        Picasso.with(this).load("http://file.bmob.cn/"+user.getIcon().getUrl().toString()).into(img);
-//    }
-
-    private void getMyIntent(){
-        //获取传过来的图片URL
-        MyUser user = BmobUser.getCurrentUser(this,MyUser.class);
-
-        if( user.getIcon() != null){
-            Picasso.with(context).load("http://file.bmob.cn/"+user.getIcon().getUrl().toString()).into(img);
-        }else{
-            Picasso.with(context).load("http://file.bmob.cn/M03/46/56/oYYBAFcfIiGAIh3gAAAEw_gSloU510.png").into(img);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MyUser  user = BmobUser.getCurrentUser(this, MyUser.class);
+        if(!user.getLoginQQ()){
+            Picasso.with(this).load("http://file.bmob.cn/"+user.getIcon().getUrl().toString()).into(img);
         }
-    }
 
+    }
 
     private void init(){
         list = (ListView) findViewById(R.id.ju_person_list);
@@ -119,7 +105,16 @@ public class JuPersonActivity extends Activity {
                 time.setText(object.get(0).getCreatedAt());
                 content.setText(object.get(0).getContent());
                 city.setText(object.get(0).getCity());
+                if( object.get(0).getIcon() != null){
+                    if( object.get(0).getLoginQQ()){
+                        Picasso.with(context).load(object.get(0).getIcon().getUrl().toString()).into(img);
+                    }else{
+                        Picasso.with(context).load("http://file.bmob.cn/"+object.get(0).getIcon().getUrl().toString()).into(img);
+                    }
 
+                }else{
+                    Picasso.with(context).load("http://file.bmob.cn/M03/46/56/oYYBAFcfIiGAIh3gAAAEw_gSloU510.png").into(img);
+                }
             }
             @Override
             public void onError(int code, String msg) {
@@ -128,7 +123,11 @@ public class JuPersonActivity extends Activity {
 
             }
         });
-        img.setOnClickListener(ViewClick);
+        MyUser user = BmobUser.getCurrentUser(this,MyUser.class);
+        if(user.getLoginQQ()){
+        }else{
+            img.setOnClickListener(ViewClick);
+        }
         content.setOnClickListener(ViewClick);
 
     }
@@ -161,7 +160,11 @@ public class JuPersonActivity extends Activity {
                         String  username  = user.getPersonname();
                         String  userscore = object.get(i).getCreatedAt();
                         if(user.getIcon() != null){
-                              storephoto= "http://file.bmob.cn/"+user.getIcon().getUrl();;
+                            if(user.getLoginQQ()){
+                                storephoto= user.getIcon().getUrl();;
+                            }else{
+                                storephoto= "http://file.bmob.cn/"+user.getIcon().getUrl();;
+                            }
                         }else{
                               storephoto = "http://file.bmob.cn/M03/46/56/oYYBAFcfIiGAIh3gAAAEw_gSloU510.png";
                         }
@@ -191,8 +194,6 @@ public class JuPersonActivity extends Activity {
                 Toast.makeText(JuPersonActivity.this, "查询失败:"+msg, Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
 
 

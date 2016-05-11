@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.jhy.myspaceshopping.myspaceshopping.R;
 
 import com.jhy.myspaceshopping.myspaceshopping.object.MyUser;
+import com.tencent.tauth.Tencent;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.UpdateListener;
@@ -55,8 +56,7 @@ public class JuPersonModifyActivity extends Activity {
     AlertDialog.Builder dialog;
 
     private int i; //表示用的测定值
-
-
+    Tencent mTencent;
     //DatePickerDialog;
     private int year;
     private int month;
@@ -103,11 +103,14 @@ public class JuPersonModifyActivity extends Activity {
     }
 
     private void setText() {
-        if (user.getSex()) {
-            sexs = "男";
-        } else {
-            sexs = "女";
+        if(user.getSex() != null){
+            if (user.getSex()) {
+                sexs = "男";
+            } else {
+                sexs = "女";
+            }
         }
+
         name.setText(user.getUsername());
         pername.setText(user.getPersonname());
         sex.setText(sexs);
@@ -177,6 +180,10 @@ public class JuPersonModifyActivity extends Activity {
                     break;
                 case R.id.modify_cancalLogin:
                     BmobUser.logOut(JuPersonModifyActivity.this);   //清除缓存用户对象
+                    if(mTencent != null){
+                        mTencent.logout(JuPersonModifyActivity.this);
+                    }
+
                     Intent intent = new Intent(JuPersonModifyActivity.this,LoginActivity.class);
                     startActivity(intent);
                     Toast.makeText(JuPersonModifyActivity.this, "已退出", Toast.LENGTH_SHORT).show();

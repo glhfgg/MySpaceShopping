@@ -57,6 +57,7 @@
             />
 
     </RadioGroup>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/ju_viewpager"
         android:layout_height="wrap_content"

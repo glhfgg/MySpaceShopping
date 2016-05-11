@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -18,6 +19,9 @@ import android.widget.Toast;
 
 import com.jhy.myspaceshopping.myspaceshopping.R;
 import com.jhy.myspaceshopping.myspaceshopping.object.MyUser;
+import com.tencent.connect.UserInfo;
+import com.tencent.connect.auth.QQToken;
+import com.tencent.connect.common.Constants;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
@@ -26,12 +30,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.listener.OtherLoginListener;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 /**
  * Created by Administrator on 2016/4/21.
  */
-public class LoginActivity extends Activity{
+public class LoginActivity extends Activity {
 
     EditText name;
     EditText pass;
@@ -39,14 +47,16 @@ public class LoginActivity extends Activity{
     TextView singup;
     Context context = this;
     //QQ登录
-    ImageView qq;
-
-    public static String mAppid;
-    public static String openidString;
+    ImageView qqimg;
     Bitmap bitmap = null;
+    public static String mAppid;
 
     private Tencent mTencent;
 
+    String TAG = "qqlife";
+
+    private  String nicknameString;
+    private   String img;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,21 +65,27 @@ public class LoginActivity extends Activity{
         Bmob.initialize(this, "83d3230ec6120329ff990b35775b96f3");
     }
 
-    private void init(){
+    //QQ第三方登录回调
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Tencent.onActivityResultData(requestCode, resultCode, data, new BaseUiListener());
+    }
+
+    private void init() {
         name = (EditText) findViewById(R.id.edit_user_name);
         pass = (EditText) findViewById(R.id.edit_user_passward);
         login = (Button) findViewById(R.id.btn_login);
         singup = (TextView) findViewById(R.id.btn_register);
-        qq = (ImageView) findViewById(R.id.login_qq);
+        qqimg = (ImageView) findViewById(R.id.login_qq);
 
 
-        qq.setOnClickListener(LoginClick);
+        qqimg.setOnClickListener(LoginClick);
 
         login.setOnClickListener(click);
         singup.setOnClickListener(click);
     }
 
-    private void toLogin(){
+    private void toLogin() {
         MyUser bu = new MyUser();
         bu.setUsername(name.getText().toString());
         bu.setPassword(pass.getText().toString());
@@ -85,67 +101,38 @@ public class LoginActivity extends Activity{
 
             @Override
             public void onFailure(int code, String msg) {
-                Toast.makeText(LoginActivity.this, "登录失败:"+msg, Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "登录失败:" + msg, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KeyEvent.KEYCODE_BACK) { //监控/拦截/屏蔽返回键
+        if (keyCode == KeyEvent.KEYCODE_BACK) { //监控/拦截/屏蔽返回键
             Intent intent = new Intent(context, MainActivity.class);
             startActivity(intent);
             return true;
-        } else if(keyCode == KeyEvent.KEYCODE_MENU) {
+        } else if (keyCode == KeyEvent.KEYCODE_MENU) {
             //监控/拦截菜单键
-        } else if(keyCode == KeyEvent.KEYCODE_HOME) {
+        } else if (keyCode == KeyEvent.KEYCODE_HOME) {
             //由于Home键为系统键，此处不能捕获，需要重写onAttachedToWindow()
         }
         return super.onKeyDown(keyCode, event);
     }
 
     //调用QQ登录
-    private void LoginQQ(){
+    private void LoginQQ() {
         mAppid = "1105386118";
-        mTencent = Tencent.createInstance(mAppid,this);
-        mTencent.login(LoginActivity.this,"all", new BaseUiListener() {
-                    @Override
-                    public void onComplete(Object response) {
-                        // TODO Auto-generated method stub
-
-                        Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-                        Log.e("qqlife", "-------------" );
-
-                            Log.e("qqlife", "-------------try" );
-                            //获得的数据是JSON格式的，获得你想获得的内容
-                            //如果你不知道你能获得什么，看一下下面的LOG
-                            Log.e("qqlife", "-------------" + response.toString());
-
-                            Log.e("qqlife", "-------------" + openidString);
-                            //access_token= ((JSONObject) response).getString("access_token");
-                            // expires_in = ((JSONObject) response).getString("expires_in");
-
-                    }
-
-                    @Override
-                    public void onError(UiError uiError) {
-                        Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onCancel() {
-                        Toast.makeText(LoginActivity.this, "登录取消", Toast.LENGTH_SHORT).show();
-                    }
-                });
+        mTencent = Tencent.createInstance(mAppid, this);
+        mTencent.login(LoginActivity.this, "all", new BaseUiListener());
     }
 
-
-            View.OnClickListener click = new View.OnClickListener(){
+    View.OnClickListener click = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.btn_register:
-                    Intent intent = new Intent(context,SingupActivity.class);
+                    Intent intent = new Intent(context, SingupActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.btn_login:
@@ -155,39 +142,120 @@ public class LoginActivity extends Activity{
         }
     };
 
-    View.OnClickListener LoginClick = new View.OnClickListener(){
+    View.OnClickListener LoginClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-          switch (v.getId()){
-              case R.id.login_qq:
-                  LoginQQ();
-                  break;
-
-          }
+            switch (v.getId()) {
+                case R.id.login_qq:
+                    LoginQQ();
+                    break;
+            }
         }
     };
 
-private class BaseUiListener implements IUiListener {
-    @Override
-    public void onComplete(Object response) {
-        //V2.0版本，参数类型由JSONObject 改成了Object,具体类型参考api文档
-//        mBaseMessageText.setText("onComplete:");
-        doComplete((JSONObject) response);
-        Toast.makeText(LoginActivity.this, "onComplete", Toast.LENGTH_SHORT).show();
+    private void User(String name,String url) {
+
+        MyUser newUser = new MyUser();
+        newUser.setFriend(true);
+        newUser.setPersonname(name);
+        newUser.setLoginQQ(true);
+        BmobFile bmobfile =new BmobFile(name+".png","",url);
+        Log.i(TAG,"URL---------"+url);
+        newUser.setIcon(bmobfile);
+
+        MyUser bmobUser = BmobUser.getCurrentUser(this,MyUser.class);
+        newUser.update(context, bmobUser.getObjectId(), new UpdateListener() {
+            @Override
+            public void onSuccess() {
+                // TODO Auto-generated method stub
+//                toast("更新用户信息成功:");
+                Intent intent = new Intent(context, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
+            @Override
+            public void onFailure(int code, String msg) {
+                // TODO Auto-generated method stub
+//                toast("更新用户信息失败:" + msg);
+            }
+        });
     }
-    protected void doComplete(JSONObject values) {
-        Toast.makeText(LoginActivity.this, "doComplete", Toast.LENGTH_SHORT).show();
+
+
+
+    public void getUserInfoInThread() {
+
+        QQToken qqToken = mTencent.getQQToken();
+        UserInfo info = new UserInfo(getApplicationContext(), qqToken);
+        info.getUserInfo(new IUiListener() {
+
+            public void onComplete(final Object response) {
+                // TODO Auto-generated method stub
+
+                    try {
+                        nicknameString =((JSONObject)response).getString("nickname");
+                        img =((JSONObject)response).getString("figureurl_qq_2");
+                        User(nicknameString,img);
+                    } catch (JSONException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+            }
+
+            public void onCancel() {
+                Log.i(TAG, "--------------onCancel");
+                // TODO Auto-generated method stub
+            }
+
+            public void onError(UiError arg0) {
+                // TODO Auto-generated method stub
+                Log.i(TAG, "---------------onError" + ":" + arg0);
+            }
+        });
     }
-    @Override
-    public void onError(UiError e) {
-//        showResult("onError:", "code:" + e.errorCode + ", msg:"
-//                + e.errorMessage + ", detail:" + e.errorDetail);
-        Toast.makeText(LoginActivity.this, "onError", Toast.LENGTH_SHORT).show();
+
+    private class BaseUiListener implements IUiListener {
+        @Override
+        public void onComplete(Object response) {
+            Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+
+            try {
+                String userId = ((JSONObject) response).getString("openid");
+                String snsType = "qq";
+                String accessToken = ((JSONObject) response).getString("access_token");
+                String expiresIn = ((JSONObject) response).getString("expires_in");
+
+                mTencent.setOpenId(userId);
+                mTencent.setAccessToken(accessToken, expiresIn);
+
+                BmobUser.BmobThirdUserAuth authInfo = new BmobUser.BmobThirdUserAuth(snsType, accessToken, expiresIn, userId);
+                BmobUser.loginWithAuthData(context, authInfo, new OtherLoginListener() {
+                    @Override
+                    public void onSuccess(JSONObject userAuth) {
+                        // TODO Auto-generated method stub
+                        Log.i(TAG, "第三方登陆成功");
+                        getUserInfoInThread();
+
+                    }
+
+                    @Override
+                    public void onFailure(int code, String msg) {
+                        // TODO Auto-generated method stub
+                        Log.i(TAG, "第三方登陆失败：" + msg);
+                    }
+                });
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        public void onError(UiError arg0) {
+        }
+
+        @Override
+        public void onCancel() {
+        }
     }
-    @Override
-    public void onCancel() {
-//        showResult("onCancel", "");
-        Toast.makeText(LoginActivity.this, "onCancel", Toast.LENGTH_SHORT).show();
-    }
-}
+
 }

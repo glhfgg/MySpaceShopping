@@ -61,9 +61,9 @@ public class JuMyLikesActivity  extends Activity{
         MyUser user = BmobUser.getCurrentUser(this,MyUser.class);
         MyUser users = new MyUser();
         BmobQuery<MyUser> query = new BmobQuery<MyUser>();
-        Log.i("life","USERBmobPointer-----------"+new BmobPointer(user));
-        Log.i("life","USERBmobRelation-----------"+new BmobRelation(user));
-        Log.i("life","USERgetLikes-----------"+ user.getLikes().toString());
+//        Log.i("life","USERBmobPointer-----------"+new BmobPointer(user));
+//        Log.i("life","USERBmobRelation-----------"+new BmobRelation(user));
+//        Log.i("life","USERgetLikes-----------"+ user.getLikes().toString());
 
         query.addWhereRelatedTo("likes", new BmobPointer(user));
         //执行查询方法
@@ -72,7 +72,10 @@ public class JuMyLikesActivity  extends Activity{
             public void onSuccess(List<MyUser> object) {
                 // TODO Auto-generated method stub
 
-                Toast.makeText(JuMyLikesActivity.this, "查询成功：共"+object.size()+"条数据。", Toast.LENGTH_SHORT).show();
+                if(object.size() == 0){
+                    Toast.makeText(JuMyLikesActivity.this, "空空如也哦~", Toast.LENGTH_SHORT).show();
+                }
+
                 for (int i =0;i<object.size();i++) {
                     //获得Name的信息
                     String name =  object.get(i).getPersonname();

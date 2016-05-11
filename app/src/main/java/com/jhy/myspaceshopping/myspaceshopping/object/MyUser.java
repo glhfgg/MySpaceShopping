@@ -14,6 +14,7 @@ public class MyUser extends BmobUser{
     private String personname; // 用户昵称
     private String content;   // 用户的自我介绍
     private Boolean Sex;      // 用户性别
+    private Boolean LoginQQ;      //是否是第三方登录
     private String UserImg;   // 用户头像
     private String birthday;  // 用户生日
     private String QQ;        // 用户QQ
@@ -21,6 +22,12 @@ public class MyUser extends BmobUser{
     private BmobFile icon;    //用户头像
     private BmobRelation likes;//多对多关系：用于存储喜欢该帖子的所有用户
 
+
+
+
+    public Boolean getLoginQQ() { return LoginQQ; }
+
+    public void setLoginQQ(Boolean loginQQ) { LoginQQ = loginQQ; }
 
     public BmobRelation getLikes() {return likes;  }
 

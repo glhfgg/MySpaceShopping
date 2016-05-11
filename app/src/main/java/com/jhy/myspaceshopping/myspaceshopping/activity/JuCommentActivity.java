@@ -251,7 +251,7 @@ public class JuCommentActivity extends Activity {
                    String name = object.get(i).getUser().getPersonname();
                    String time = object.get(i).getCreatedAt();
                    if (object.get(i).getUser().getIcon() != null) {
-                       img = "http://file.bmob.cn/" + object.get(i).getUser().getIcon().getUrl();
+                       img = object.get(i).getUser().getIcon().getUrl().toString();
                    } else {
                        img = "http://file.bmob.cn/M03/46/56/oYYBAFcfIiGAIh3gAAAEw_gSloU510.png";
                    }
