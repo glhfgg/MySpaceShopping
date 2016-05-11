@@ -78,9 +78,7 @@ public class LoginActivity extends Activity {
         singup = (TextView) findViewById(R.id.btn_register);
         qqimg = (ImageView) findViewById(R.id.login_qq);
 
-
         qqimg.setOnClickListener(LoginClick);
-
         login.setOnClickListener(click);
         singup.setOnClickListener(click);
     }
@@ -159,6 +157,7 @@ public class LoginActivity extends Activity {
         newUser.setFriend(true);
         newUser.setPersonname(name);
         newUser.setLoginQQ(true);
+        newUser.setSex(true);
         BmobFile bmobfile =new BmobFile(name+".png","",url);
         Log.i(TAG,"URL---------"+url);
         newUser.setIcon(bmobfile);

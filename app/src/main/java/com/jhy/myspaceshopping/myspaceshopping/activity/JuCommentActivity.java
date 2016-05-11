@@ -98,7 +98,7 @@ public class JuCommentActivity extends Activity {
             Picasso.with(this).load("http://www.qqzhi.com/uploadpic/2014-10-08/051328157.jpg").into(userphoto);
         }
         if(intent.getExtras().getString("JuConImg") != null){
-            Picasso.with(this).load( intent.getExtras().getString("JuConImg").toString()).into(contentphoto);
+            Picasso.with(this).load( "http://file.bmob.cn/"+intent.getExtras().getString("JuConImg").toString()).into(contentphoto);
         }
 
         username.setText(intent.getExtras().getString("JuUseNam").toString());

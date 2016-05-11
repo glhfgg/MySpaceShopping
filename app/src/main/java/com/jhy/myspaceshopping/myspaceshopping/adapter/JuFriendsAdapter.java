@@ -142,7 +142,6 @@ public class JuFriendsAdapter extends BaseAdapter {
                     if(hour == shour+12){
                         if(smin == min){
                             holder.score.setText( "1分钟内");
-
                         }else{
                             int mins = smin - min;
                             if(mins <0){
@@ -156,7 +155,6 @@ public class JuFriendsAdapter extends BaseAdapter {
                         holder.score.setText( mins+"分钟前");
 
                     }else{
-
                         int hous =12+shour-hour;
                         holder.score.setText(hous+"小时前");
                     }
@@ -169,7 +167,6 @@ public class JuFriendsAdapter extends BaseAdapter {
                     }else{
                         holder.score.setText(days+"天前"+" "+hour+":"+min);
                     }
-
                 }
             }else{
                 holder.score.setText(month+"月"+day+"日"+" "+hour+":"+min);
@@ -183,8 +180,8 @@ public class JuFriendsAdapter extends BaseAdapter {
         Picasso.with(context).load(data.getPhoto()).into( holder.storephoto);
         holder.storecontent.setText(data.getContent());
 
-
-        Picasso.with(context).load(data.getDistance()).into( holder.contentphoto);
+        Picasso.with(context).load("http://file.bmob.cn/"+data.getDistance()).into( holder.contentphoto);
+        Log.i("url","--------"+data.getDistance());
         datas = data.getSalelater();
 
 
@@ -202,8 +199,8 @@ public class JuFriendsAdapter extends BaseAdapter {
                     public void onSuccess() {
                         // TODO Auto-generated method stub
                         Toast.makeText(context, "转发成功", Toast.LENGTH_SHORT).show();
-
                     }
+
                     @Override
                     public void onFailure(int code, String msg) {
                         // TODO Auto-generated method stub
