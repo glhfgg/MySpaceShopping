@@ -59,7 +59,6 @@
 
         <RadioButton
             android:id="@+id/rbtn_main_genduo"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/main_gengduo_selector"

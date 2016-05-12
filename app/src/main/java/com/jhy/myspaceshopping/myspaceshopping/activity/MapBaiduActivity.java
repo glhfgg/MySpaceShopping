@@ -3,8 +3,6 @@ package com.jhy.myspaceshopping.myspaceshopping.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.PaintDrawable;
-import android.location.Location;
-import android.location.LocationListener;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,12 +10,12 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -26,49 +24,32 @@ import com.baidu.location.Poi;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
-import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MarkerOptions;
-import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.model.inner.GeoPoint;
-import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
-import com.baidu.mapapi.search.poi.PoiCitySearchOption;
-import com.baidu.mapapi.search.poi.PoiDetailResult;
-import com.baidu.mapapi.search.poi.PoiResult;
-import com.baidu.mapapi.search.poi.PoiSearch;
 import com.jhy.myspaceshopping.myspaceshopping.R;
 import com.jhy.myspaceshopping.myspaceshopping.adapter.FirstClassAdapter;
 import com.jhy.myspaceshopping.myspaceshopping.adapter.SecondClassAdapter;
 import com.jhy.myspaceshopping.myspaceshopping.objectmode.FirstClassItemModel;
 import com.jhy.myspaceshopping.myspaceshopping.objectmode.SecondClassItemModel;
-import com.jhy.myspaceshopping.myspaceshopping.util.OnReceiveLocationListener;
 import com.jhy.myspaceshopping.myspaceshopping.util.ScreenUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by TOSHIBA on 2016/4/19.
  */
-public class MapBaiduActivity extends Activity implements OnReceiveLocationListener{
+public class MapBaiduActivity extends Activity {
     MapView mapvSlideMap = null;// MapView 显示百度地图
-    TextView textMapXY=null;//地图定位后的地点结果
+    TextView textMapXY = null;//地图定位后的地点结果
     RadioButton rbtnMaptypes;//按类别查询当前位置附近的商店
     public LocationClient mLocationClient = null;
     BaiduMap mBaiduMap;//定位图层
-
-    double  mLongitude;//经度
-    double mLatitude;//纬度
-    float  mRadius;//半径范围
-    BitmapDescriptor  mCurrentMarker;
-    PoiSearch mPoiSearch;//POI检索对象
-    List<Poi> list;//poi数据
-
+    ImageButton imgDingwei;//更新图层，刷新当前位置
     //popupWindow
     /**
      * 左侧一级分类的数据
@@ -91,24 +72,20 @@ public class MapBaiduActivity extends Activity implements OnReceiveLocationListe
     //弹出PopupWindow时，背景变暗的动画
     private Animation animIn, animOut;
 
-    //定义Maker坐标点
-    LatLng point;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         //控件初始化
-       init();
+        init();
         //地图图层
         mBaiduMap = mapvSlideMap.getMap();
-
         //普通地图  地图类型：普通地图 卫星地图 空白地图
         mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
         //开启交通图
         mBaiduMap.setTrafficEnabled(true);
-       // 开启百度城市热力图
-       // mBaiduMap.setBaiduHeatMapEnabled(true);
-
+        //开启定位图层
+        mBaiduMap.setMyLocationEnabled(true);
         //Context需要时全进程有效的context,推荐用getApplicationConext获取全进程有效的context
         mLocationClient = new LocationClient(getApplicationContext());     //声明LocationClient类
         //注册监听函数
@@ -117,15 +94,36 @@ public class MapBaiduActivity extends Activity implements OnReceiveLocationListe
         mLocationClient.registerLocationListener(new BDLocationListener() {
             @Override
             public void onReceiveLocation(BDLocation bdLocation) {
-                if(bdLocation==null){
+                if (bdLocation== null) {
                     return;
                 }
-                onReceive(bdLocation);
+                //定位的结果显示在TextView中
                 textMapXY.setText(bdLocation.getAddrStr());
+                // 构造定位数据
+                MyLocationData data = new MyLocationData.Builder()
+                        .accuracy(bdLocation.getRadius())
+                        // 此处设置开发者获取到的方向信息，顺时针0-360
+                        .direction(100).latitude(bdLocation.getLatitude())
+                        .longitude(bdLocation.getLongitude()).build();
+                // 设置定位数据
+                mBaiduMap.setMyLocationData(data);
+                //定义Maker坐标点
+                LatLng latLng = new LatLng(bdLocation.getLatitude(),
+                        bdLocation.getLongitude());
 
-                list= bdLocation.getPoiList();// POI数据
-                //定位没结果时返回数据
-                StringBuffer sb= new StringBuffer(256);
+                MapStatusUpdate msu = MapStatusUpdateFactory.newLatLng(latLng);
+                mBaiduMap.animateMapStatus(msu);
+                StringBuffer sb = new StringBuffer(256);
+                sb.append("time : ");
+                sb.append(bdLocation.getTime());
+                sb.append("\nerror code : ");
+                sb.append(bdLocation.getLocType());
+                sb.append("\nlatitude : ");
+                sb.append(bdLocation.getLatitude());
+                sb.append("\nlontitude : ");
+                sb.append(bdLocation.getLongitude());
+                sb.append("\nradius : ");
+                sb.append(bdLocation.getRadius());
                 if (bdLocation.getLocType() == BDLocation.TypeGpsLocation) {// GPS定位结果
                     sb.append("\nspeed : ");
                     sb.append(bdLocation.getSpeed());// 单位：公里每小时
@@ -161,71 +159,42 @@ public class MapBaiduActivity extends Activity implements OnReceiveLocationListe
                     sb.append("\ndescribe : ");
                     sb.append("无法获取有效定位依据导致定位失败，一般是由于手机的原因，处于飞行模式下一般会造成这种结果，可以试着重启手机");
                 }
-                Log.i("Location result","-------------"+sb.toString());
-            }
-        });
-
-
-        //定义Maker坐标点
-
-        //构建Marker图标
-       /* mCurrentMarker = BitmapDescriptorFactory
-                .fromResource(R.mipmap.biaozhu);
-        //构建MarkerOption，用于在地图上添加Marker
-        OverlayOptions option = new MarkerOptions()
-                .position(point)
-                .icon(mCurrentMarker);
-        //在地图上添加Marker，并显示
-        mBaiduMap.addOverlay(option);
-        // 开启定位图层
-        mBaiduMap.setMyLocationEnabled(true);*/
-
-          //POI检索
-        //创建POI检索实例
-        mPoiSearch=PoiSearch.newInstance();
-        //创建POI检索监听者
-        OnGetPoiSearchResultListener poiListener = new OnGetPoiSearchResultListener(){
-            public void onGetPoiResult(PoiResult result){
-                //获取POI检索结果
-                StringBuffer sbPoiresult= new StringBuffer(256);
-                if(list!=null){
+                sb.append("\nlocationdescribe : ");
+                sb.append(bdLocation.getLocationDescribe());// 位置语义化信息
+                List<Poi> list = bdLocation.getPoiList();// POI数据
+                if (list != null) {
+                    sb.append("\npoilist size = : ");
+                    sb.append(list.size());
                     for (Poi p : list) {
-                        sbPoiresult.append("\npoi= : ");
-                        sbPoiresult.append(p.getId() + " " + p.getName() + " " + p.getRank());
+                        sb.append("\npoi= : ");
+                        sb.append(p.getId() + " " + p.getName() + " " + p.getRank());
                     }
                 }
-                Log.i("Poi result","-------------"+ sbPoiresult.toString());
+                Log.i("BaiduLocationApiDem", sb.toString());
             }
-            public void onGetPoiDetailResult(PoiDetailResult result){
-                //获取Place详情页检索结果
 
-                Log.i("PoiDetail result","-------------"+ result);
-            }
-        };
-        //设置POI检索监听者
-        mPoiSearch.setOnGetPoiSearchResultListener(poiListener);
-        //发起检索请求
-        mPoiSearch.searchInCity((new PoiCitySearchOption())
-                .city("武汉")
-                .keyword("美食")
-                .pageNum(10));
-       initLocation();
-       mLocationClient.start();
+        });
+        initLocation();
+        mLocationClient.start();
 
     }
-
-    private void init(){
+    //控件初始化
+    private void init() {
         mapvSlideMap = (MapView) findViewById(R.id.mapv_slidemap);//获取地图控件引用
         textMapXY = (TextView) findViewById(R.id.text_mapxy);//最终定位的地址结果
-        rbtnMaptypes=(RadioButton) findViewById(R.id.rbtn_maptypes);//点击获得附近商店的位置
+        rbtnMaptypes = (RadioButton) findViewById(R.id.rbtn_maptypes);//点击获得附近商店的位置
+        imgDingwei=(ImageButton) findViewById(R.id.img_dingwei);//刷新当前位置
         //RadioButton监听
         rbtnMaptypes.setOnClickListener(rbtnListener);
+        //更新当前位置
+        imgDingwei.setOnClickListener(imgListener);
         //弹出PopupWindow时，背景变暗的动画
         animIn = AnimationUtils.loadAnimation(this, R.anim.fade_in_anim);
         animOut = AnimationUtils.loadAnimation(this, R.anim.fade_out_anim);
     }
+
     //RadioButton监听 --全部分类
-    View.OnClickListener rbtnListener=new View.OnClickListener() {
+    View.OnClickListener rbtnListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             typeData();
@@ -233,48 +202,59 @@ public class MapBaiduActivity extends Activity implements OnReceiveLocationListe
             btnOnClick();
         }
     };
+
+    View.OnClickListener imgListener=new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+          mapvSlideMap.refreshDrawableState();
+        }
+    };
     //PopupWindow中ListView中存进的数据
     //全部分类--data
     private void typeData() {
         firstList = new ArrayList<FirstClassItemModel>();
+
         //1
-        ArrayList<SecondClassItemModel> secondList1 = new ArrayList<SecondClassItemModel>();
-        secondList1.add(new SecondClassItemModel(101, "自助餐"));
-        secondList1.add(new SecondClassItemModel(102, "西餐"));
-        secondList1.add(new SecondClassItemModel(103, "川菜"));
-        firstList.add(new FirstClassItemModel(1, "美食", secondList1));
+        firstList.add(new FirstClassItemModel(1, "全部分类", new ArrayList<SecondClassItemModel>()));
         //2
         ArrayList<SecondClassItemModel> secondList2 = new ArrayList<SecondClassItemModel>();
-        secondList2.add(new SecondClassItemModel(201, "天津"));
-        secondList2.add(new SecondClassItemModel(202, "北京"));
-        secondList2.add(new SecondClassItemModel(203, "秦皇岛"));
-        secondList2.add(new SecondClassItemModel(204, "沈阳"));
-        secondList2.add(new SecondClassItemModel(205, "大连"));
-        secondList2.add(new SecondClassItemModel(206, "哈尔滨"));
-        secondList2.add(new SecondClassItemModel(207, "锦州"));
-        secondList2.add(new SecondClassItemModel(208, "上海"));
-        secondList2.add(new SecondClassItemModel(209, "杭州"));
-        secondList2.add(new SecondClassItemModel(210, "南京"));
-        secondList2.add(new SecondClassItemModel(211, "嘉兴"));
-        secondList2.add(new SecondClassItemModel(212, "苏州"));
-        firstList.add(new FirstClassItemModel(2, "旅游", secondList2));
+        secondList2.add(new SecondClassItemModel(201, "自助餐"));
+        secondList2.add(new SecondClassItemModel(202, "西餐"));
+        secondList2.add(new SecondClassItemModel(203, "川菜"));
+        firstList.add(new FirstClassItemModel(2, "美食", secondList2));
         //3
         ArrayList<SecondClassItemModel> secondList3 = new ArrayList<SecondClassItemModel>();
-        secondList3.add(new SecondClassItemModel(301, "南开区"));
-        secondList3.add(new SecondClassItemModel(302, "和平区"));
-        secondList3.add(new SecondClassItemModel(303, "河西区"));
-        secondList3.add(new SecondClassItemModel(304, "河东区"));
-        secondList3.add(new SecondClassItemModel(305, "滨海新区"));
-        firstList.add(new FirstClassItemModel(3, "电影", secondList3));
+        secondList3.add(new SecondClassItemModel(301, "天津"));
+        secondList3.add(new SecondClassItemModel(302, "北京"));
+        secondList3.add(new SecondClassItemModel(303, "秦皇岛"));
+        secondList3.add(new SecondClassItemModel(304, "沈阳"));
+        secondList3.add(new SecondClassItemModel(305, "大连"));
+        secondList3.add(new SecondClassItemModel(306, "哈尔滨"));
+        secondList3.add(new SecondClassItemModel(307, "锦州"));
+        secondList3.add(new SecondClassItemModel(308, "上海"));
+        secondList3.add(new SecondClassItemModel(309, "杭州"));
+        secondList3.add(new SecondClassItemModel(310, "南京"));
+        secondList3.add(new SecondClassItemModel(311, "嘉兴"));
+        secondList3.add(new SecondClassItemModel(312, "苏州"));
+        firstList.add(new FirstClassItemModel(3, "旅游", secondList3));
         //4
-        firstList.add(new FirstClassItemModel(4, "手机", new ArrayList<SecondClassItemModel>()));
+        ArrayList<SecondClassItemModel> secondList4 = new ArrayList<SecondClassItemModel>();
+        secondList4.add(new SecondClassItemModel(401, "南开区"));
+        secondList4.add(new SecondClassItemModel(402, "和平区"));
+        secondList4.add(new SecondClassItemModel(403, "河西区"));
+        secondList4.add(new SecondClassItemModel(404, "河东区"));
+        secondList4.add(new SecondClassItemModel(405, "滨海新区"));
+        firstList.add(new FirstClassItemModel(4, "电影", secondList4));
         //5
-        firstList.add(new FirstClassItemModel(5, "娱乐", null));
+        firstList.add(new FirstClassItemModel(5, "手机", new ArrayList<SecondClassItemModel>()));
         //6
-        firstList.add(new FirstClassItemModel(6, "全部分类", null));
+        firstList.add(new FirstClassItemModel(6, "娱乐", null));
+        //7
+        firstList.add(new FirstClassItemModel(7, "全部分类", null));
         //copy
         firstList.addAll(firstList);
     }
+
     //PopupWindow
     private void initPopup() {
         popupWindow = new PopupWindow(this);
@@ -304,7 +284,6 @@ public class MapBaiduActivity extends Activity implements OnReceiveLocationListe
 
         //加载左侧第一行对应右侧二级分类
         secondList = new ArrayList<SecondClassItemModel>();
-        secondList.addAll(firstList.get(0).getSecondList());
         final SecondClassAdapter secondAdapter = new SecondClassAdapter(this, secondList);
         rightLV.setAdapter(secondAdapter);
 
@@ -317,8 +296,6 @@ public class MapBaiduActivity extends Activity implements OnReceiveLocationListe
                 //如果没有二级类，则直接跳转
                 if (listSecond == null || listSecond.size() == 0) {
                     popupWindow.dismiss();
-
-                    int firstId = firstList.get(position).getId();
                     String selectedName = firstList.get(position).getName();
                     result(selectedName);
                     return;
@@ -365,6 +342,7 @@ public class MapBaiduActivity extends Activity implements OnReceiveLocationListe
             popupWindow.setFocusable(true);
         }
     }
+
     //LocationClientOption类，该类用来设置定位SDK的定位方式
     private void initLocation() {
         LocationClientOption option = new LocationClientOption();
@@ -407,8 +385,7 @@ public class MapBaiduActivity extends Activity implements OnReceiveLocationListe
         mLocationClient.stop();
         // 关闭定位图层
         mBaiduMap.setMyLocationEnabled(false);
-        //释放POI检索实例
-        mPoiSearch.destroy();
+
     }
 
     //刷新右侧ListView
@@ -418,22 +395,17 @@ public class MapBaiduActivity extends Activity implements OnReceiveLocationListe
         secondAdapter.notifyDataSetChanged();
     }
 
-
     //处理点击结果
-    private void  result(String selectedName) {
+    private void result(String selectedName) {
         Toast.makeText(this, selectedName, Toast.LENGTH_SHORT).show();
         rbtnMaptypes.setText(selectedName);
 
-        }
+    }
+
     //返回控件点击事件
     public void onClickBack(View view) {
         Intent intent = new Intent(MapBaiduActivity.this, BusinessActivity.class);
         startActivity(intent);
     }
 
-    @Override
-    public void onReceive(BDLocation location) {
-        point = new LatLng(location.getLongitude(),location.getLatitude());
-        Toast.makeText(this, ""+location.getLongitude()+location.getLatitude(), Toast.LENGTH_SHORT).show();
-    }
 }

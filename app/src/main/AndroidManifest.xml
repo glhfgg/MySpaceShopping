@@ -40,13 +40,14 @@
 
     <application
 
+        android:name="com.jhy.myspaceshopping.myspaceshopping.activity.MapApplication"
         android:allowBackup="true"
         android:icon="@mipmap/shop"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name="com.jhy.myspaceshopping.myspaceshopping.activity.MapApplication">
-        <!-- 将我们以前一直用的默认Application设置成自定义的MapApplication -->
+        android:theme="@style/AppTheme">
+        <!-- 将我们以前一直用的默认Application设置成自定义的MapApplication
+          android:name="com.jhy.myspaceshopping.myspaceshopping.activity.MapApplication"-->
         <!--百度地图 添加开发密钥 -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
@@ -57,13 +58,11 @@
             android:enabled="true"
             android:process=":remote"></service>
 
-        .
         <activity
             android:name=".activity.MainActivity"
             android:launchMode="singleTask">
 
         </activity>
-
 
         <activity
             android:name=".activity.HomeSearchCityActivity"
@@ -125,18 +124,16 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name="com.jhy.myspaceshopping.myspaceshopping.activity.MapBaiduActivity"
             android:launchMode="singleTask">
 
-        </activity>
-        <activity
-            android:name=".activity.MoreActivity"
-            android:launchMode="singleTask">
-
-        </activity>.
+        </activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>

@@ -15,6 +15,7 @@ import com.jhy.myspaceshopping.myspaceshopping.R;
 import com.jhy.myspaceshopping.myspaceshopping.adapter.StoreAdapter;
 import com.jhy.myspaceshopping.myspaceshopping.dao.BusinessConfig;
 import com.jhy.myspaceshopping.myspaceshopping.objectmode.StoreBaseModel;
+import com.yalantis.phoenix.PullToRefreshView;
 
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class StoreCheapFragment extends Fragment {
 
     ListView listStoreMsg;//商店具体信息
     List<StoreBaseModel> list;//商店信息List<T>
+    PullToRefreshView mPullToRefreshView;//刷新特效
 
     String responseBack;//响应返回得到的数据
     BusinessConfig url=new BusinessConfig();// api --得到网络上的动态数据
@@ -41,6 +43,7 @@ public class StoreCheapFragment extends Fragment {
         View viewLocation=inflater.inflate(R.layout.location_plate_layout, null);
         //控件初始化
         listStoreMsg= (ListView) view.findViewById(R.id.lv_storemsg);
+        mPullToRefreshView = (PullToRefreshView)view.findViewById(R.id.pull_to_refresh);
         //实现TextView与ListView一起滑动
         listStoreMsg.addHeaderView(viewLocation);
         //适配器：连接ListView对象和数据的
@@ -49,6 +52,18 @@ public class StoreCheapFragment extends Fragment {
         listStoreMsg.setAdapter(storeAllAdap);
         //ListView对象item的点击监听事件
         listStoreMsg.setOnItemClickListener(listener);
+        //刷新特效的监听事件
+        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPullToRefreshView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mPullToRefreshView.setRefreshing(false);
+                    }
+                },1000);
+            }
+        });
         return view;
     }
     //ListView对象item的点击监听事件

@@ -26,24 +26,29 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.jhy.myspaceshopping.myspaceshopping.R;
 import com.jhy.myspaceshopping.myspaceshopping.activity.HomeSearchActivity;
 import com.jhy.myspaceshopping.myspaceshopping.activity.MapBaiduActivity;
 import com.jhy.myspaceshopping.myspaceshopping.adapter.FirstClassAdapter;
 import com.jhy.myspaceshopping.myspaceshopping.adapter.PagerAdapter;
 import com.jhy.myspaceshopping.myspaceshopping.adapter.SecondClassAdapter;
+import com.jhy.myspaceshopping.myspaceshopping.dao.BusinessConfig;
+import com.jhy.myspaceshopping.myspaceshopping.object.Level;
 import com.jhy.myspaceshopping.myspaceshopping.objectmode.FirstClassItemModel;
 import com.jhy.myspaceshopping.myspaceshopping.objectmode.SecondClassItemModel;
+import com.jhy.myspaceshopping.myspaceshopping.util.OkHttpUtils;
 import com.jhy.myspaceshopping.myspaceshopping.util.ScreenUtils;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by TOSHIBA on 2016/4/28.
  */
 public class BusinessFragment extends Fragment {
     View v;
-    View upButtonView;
     ViewPager vpagerStore;//ViewPager容器
     FragmentManager fragmentManager;//Fragment(自定义控件)管理器
     List<Fragment> list;//存放Fragment(自定义控件)的集合
@@ -57,6 +62,7 @@ public class BusinessFragment extends Fragment {
     Button btnType;//全部分类
     Button btnCity;//全城
     Button btnOrder;//智能排序
+
     /**
      * 左侧一级分类的数据
      */
@@ -87,7 +93,7 @@ public class BusinessFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //将布局文件转化成view对象
         v = inflater.inflate(R.layout.fragment_business, container, false);
-        upButtonView = inflater.inflate(R.layout.upbuttonset_layout,null);
+
         //控件初始化
         vpagerStore = (ViewPager) v.findViewById(R.id.vpager_storeall);
         grpBusiness = (RadioGroup) v.findViewById(R.id.grp_business);
@@ -184,42 +190,57 @@ public class BusinessFragment extends Fragment {
     //PopupWindow中ListView中存进的数据
     //全部分类--data
     private void typeData() {
+
+        Gson gson=new Gson();
+        Map<String, String> shopMap = new HashMap<>();
+
+        shopMap.put("cat_id", "400010000");
+        shopMap.put("cat_name",  "");
+        shopMap.put("subcat_id", "320");
+        shopMap.put("subcat_name", "1000");
+       // String str= OkHttpUtils.getInstance().doGet(BusinessConfig.CATEGORIES,,"a00331c6e10264ea1c7ef7d0abc04839");
+      //  Log.i("result","-------------------------------------"+str);
+        //Level level=new gson.fromJson(str,Level.class);
+
         firstList = new ArrayList<FirstClassItemModel>();
+
         //1
-        ArrayList<SecondClassItemModel> secondList1 = new ArrayList<SecondClassItemModel>();
-        secondList1.add(new SecondClassItemModel(101, "自助餐"));
-        secondList1.add(new SecondClassItemModel(102, "西餐"));
-        secondList1.add(new SecondClassItemModel(103, "川菜"));
-        firstList.add(new FirstClassItemModel(1, "美食", secondList1));
+        firstList.add(new FirstClassItemModel(1, "全部分类", new ArrayList<SecondClassItemModel>()));
         //2
         ArrayList<SecondClassItemModel> secondList2 = new ArrayList<SecondClassItemModel>();
-        secondList2.add(new SecondClassItemModel(201, "天津"));
-        secondList2.add(new SecondClassItemModel(202, "北京"));
-        secondList2.add(new SecondClassItemModel(203, "秦皇岛"));
-        secondList2.add(new SecondClassItemModel(204, "沈阳"));
-        secondList2.add(new SecondClassItemModel(205, "大连"));
-        secondList2.add(new SecondClassItemModel(206, "哈尔滨"));
-        secondList2.add(new SecondClassItemModel(207, "锦州"));
-        secondList2.add(new SecondClassItemModel(208, "上海"));
-        secondList2.add(new SecondClassItemModel(209, "杭州"));
-        secondList2.add(new SecondClassItemModel(210, "南京"));
-        secondList2.add(new SecondClassItemModel(211, "嘉兴"));
-        secondList2.add(new SecondClassItemModel(212, "苏州"));
-        firstList.add(new FirstClassItemModel(2, "旅游", secondList2));
+        secondList2.add(new SecondClassItemModel(201, "自助餐"));
+        secondList2.add(new SecondClassItemModel(202, "西餐"));
+        secondList2.add(new SecondClassItemModel(203, "川菜"));
+        firstList.add(new FirstClassItemModel(2, "美食", secondList2));
         //3
         ArrayList<SecondClassItemModel> secondList3 = new ArrayList<SecondClassItemModel>();
-        secondList3.add(new SecondClassItemModel(301, "南开区"));
-        secondList3.add(new SecondClassItemModel(302, "和平区"));
-        secondList3.add(new SecondClassItemModel(303, "河西区"));
-        secondList3.add(new SecondClassItemModel(304, "河东区"));
-        secondList3.add(new SecondClassItemModel(305, "滨海新区"));
-        firstList.add(new FirstClassItemModel(3, "电影", secondList3));
+        secondList3.add(new SecondClassItemModel(301, "天津"));
+        secondList3.add(new SecondClassItemModel(302, "北京"));
+        secondList3.add(new SecondClassItemModel(303, "秦皇岛"));
+        secondList3.add(new SecondClassItemModel(304, "沈阳"));
+        secondList3.add(new SecondClassItemModel(305, "大连"));
+        secondList3.add(new SecondClassItemModel(306, "哈尔滨"));
+        secondList3.add(new SecondClassItemModel(307, "锦州"));
+        secondList3.add(new SecondClassItemModel(308, "上海"));
+        secondList3.add(new SecondClassItemModel(309, "杭州"));
+        secondList3.add(new SecondClassItemModel(310, "南京"));
+        secondList3.add(new SecondClassItemModel(311, "嘉兴"));
+        secondList3.add(new SecondClassItemModel(312, "苏州"));
+        firstList.add(new FirstClassItemModel(3, "旅游", secondList3));
         //4
-        firstList.add(new FirstClassItemModel(4, "手机", new ArrayList<SecondClassItemModel>()));
+        ArrayList<SecondClassItemModel> secondList4 = new ArrayList<SecondClassItemModel>();
+        secondList4.add(new SecondClassItemModel(401, "南开区"));
+        secondList4.add(new SecondClassItemModel(402, "和平区"));
+        secondList4.add(new SecondClassItemModel(403, "河西区"));
+        secondList4.add(new SecondClassItemModel(404, "河东区"));
+        secondList4.add(new SecondClassItemModel(405, "滨海新区"));
+        firstList.add(new FirstClassItemModel(4, "电影", secondList4));
         //5
-        firstList.add(new FirstClassItemModel(5, "娱乐", null));
+        firstList.add(new FirstClassItemModel(5, "手机", new ArrayList<SecondClassItemModel>()));
         //6
-        firstList.add(new FirstClassItemModel(6, "全部分类", null));
+        firstList.add(new FirstClassItemModel(6, "娱乐", null));
+        //7
+        firstList.add(new FirstClassItemModel(7, "全部分类", null));
         //copy
         firstList.addAll(firstList);
     }
@@ -227,30 +248,31 @@ public class BusinessFragment extends Fragment {
     private void cityData() {
         firstList = new ArrayList<FirstClassItemModel>();
         //1
-        ArrayList<SecondClassItemModel> secondList1 = new ArrayList<SecondClassItemModel>();
-        secondList1.add(new SecondClassItemModel(101, "1km"));
-        secondList1.add(new SecondClassItemModel(102, "3km"));
-        secondList1.add(new SecondClassItemModel(103, "5km"));
-        secondList1.add(new SecondClassItemModel(104, "全城"));
-        firstList.add(new FirstClassItemModel(1, "附近", secondList1));
+        firstList.add(new FirstClassItemModel(1, "全城",new ArrayList<SecondClassItemModel>()));
         //2
         ArrayList<SecondClassItemModel> secondList2 = new ArrayList<SecondClassItemModel>();
-        secondList2.add(new SecondClassItemModel(201, "阅马场"));
-        secondList2.add(new SecondClassItemModel(202, "武昌火车站"));
-        secondList2.add(new SecondClassItemModel(203, "鲁巷"));
-        secondList2.add(new SecondClassItemModel(204, "江汉路步行街"));
-        firstList.add(new FirstClassItemModel(2, "推荐商圈", secondList2));
+        secondList2.add(new SecondClassItemModel(201, "1km"));
+        secondList2.add(new SecondClassItemModel(202, "3km"));
+        secondList2.add(new SecondClassItemModel(203, "5km"));
+        firstList.add(new FirstClassItemModel(2, "附近", secondList2));
         //3
         ArrayList<SecondClassItemModel> secondList3 = new ArrayList<SecondClassItemModel>();
-        secondList3.add(new SecondClassItemModel(301, "全部"));
-        secondList3.add(new SecondClassItemModel(302, "邾城街"));
-        firstList.add(new FirstClassItemModel(3, "新洲区", secondList3));
+        secondList3.add(new SecondClassItemModel(301, "阅马场"));
+        secondList3.add(new SecondClassItemModel(302, "武昌火车站"));
+        secondList3.add(new SecondClassItemModel(303, "鲁巷"));
+        secondList3.add(new SecondClassItemModel(304, "江汉路步行街"));
+        firstList.add(new FirstClassItemModel(3, "推荐商圈", secondList3));
         //4
-        firstList.add(new FirstClassItemModel(4, "汉南区", new ArrayList<SecondClassItemModel>()));
+        ArrayList<SecondClassItemModel> secondList4 = new ArrayList<SecondClassItemModel>();
+        secondList4.add(new SecondClassItemModel(401, "全部"));
+        secondList4.add(new SecondClassItemModel(402, "邾城街"));
+        firstList.add(new FirstClassItemModel(4, "新洲区", secondList4));
         //5
-        firstList.add(new FirstClassItemModel(5, "江夏区", null));
+        firstList.add(new FirstClassItemModel(5, "汉南区", new ArrayList<SecondClassItemModel>()));
         //6
-        firstList.add(new FirstClassItemModel(6, "青山区", null));
+        firstList.add(new FirstClassItemModel(6, "江夏区", null));
+        //7
+        firstList.add(new FirstClassItemModel(7, "青山区", null));
         //copy
         firstList.addAll(firstList);
     }
@@ -261,6 +283,9 @@ public class BusinessFragment extends Fragment {
         FirstListOrder.add(new FirstClassItemModel(1, "智能排序",null));
         FirstListOrder.add(new FirstClassItemModel(2, "好评优先",null));
         FirstListOrder.add(new FirstClassItemModel(3, "离我最近",null));
+        FirstListOrder.add(new FirstClassItemModel(4, "最新发布",null));
+        FirstListOrder.add(new FirstClassItemModel(5, "销量优先",null));
+        FirstListOrder.add(new FirstClassItemModel(6, "人均最低",null));
     }
 
     //PopupWindow
@@ -292,7 +317,6 @@ public class BusinessFragment extends Fragment {
 
         //加载左侧第一行对应右侧二级分类
         secondList = new ArrayList<SecondClassItemModel>();
-        secondList.addAll(firstList.get(0).getSecondList());
         final SecondClassAdapter secondAdapter = new SecondClassAdapter(this.getActivity(), secondList);
         rightLV.setAdapter(secondAdapter);
 

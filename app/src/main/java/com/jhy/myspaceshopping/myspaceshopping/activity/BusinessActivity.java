@@ -1,19 +1,16 @@
 package com.jhy.myspaceshopping.myspaceshopping.activity;
 
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-
 import com.jhy.myspaceshopping.myspaceshopping.R;
-
 import android.support.v4.app.FragmentTransaction;
-
 import com.jhy.myspaceshopping.myspaceshopping.fragment.BusinessFragment;
+
 
 public class BusinessActivity extends FragmentActivity {
     FragmentTransaction transition;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,5 +22,4 @@ public class BusinessActivity extends FragmentActivity {
         transition.add(R.id.business_container, businessFragment);
         transition.commit();
     }
-
 }

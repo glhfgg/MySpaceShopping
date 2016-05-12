@@ -5,11 +5,13 @@
           android:id="@+id/img_themepicture"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:src="@mipmap/ic_launcher"/>
+          android:src="@mipmap/ic_launcher"
+          android:layout_marginLeft="5dp"/>
     <TextView
         android:id="@+id/text_storename"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
         android:layout_toRightOf="@id/img_themepicture"
         android:layout_alignTop="@id/img_themepicture"
         android:text="storename"/>
@@ -29,6 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="300人评价"
+        android:layout_marginLeft="5dp"
         android:layout_below="@id/text_storename"
         android:layout_toRightOf="@id/bar_star"
         android:layout_toEndOf="@id/bar_star" />
@@ -37,6 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="人均￥60"
+        android:layout_marginRight="5dp"
         android:layout_alignTop="@id/text_comment"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -45,6 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="大东门"
+        android:layout_marginLeft="5dp"
         android:layout_alignBottom="@id/img_themepicture"
         android:layout_toRightOf="@id/img_themepicture"
          />
@@ -53,6 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="100km"
+        android:layout_marginRight="5dp"
         android:layout_below="@id/text_average"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />

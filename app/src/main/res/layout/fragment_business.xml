@@ -51,8 +51,7 @@
             android:layout_toLeftOf="@+id/rbtn_search"
             android:layout_toStartOf="@+id/rbtn_search"
             android:background="@mipmap/dingwei"
-            android:button="@null"
-            />
+            android:button="@null" />
 
         <RadioButton
             android:id="@+id/rbtn_search"
@@ -65,7 +64,7 @@
             android:button="@null"
             android:paddingRight="5dp" />
     </RelativeLayout>
-    .
+
 
     <include
         android:id="@+id/include_upbuttonset"
