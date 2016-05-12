@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MySpaceShopping</string>
+    <string name="app_name">聚友团</string>
     <string name="label_businessall">全部商家</string>
     <string name="label_cheap">优惠商家</string>
     <string name="tab_type">全部分类</string>

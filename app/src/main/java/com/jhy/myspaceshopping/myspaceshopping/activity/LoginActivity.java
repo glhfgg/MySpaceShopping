@@ -109,6 +109,8 @@ public class LoginActivity extends Activity {
         if (keyCode == KeyEvent.KEYCODE_BACK) { //监控/拦截/屏蔽返回键
             Intent intent = new Intent(context, MainActivity.class);
             startActivity(intent);
+            finish();
+            Log.i("life","onkey----@@@@");
             return true;
         } else if (keyCode == KeyEvent.KEYCODE_MENU) {
             //监控/拦截菜单键

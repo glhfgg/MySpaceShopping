@@ -28,6 +28,7 @@ import com.jhy.myspaceshopping.myspaceshopping.activity.JuPersonModifyActivity;
 import com.jhy.myspaceshopping.myspaceshopping.R;
 import com.jhy.myspaceshopping.myspaceshopping.activity.JuNewsActivity;
 import com.jhy.myspaceshopping.myspaceshopping.activity.JuPersonActivity;
+import com.jhy.myspaceshopping.myspaceshopping.activity.MainActivity;
 import com.jhy.myspaceshopping.myspaceshopping.adapter.PagerAdapter;
 import com.jhy.myspaceshopping.myspaceshopping.object.MyUser;
 import com.squareup.picasso.Picasso;
@@ -75,6 +76,13 @@ public class JuMainFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        user = BmobUser.getCurrentUser(this.getActivity(), MyUser.class);
+        if (user == null) {
+            getActivity().finish();
+            Intent intent = new Intent(JuMainFragment.this.getActivity(), MainActivity.class);
+            startActivity(intent);
+        }
+
         inflater1 = inflater;
         View v = inflater.inflate(R.layout.fragment_ju_main, container, false);
         v1 = v;
@@ -86,7 +94,7 @@ public class JuMainFragment extends Fragment {
         radioGroup = (RadioGroup) v.findViewById(R.id.ju_main_radio);
         viewPager = (ViewPager) v.findViewById(R.id.ju_viewpager);
         name = (TextView) v.findViewById(R.id.ju_main_username);
-        user = BmobUser.getCurrentUser(this.getActivity(), MyUser.class);
+
 
         if(user == null){
         }else{  name.setText(user.getPersonname());}
@@ -102,6 +110,11 @@ public class JuMainFragment extends Fragment {
     public void onResume() {
         super.onResume();
         MyUser  user = BmobUser.getCurrentUser(this.getActivity(), MyUser.class);
+        if (user == null) {
+            getActivity().finish();
+            Intent intent = new Intent(JuMainFragment.this.getActivity(), MainActivity.class);
+            startActivity(intent);
+        }
         name.setText(user.getPersonname());
         Log.i("stest","sssss---------=onResume");
         if(user.getIcon() != null){

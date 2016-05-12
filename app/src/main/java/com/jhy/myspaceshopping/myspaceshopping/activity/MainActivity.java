@@ -37,16 +37,15 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
         init();
     }
-
+//
 //    @Override
 //    protected void onResume() {
 //        super.onResume();
-//        if (user != null) {
-//            jufragment = new JuMainFragment();
-//            android.support.v4.app.FragmentManager fm4 = getSupportFragmentManager();
-//            android.support.v4.app.FragmentTransaction ft4 = fm4.beginTransaction();
-//            ft4.add(R.id.fragment_container, jufragment);
-//            ft4.commit();
+//        if (user == null) {
+//            finish();
+//            Intent intent = new Intent(MainActivity.this, MainActivity.class);
+//            startActivity(intent);
+//
 //        }
 //    }
 
@@ -70,6 +69,8 @@ public class MainActivity extends FragmentActivity {
             ft4.commit();
 //            Log.i("life","JU------init--");
         }
+        Log.i("life","JU------init--"+(user==null));
+
 
     }
 

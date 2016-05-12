@@ -77,6 +77,8 @@ public class JuCommentActivity extends Activity {
     String  i ;
     String num;  //评论数
 
+    String conimg;
+
     //获取系统时间
     SimpleDateFormat sDateFormat    =   new SimpleDateFormat("yyyy-MM-dd    hh:mm:ss");
     String    date    =    sDateFormat.format(new    java.util.Date());
@@ -99,6 +101,8 @@ public class JuCommentActivity extends Activity {
         }
         if(intent.getExtras().getString("JuConImg") != null){
             Picasso.with(this).load( "http://file.bmob.cn/"+intent.getExtras().getString("JuConImg").toString()).into(contentphoto);
+            conimg =  "http://file.bmob.cn/"+intent.getExtras().getString("JuConImg").toString();
+            contentphoto.setOnClickListener(ContentClick);
         }
 
         username.setText(intent.getExtras().getString("JuUseNam").toString());
@@ -359,6 +363,17 @@ public class JuCommentActivity extends Activity {
             }
         });
     }
+
+    View.OnClickListener ContentClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+           Intent intent = new Intent(JuCommentActivity.this,ImageActivity.class);
+            intent.putExtra("img",conimg);
+            startActivity(intent);
+
+        }
+    };
+
 
     View.OnClickListener EnterClick = new View.OnClickListener(){
         @Override
